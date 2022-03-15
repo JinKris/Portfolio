@@ -4,19 +4,26 @@ const is = require("@sindresorhus/is");
 const userAuthRouter = Router();
 const userAuthService = require("../services/userService");
 
-userAuthRouter.post("/user/register", async (req, res) => {
-  const { name, email, password } = req.body;
-  const userData = {
-    ...req.body,
-  };
-  console.log(name, email, password);
-  const newUser = await userAuthService.addUser(userData);
+userAuthRouter.post("/user/register", async (req, res, next) => {
+  try {
+    const { name, email, password } = req.body;
 
-  res.json({
-    name,
-    email,
-    password,
-  });
+    const newUser = await userAuthService.addUser({
+      name,
+      email,
+      password,
+    });
+
+    //console.log(newUser);
+
+    if (newUser.errorMessage) {
+      throw new Error(newUser.errorMessage);
+    }
+
+    res.status(201).json(newUser);
+  } catch (error) {
+    next(error);
+  }
 });
 
 userAuthRouter.get("/user", (req, res) => {
