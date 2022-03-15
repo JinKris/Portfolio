@@ -56,6 +56,11 @@ class projectService {
     }
     return project;
   };
+
+  static getProjectList = async ({ user_id }) => {
+    const projects = await Project.findByUserId({ user_id });
+    return projects;
+  };
 }
 
 module.exports = projectService;

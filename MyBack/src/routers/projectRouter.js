@@ -59,4 +59,14 @@ projectRouter.put("/projects/:id", async (req, res, next) => {
   }
 });
 
+projectRouter.get("/projectlist/:user_id", async (req, res, next) => {
+  try {
+    const user_id = req.params.user_id;
+    const projectList = await projectService.getProjectList({ user_id });
+    res.status(200).json(projectList);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = projectRouter;
