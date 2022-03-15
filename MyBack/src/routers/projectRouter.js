@@ -38,4 +38,25 @@ projectRouter.get("/projects/:id", async (req, res, next) => {
   }
 });
 
+projectRouter.put("/projects/:id", async (req, res, next) => {
+  try {
+    const projectId = req.params.id;
+
+    const { title, description, fromDate, toDate } = req.body;
+
+    const updateData = { title, description, fromDate, toDate };
+
+    const project = await projectService.setProject({ projectId, updateData });
+    if (project.errorMessage) {
+      throw new Error(project.errorMessage);
+    }
+
+    res.status(200).json({
+      project,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = projectRouter;
