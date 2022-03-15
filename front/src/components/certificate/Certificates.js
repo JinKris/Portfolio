@@ -23,7 +23,7 @@ function Certificates({ portfolioOwnerId, isEditable }) {
           <Certificate
             key={certificate.id}
             certificate={certificate}
-            setAwards={setCertificates}
+            setCertificates={setCertificates}
             isEditable={isEditable}
           />
         ))}
