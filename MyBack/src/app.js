@@ -13,4 +13,5 @@ app.use(express.json());
 
 app.use("/", indexRouter);
 app.use(userRouter);
+
 module.exports = app;

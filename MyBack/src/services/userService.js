@@ -1,4 +1,4 @@
-const User = require("../db/index");
+const { User } = require("../db/index");
 const { v4: uuidv4 } = require("uuid");
 const hashPassword = require("../utils/hashPassword");
 //uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
@@ -57,6 +57,7 @@ class userAuthService {
 
   static getUser = async ({ email, password }) => {
     const user = await User.findByEmail(email);
+
     const hashedPassword = hashPassword(password);
 
     if (!user) {

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("./models/User");
-
+const Project = require("./models/Project");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -11,4 +11,7 @@ mongoose
   .then(() => console.log("몽고디비 오온!"))
   .catch(() => console.log("몽고디비 실패 ㅠㅠ"));
 
-module.exports = User;
+module.exports = {
+  User,
+  Project,
+};
