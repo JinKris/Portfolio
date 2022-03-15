@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const is = require("@sindresorhus/is");
+const veryfyToken = require("../middlewares/verifyToken");
 
 const userAuthRouter = Router();
 const userAuthService = require("../services/userService");
@@ -39,6 +40,19 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
     res.status(200).json(user);
   } catch (err) {
     next(err);
+  }
+});
+
+userAuthRouter.get("/userlist", veryfyToken, async (req, res, next) => {
+  try {
+    const user_id = req.currentUserId;
+    const currentUserInfo = await userAuthService.getUserInfo({
+      user_id,
+    });
+
+    res.json(currentUserInfo);
+  } catch (error) {
+    next(error);
   }
 });
 

@@ -10,6 +10,11 @@ class User {
     const user = await userModel.findOne({ email });
     return user;
   }
+
+  static async findById({ user_id }) {
+    const user = await userModel.findOne({ id: user_id });
+    return user;
+  }
 }
 
 module.exports = User;

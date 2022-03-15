@@ -5,6 +5,15 @@ const hashPassword = require("../utils/hashPassword");
 const makeToken = require("../utils/makeToken");
 
 class userAuthService {
+  static getUserInfo = async ({ user_id }) => {
+    const user = await User.findById({ user_id });
+    if (!user) {
+      const errorMessage = "이메일 가입한 적이 없습니다.";
+      return { errorMessage };
+    }
+    return user;
+  };
+
   static getUser = async ({ email, password }) => {
     const user = await User.findByEmail(email);
     const hashedPassword = hashPassword(password);
