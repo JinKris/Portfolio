@@ -5,6 +5,11 @@ const hashPassword = require("../utils/hashPassword");
 const makeToken = require("../utils/makeToken");
 
 class userAuthService {
+  static getUsers = async () => {
+    const users = await User.findAll();
+    return users;
+  };
+
   static getUserInfo = async ({ user_id }) => {
     const user = await User.findById({ user_id });
     if (!user) {

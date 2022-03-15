@@ -15,6 +15,11 @@ class User {
     const user = await userModel.findOne({ id: user_id });
     return user;
   }
+
+  static async findAll() {
+    const users = await userModel.find({});
+    return users;
+  }
 }
 
 module.exports = User;

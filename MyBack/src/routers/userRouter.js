@@ -45,12 +45,20 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
 
 userAuthRouter.get("/userlist", veryfyToken, async (req, res, next) => {
   try {
-    const user_id = req.currentUserId;
-    const currentUserInfo = await userAuthService.getUserInfo({
-      user_id,
-    });
+    const users = await userAuthService.getUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+});
 
-    res.json(currentUserInfo);
+userAuthRouter.get("/user/current", veryfyToken, async (req, res, next) => {
+  try {
+    // const user_id = req.currentUserId;
+    // const currentUserInfo = await userAuthService.getUserInfo({
+    //   user_id,
+    // });
+    // res.json(currentUserInfo);
   } catch (error) {
     next(error);
   }
