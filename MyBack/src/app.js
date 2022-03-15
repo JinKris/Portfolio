@@ -2,7 +2,7 @@ const express = require("express");
 
 const indexRouter = require("./routers/indexRouter");
 const userRouter = require("./routers/userRouter");
-
+const projectRouter = require("./routers/projectRouter");
 const app = express();
 
 // POST 요청 시 Body 사용을 위한 기본코드
@@ -13,5 +13,5 @@ app.use(express.json());
 
 app.use("/", indexRouter);
 app.use(userRouter);
-
+app.use(projectRouter);
 module.exports = app;

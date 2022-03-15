@@ -19,6 +19,14 @@ const projectSchema = new Schema(
       type: String,
       required: true,
     },
+    fromDate: {
+      type: String,
+      required: true,
+    },
+    toDate: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
