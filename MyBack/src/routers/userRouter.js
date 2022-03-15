@@ -54,11 +54,16 @@ userAuthRouter.get("/userlist", veryfyToken, async (req, res, next) => {
 
 userAuthRouter.get("/user/current", veryfyToken, async (req, res, next) => {
   try {
-    // const user_id = req.currentUserId;
-    // const currentUserInfo = await userAuthService.getUserInfo({
-    //   user_id,
-    // });
-    // res.json(currentUserInfo);
+    const user_id = req.currentUserId;
+    const currentUserInfo = await userAuthService.getUserInfo({
+      user_id,
+    });
+
+    if (currentUserInfo.errorMessage) {
+      throw new Error(currentUserInfo.errorMessage);
+    }
+
+    res.json(currentUserInfo);
   } catch (error) {
     next(error);
   }
