@@ -69,6 +69,47 @@ userAuthRouter.get("/user/current", veryfyToken, async (req, res, next) => {
   }
 });
 
+userAuthRouter.get("/users/:id", veryfyToken, async (req, res, next) => {
+  try {
+    const user_id = req.params.id;
+    // console.log(user_id);
+
+    const currentUserInfo = await userAuthService.getUserInfo({ user_id });
+    // console.log(user_id, { user_id });
+    // console.log(currentUserInfo);
+
+    if (currentUserInfo.errorMessage) {
+      throw new Error(currentUserInfo.errorMessage);
+    }
+
+    res.status(200).json(currentUserInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
+userAuthRouter.put("/users/:id", veryfyToken, async (req, res, next) => {
+  try {
+    const user_id = req.params.id;
+
+    const { name, email, password, description } = req.body;
+    const updateData = {
+      name,
+      email,
+      password,
+      description,
+    };
+
+    const updatedUser = await userAuthService.setUser({ user_id, updateData });
+    if (updatedUser.errorMessage) {
+      throw new Error(updatedUser.errorMessage);
+    }
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
 userAuthRouter.get("/user", (req, res) => {
   // 이다인거 확인하는 친구
   console.log(is("🦄"));

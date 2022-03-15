@@ -20,6 +20,19 @@ class User {
     const users = await userModel.find({});
     return users;
   }
+
+  static async update({ user_id, updateDataField, newValue }) {
+    const filter = { id: user_id };
+    const update = { [updateDataField]: newValue };
+    const option = { returnOriginal: false };
+
+    const updatedUser = await userModel.findOneAndUpdate(
+      filter,
+      update,
+      option
+    );
+    return updatedUser;
+  }
 }
 
 module.exports = User;
