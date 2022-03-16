@@ -1,4 +1,4 @@
-//import is from "@sindresorhus/is"; // ?무엇인지?
+import is from "@sindresorhus/is"; // ?무엇인지?
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
 import { educationService } from "../services/educationService";
@@ -40,7 +40,7 @@ eduRouter.post(
     }
 });
 // education 항목 아이디별 확인
-userAuthRouter.get(
+eduRouter.get(
     "/educations/:id",
     login_required,
     async function (req, res, next) {
@@ -89,7 +89,7 @@ eduRouter.put(
   }
 );
 
-userAuthRouter.get(
+eduRouter.get(
     "/educationlist/:user_id",
     login_required,
     async function (req, res, next) {
@@ -109,7 +109,7 @@ userAuthRouter.get(
   );
 
 // jwt 토큰 기능 확인용, 삭제해도 되는 라우터임.
-userAuthRouter.get("/afterlogin", login_required, function (req, res, next) {
+eduRouter.get("/afterlogin", login_required, function (req, res, next) {
   res
     .status(200)
     .send(
@@ -117,4 +117,4 @@ userAuthRouter.get("/afterlogin", login_required, function (req, res, next) {
     );
 });
 
-export { userAuthRouter };
+export { eduRouter };

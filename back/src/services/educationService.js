@@ -7,7 +7,7 @@ class educationService {
     // id 는 유니크 값 부여
     const id = uuidv4();
     const newEducation = { user_id,id,school,major,position };
-
+    console.log("newEducation",newEducation)
     // db에 저장
     const createdNewEducation = await Education.create({ newEducation });
     createdNewEducation.errorMessage = null; // 문제 없이 db 저장 완료되었으므로 에러가 없음.
@@ -26,9 +26,7 @@ class educationService {
 
     return education;
   }
-}
-
-static async setEducation({ education_id, toUpdate }) {
+  static async setEducation({ education_id, toUpdate }) {
     // 우선 해당 id 의 유저가 db에 존재하는지 여부 확인
     let education = await Education.findById({ education_id });
 
@@ -43,19 +41,19 @@ static async setEducation({ education_id, toUpdate }) {
     if (toUpdate.school) {
       const fieldToUpdate = "school";
       const newValue = toUpdate.school;
-      user = await Education.update({ education_id, fieldToUpdate, newValue });
+      education = await Education.update({ education_id, fieldToUpdate, newValue });
     }
 
     if (toUpdate.major) {
       const fieldToUpdate = "major";
       const newValue = toUpdate.major;
-      user = await Education.update({ education_id, fieldToUpdate, newValue });
+      education = await Education.update({ education_id, fieldToUpdate, newValue });
     }
 
     if (toUpdate.position) {
       const fieldToUpdate = "position";
       const newValue = toUpdate.position;
-      user = await Education.update({ education_id, fieldToUpdate, newValue });
+      education = await Education.update({ education_id, fieldToUpdate, newValue });
     }
 
     return education;
@@ -63,17 +61,17 @@ static async setEducation({ education_id, toUpdate }) {
 
   static async getEduUserInfo({ user_id }) {
     // 이메일 db에 존재 여부 확인
-    const Education = await Education.findByUserID({ user_id });
-    if (!Education) {
+    const education = await Education.findByUserID({ user_id });
+    if (!education) {
       const errorMessage =
         "해당 사용자 가입 내역이 없습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
 
-    return Education;
+    return education;
   }
 
 
-
+}
 
 export { educationService };

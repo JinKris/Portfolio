@@ -7,7 +7,7 @@ const EducationSchema = new Schema(
       required: true,
     },
     id : {
-        type : Number,
+        type : String,
         required : true,
     },
     school: {
@@ -28,6 +28,6 @@ const EducationSchema = new Schema(
   }
 );
 
-const UserModel = model("Education", EducationSchema);
+const EducationModel = model("Education", EducationSchema);
 
-export { UserModel };
+export { EducationModel };
