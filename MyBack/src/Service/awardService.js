@@ -12,6 +12,17 @@ class AwardService {
     });
     return createdAward;
   };
+
+  static getAward = async ({ user_id }) => {
+    const award = await Award.findById({ user_id });
+
+    if (!award) {
+      const errorMessage = "해당 id로 받은 수상 이력이 없습니다.";
+      return { errorMessage };
+    }
+
+    return award;
+  };
 }
 
 module.exports = AwardService;

@@ -19,4 +19,19 @@ awardRouter.post("/award/create", verifyToken, async (req, res, next) => {
   }
 });
 
+awardRouter.get("/awards/:id", verifyToken, async (req, res, next) => {
+  try {
+    const user_id = req.params.id;
+    const award = await AwardService.getAward({ user_id });
+
+    if (award.errorMessage) {
+      throw new Error(award.errorMessage);
+    }
+
+    res.status(200).json(award);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = awardRouter;

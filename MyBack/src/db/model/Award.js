@@ -8,9 +8,14 @@ class Award {
       title,
       description,
     };
-    console.log(updateData);
+
     const createdAward = await awardModel.create(updateData);
     return createdAward;
+  };
+
+  static findById = async ({ user_id }) => {
+    const award = await awardModel.findOne({ id: user_id });
+    return award;
   };
 }
 
