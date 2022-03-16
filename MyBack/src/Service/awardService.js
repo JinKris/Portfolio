@@ -23,6 +23,11 @@ class AwardService {
 
     return award;
   };
+
+  static getAwardList = async ({ user_id }) => {
+    const awardList = await Award.findByUserId({ user_id });
+    return awardList;
+  };
 }
 
 module.exports = AwardService;

@@ -34,4 +34,21 @@ awardRouter.get("/awards/:id", verifyToken, async (req, res, next) => {
   }
 });
 
+awardRouter.put("/awards/:id", verifyToken, async (req, res, next) => {
+  try {
+  } catch (error) {
+    next(error);
+  }
+});
+
+awardRouter.get("/awardlist/:user_id", verifyToken, async (req, res, next) => {
+  try {
+    const user_id = req.params.user_id;
+    const awardlist = await AwardService.getAwardList({ user_id });
+    res.status(200).json(awardlist);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = awardRouter;

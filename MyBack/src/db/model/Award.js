@@ -17,6 +17,11 @@ class Award {
     const award = await awardModel.findOne({ id: user_id });
     return award;
   };
+
+  static findByUserId = async ({ user_id }) => {
+    const awards = await awardModel.find({ user_id });
+    return awards;
+  };
 }
 
 module.exports = Award;
