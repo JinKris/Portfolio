@@ -5,7 +5,6 @@ const makeToken = require("../utils/makeToken");
 const bcrypt = require("bcrypt");
 
 const { v4: uuidv4 } = require("uuid");
-const { findById } = require("../db/schema/user");
 // uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 class userAuthService {
