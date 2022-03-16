@@ -11,6 +11,11 @@ class User {
     const user = userModel.findOne({ email });
     return user;
   };
+
+  static findAll = async () => {
+    const users = userModel.find({});
+    return users;
+  };
 }
 
 module.exports = User;
