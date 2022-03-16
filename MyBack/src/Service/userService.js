@@ -5,6 +5,7 @@ const makeToken = require("../utils/makeToken");
 const bcrypt = require("bcrypt");
 
 const { v4: uuidv4 } = require("uuid");
+const { findById } = require("../db/schema/user");
 // uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 class userAuthService {
@@ -79,6 +80,36 @@ class userAuthService {
       return { errorMessage };
     }
     return currentUser;
+  };
+
+  static update = async ({ user_id, name, email, description }) => {
+    let user = await User.findById({ user_id });
+    const updateData = {
+      name,
+      email,
+      description,
+    };
+    if (!user) {
+      const errorMessage = "가입된 아이디가 아닙니다.";
+      return { errorMessage };
+    }
+
+    if (updateData.name) {
+      const updateField = "name";
+      const newValue = updateData.name;
+      user = await User.update({ user_id, updateField, newValue });
+    }
+    if (updateData.email) {
+      const updateField = "email";
+      const newValue = updateData.email;
+      user = await User.update({ user_id, updateField, newValue });
+    }
+    if (updateData.description) {
+      const updateField = "description";
+      const newValue = updateData.description;
+      user = await User.update({ user_id, updateField, newValue });
+    }
+    return user;
   };
 }
 

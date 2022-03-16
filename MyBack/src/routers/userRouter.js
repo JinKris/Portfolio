@@ -68,7 +68,6 @@ userAuthRouter.get("/users/:id", verifyToken, async (req, res, next) => {
     const user_id = req.params.id;
     console.log(user_id);
     const currentUser = await userAuthService.getUserInfo({ user_id });
-    console.log(currentUser);
 
     if (currentUser.errorMessage) {
       throw new Error(currentUser.errorMessage);
@@ -79,4 +78,26 @@ userAuthRouter.get("/users/:id", verifyToken, async (req, res, next) => {
     next(error);
   }
 });
+
+userAuthRouter.put("/users/:id", verifyToken, async (req, res, next) => {
+  try {
+    const { name, email, description } = req.body;
+    const user_id = req.params.id;
+
+    const updateUser = await userAuthService.update({
+      user_id,
+      name,
+      email,
+      description,
+    });
+
+    if (updateUser.errorMessage) {
+      throw new Error(updateUser.errorMessage);
+    }
+    res.status(200).json(updateUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = userAuthRouter;
