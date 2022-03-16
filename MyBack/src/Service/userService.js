@@ -1,4 +1,4 @@
-const User = require("../db/index");
+const { User } = require("../db/index");
 
 const hashPassword = require("../utils/hashPassword");
 const makeToken = require("../utils/makeToken");

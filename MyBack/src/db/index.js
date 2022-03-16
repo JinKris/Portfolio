@@ -1,4 +1,5 @@
 const User = require("./model/User");
+const Award = require("./model/Award");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 dotenv.config();
@@ -11,4 +12,7 @@ mongoose
   .then(() => console.log("몽고디비 오온"))
   .catch(() => console.log("몽고디비 실패 ㅠ"));
 
-module.exports = User;
+module.exports = {
+  User,
+  Award,
+};
