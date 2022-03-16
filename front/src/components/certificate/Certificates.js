@@ -11,17 +11,29 @@ function Certificates({ portfolioOwnerId, isEditable }) {
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    // "certificatelist/유저id"로 GET 요청하고, response의 data로 awards를 세팅함.
+    // "certificatelist/유저id"로 GET 요청하고, response의 data로 certificates를 세팅함.
     Api.get("certificatelist", portfolioOwnerId).then((res) => setCertificates(res.data));
   }, [portfolioOwnerId]);
 
+    // Api.get("certificatelist", portfolioOwnerId).then((res) => setCertificates(res.data));
+    // console.log(`Certificates : ${certificates}`)
+
+    // setCertificates([
+    //   {
+    //     "user_id":"0",
+    //     "title":"운전면허증 2탄",
+    //     "description":"수정용 2탄입니다.",
+    //     "when_date":"2099-01-20"
+    // },])
+
   return (
+    <>
     <Card>
       <Card.Body>
         <Card.Title>자격증이력</Card.Title>
         {certificates.map((certificate) => (
             <Certificate
-            key={certificate.user_id}
+            key={certificate._id}
             certificate={certificate}
             setAwards={setCertificates}
             isEditable={isEditable}
@@ -43,6 +55,7 @@ function Certificates({ portfolioOwnerId, isEditable }) {
         )}
       </Card.Body>
     </Card>
+    </>
   );
 }
 
