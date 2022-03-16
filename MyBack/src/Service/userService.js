@@ -71,6 +71,15 @@ class userAuthService {
     const users = await User.findAll();
     return users;
   };
+
+  static getUserInfo = async ({ user_id }) => {
+    const currentUser = await User.findById({ user_id });
+    if (!currentUser) {
+      const errorMessage = "가입내역이 없습니다.";
+      return { errorMessage };
+    }
+    return currentUser;
+  };
 }
 
 module.exports = userAuthService;

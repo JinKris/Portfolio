@@ -3,6 +3,8 @@ const userAuthRouter = Router();
 
 const userAuthService = require("../Service/userService");
 
+const verifyToken = require("../middleware/verifyToken");
+
 userAuthRouter.post("/user/register", async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
@@ -37,7 +39,7 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
   }
 });
 
-userAuthRouter.get("/userlist", async (req, res, next) => {
+userAuthRouter.get("/userlist", verifyToken, async (req, res, next) => {
   try {
     const users = await userAuthService.getUsers();
     res.status(200).json(users);
@@ -46,4 +48,25 @@ userAuthRouter.get("/userlist", async (req, res, next) => {
   }
 });
 
+userAuthRouter.get("/user/current", verifyToken, async (req, res, next) => {
+  try {
+    const user_id = req.user.user_id;
+    console.log(user_id);
+    const currentUser = await userAuthService.getUserInfo({ user_id });
+    console.log(currentUser);
+    if (currentUser.errorMessage) {
+      throw new Error(currentUser.errorMessage);
+    }
+    res.status(200).json(currentUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+userAuthRouter.get("/users/:id", verifyToken, async (req, res, next) => {
+  try {
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = userAuthRouter;

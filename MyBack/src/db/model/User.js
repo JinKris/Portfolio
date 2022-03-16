@@ -16,6 +16,11 @@ class User {
     const users = userModel.find({});
     return users;
   };
+
+  static findById = async ({ user_id }) => {
+    const currentUser = userModel.findOne({ id: user_id });
+    return currentUser;
+  };
 }
 
 module.exports = User;
