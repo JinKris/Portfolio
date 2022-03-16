@@ -8,9 +8,9 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
   //useState로 description 상태를 생성함.
   const [description, setDescription] = useState("");
   //useState로 from_date 상태를 생성함.
-  const [from_date, setFromdate] = useState("");
+  const [from_date, setFromDate] = useState("");
   //useState로 to_date 상태를 생성함.
-  const [to_date, setTodate] = useState("");
+  const [to_date, setToDate] = useState("");
 
 
   const handleSubmit = async (e) => {
@@ -31,9 +31,9 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
 
     // "projectlist/유저id" 엔드포인트로 get요청함.
     const res = await Api.get("projectlist", user_id);
-    // awards를 response의 data로 세팅함.
+    // projects를 response의 data로 세팅함.
     setProjects(res.data);
-    // award를 추가하는 과정이 끝났으므로, isAdding을 false로 세팅함.
+    // project를 추가하는 과정이 끝났으므로, isAdding을 false로 세팅함.
     setIsAdding(false);
   };
 
@@ -62,7 +62,7 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
           type="text"
           placeholder="시작날짜"
           value={from_date}
-          onChange={(e) => setFromdate(e.target.value)}
+          onChange={(e) => setFromDate(e.target.value)}
         />
       </Form.Group>
 
@@ -71,7 +71,7 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
           type="text"
           placeholder="종료날짜"
           value={to_date}
-          onChange={(e) => setTodate(e.target.value)}
+          onChange={(e) => setToDate(e.target.value)}
         />
       </Form.Group>
 
