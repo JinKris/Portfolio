@@ -42,6 +42,7 @@ userAuthRouter.post("/user/login", async (req, res, next) => {
 userAuthRouter.get("/userlist", verifyToken, async (req, res, next) => {
   try {
     const users = await userAuthService.getUsers();
+    console.log(users);
     res.status(200).json(users);
   } catch (error) {
     next(error);

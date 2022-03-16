@@ -22,6 +22,20 @@ class Award {
     const awards = await awardModel.find({ user_id });
     return awards;
   };
+
+  static update = async ({ user_id, updataField, newValue }) => {
+    const filter = { id: user_id };
+    const update = { [updataField]: newValue };
+    const option = { returnOriginal: false };
+
+    const updatedAward = await awardModel.findOneAndUpdate(
+      filter,
+      update,
+      option
+    );
+
+    return updatedAward;
+  };
 }
 
 module.exports = Award;

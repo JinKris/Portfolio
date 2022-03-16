@@ -34,8 +34,26 @@ awardRouter.get("/awards/:id", verifyToken, async (req, res, next) => {
   }
 });
 
+/**
+ * {
+    "title": "행복한 상",
+    "description":"행복해서 상을 받았습니다."
+}
+
+ */
 awardRouter.put("/awards/:id", verifyToken, async (req, res, next) => {
   try {
+    const { title, description } = req.body;
+    const user_id = req.params.id;
+    console.log(req.body);
+
+    const updateData = await AwardService.setAward({
+      user_id,
+      title,
+      description,
+    });
+    console.log(updateData);
+    res.status(200).json(updateData);
   } catch (error) {
     next(error);
   }
@@ -44,8 +62,13 @@ awardRouter.put("/awards/:id", verifyToken, async (req, res, next) => {
 awardRouter.get("/awardlist/:user_id", verifyToken, async (req, res, next) => {
   try {
     const user_id = req.params.user_id;
-    const awardlist = await AwardService.getAwardList({ user_id });
-    res.status(200).json(awardlist);
+    const awardList = await AwardService.getAwardList({ user_id });
+
+    if (awardList.errorMessage) {
+      throw new Error(awardList.errorMessage);
+    }
+
+    res.status(200).json(awardList);
   } catch (error) {
     next(error);
   }
