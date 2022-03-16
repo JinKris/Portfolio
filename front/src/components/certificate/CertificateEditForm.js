@@ -18,16 +18,16 @@ function CertificateEditForm({ currentCertificate, setCertificates, setIsEditing
     const user_id = currentCertificate.user_id;
 
     // "certificates/수상 id" 엔드포인트로 PUT 요청함.
-    await Api.put(`certificates/${currentCertificate.id}`, {
+    await Api.put(`certificates/${currentCertificate.user_id}`, {
       user_id,
       title,
       description,
-      when_date
+      when_date,
     });
 
     // "certificatelist/유저id" 엔드포인트로 GET 요청함.
     const res = await Api.get("certificatelist", user_id);
-    // awards를 response의 data로 세팅함.
+    // certificates를 response의 data로 세팅함.
     setCertificates(res.data);
     // 편집 과정이 끝났으므로, isEditing을 false로 세팅함.
     setIsEditing(false);
@@ -53,10 +53,10 @@ function CertificateEditForm({ currentCertificate, setCertificates, setIsEditing
         />
       </Form.Group>
 
-      <Form.Group controlId="formBasicWhenDate" className="mt-3">
+      <Form.Group controlId="formBasicFromDate" className="mt-3">
         <Form.Control
           type="text"
-          placeholder="취득일"
+          placeholder="시작날짜"
           value={when_date}
           onChange={(e) => setWhenDate(e.target.value)}
         />

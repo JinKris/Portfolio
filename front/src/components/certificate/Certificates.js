@@ -5,25 +5,25 @@ import Certificate from "./Certificate";
 import CertificateAddForm from "./CertificateAddForm";
 
 function Certificates({ portfolioOwnerId, isEditable }) {
-  //useState로 certificates 상태를 생성함.
+  //useState로 certificate 상태를 생성함.
   const [certificates, setCertificates] = useState([]);
   //useState로 isAdding 상태를 생성함.
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    // "awardlist/유저id"로 GET 요청하고, response의 data로 awards를 세팅함.
+    // "certificatelist/유저id"로 GET 요청하고, response의 data로 awards를 세팅함.
     Api.get("certificatelist", portfolioOwnerId).then((res) => setCertificates(res.data));
   }, [portfolioOwnerId]);
 
   return (
     <Card>
       <Card.Body>
-        <Card.Title>수상이력</Card.Title>
+        <Card.Title>자격증이력</Card.Title>
         {certificates.map((certificate) => (
-          <Certificate
-            key={certificate.id}
+            <Certificate
+            key={certificate.user_id}
             certificate={certificate}
-            setCertificates={setCertificates}
+            setAwards={setCertificates}
             isEditable={isEditable}
           />
         ))}

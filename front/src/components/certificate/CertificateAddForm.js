@@ -10,6 +10,7 @@ function CertificateAddForm({ portfolioOwnerId, setCertificates, setIsAdding }) 
   //useState로 when_date 상태를 생성함.
   const [when_date, setWhenDate] = useState("");
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -26,10 +27,10 @@ function CertificateAddForm({ portfolioOwnerId, setCertificates, setIsAdding }) 
     });
 
     // "certificatelist/유저id" 엔드포인트로 get요청함.
-    const res = await Api.get("certificatelist", user_id);
-    // awards를 response의 data로 세팅함.
+    const res = await Api.get("certificatetlist", user_id);
+    // certifiactes를 response의 data로 세팅함.
     setCertificates(res.data);
-    // award를 추가하는 과정이 끝났으므로, isAdding을 false로 세팅함.
+    // ceritificate를 추가하는 과정이 끝났으므로, isAdding을 false로 세팅함.
     setIsAdding(false);
   };
 
@@ -56,7 +57,7 @@ function CertificateAddForm({ portfolioOwnerId, setCertificates, setIsAdding }) 
       <Form.Group controlId="formBasicWhenDate" className="mt-3">
         <Form.Control
           type="text"
-          placeholder="취득일"
+          placeholder="취득날짜"
           value={when_date}
           onChange={(e) => setWhenDate(e.target.value)}
         />
