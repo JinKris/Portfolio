@@ -7,8 +7,8 @@ class Certificate {
   }
 
   static async findById({ certificateId }) {
-    const award = await CertificateModel.findOne({ id: certificateId });
-    return award;
+    const certificate = await CertificateModel.findOne({ id: certificateId });
+    return certificate;
   }
 
   static async findByUserId({ user_id }) {
