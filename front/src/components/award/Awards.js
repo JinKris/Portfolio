@@ -28,7 +28,7 @@ const Awards = ({ portfolioOwnerId, isEditable }) => {
           />
         ))}
         {isEditable && (
-          <Row className="mt-3 text-center mb-4">
+          <Row className="mt-3 text-center mb-4 me-2">
             <Col sm={{ span: 20 }}>
               <Button onClick={() => setIsAdding(true)}>+</Button>
             </Col>

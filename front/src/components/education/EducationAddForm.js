@@ -19,7 +19,7 @@ const EducationAddForm = ({ portfolioOwnerId, setEducations, setIsAdding }) => {
       position,
     });
 
-    const res = await Api.get("educationlist", portfolioOwnerId);
+    const res = await Api.get("어디에 연결해야하죠?", portfolioOwnerId);
     setEducations(res.data); */
 
     setIsAdding(false);

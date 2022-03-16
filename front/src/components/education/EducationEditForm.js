@@ -3,7 +3,7 @@ import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
 const EducationEditForm = ({ setIsEditing }) => {
-  const [position, setPosition] = useState("재학중");
+  const [position, setPosition] = useState("");
   const [univ, setUniv] = useState("");
   const [major, setMajor] = useState("");
 

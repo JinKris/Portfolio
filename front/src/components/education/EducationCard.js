@@ -5,9 +5,8 @@ import * as Api from "../../api";
 const EducationCard = ({ education, isEditable, setIsEditing }) => {
   return (
     <Card.Text>
-      <h1>왜 안들어가죠</h1>
-
-      {/*       {isEditable && (
+      {/* <span>{education.school}</span> */}
+      {isEditable && (
         <Col>
           <Row className="mt-3 text-center text-info">
             <Col sm={{ span: 20 }}>
@@ -26,7 +25,7 @@ const EducationCard = ({ education, isEditable, setIsEditing }) => {
             </Col>
           </Row>
         </Col>
-      )} */}
+      )}
     </Card.Text>
   );
 };

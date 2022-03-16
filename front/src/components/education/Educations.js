@@ -3,6 +3,7 @@ import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import Education from "./Education";
 import EducationAddForm from "./EducationAddForm";
+import EducationCard from "./EducationCard";
 
 const Educations = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -18,7 +19,7 @@ const Educations = ({ portfolioOwnerId, isEditable }) => {
     <Card style={{ width: "80rem" }}>
       <Card.Body>
         <Card.Title>학력</Card.Title>
-
+        <EducationCard />
         {educationList.map((education) => (
           <Education
             key={education.id}
@@ -28,7 +29,7 @@ const Educations = ({ portfolioOwnerId, isEditable }) => {
           />
         ))}
         {isEditable && (
-          <Row className="mt-3 text-center mb-4">
+          <Row className="mt-3 text-center mb-4 me-2">
             <Col sm={{ span: 40 }}>
               <Button onClick={() => setIsAdding(true)}>+</Button>
             </Col>
