@@ -1,6 +1,6 @@
-import cors from "cors";
+import cors from "cors"; // cors error prevention 
 import express from "express";
-import { userAuthRouter } from "./routers/userRouter";
+import { userAuthRouter } from "./routers/userRouter"; 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 const app = express();
