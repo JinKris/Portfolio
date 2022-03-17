@@ -52,6 +52,18 @@ class AwardService {
     }
     return award;
   };
+
+  static deleteAward = async ({ awardId }) => {
+    const deletedData = await Award.deleteById({ awardId });
+
+    if (!deletedData) {
+      const errorMessage = "해당 id 데이터 없습니다.";
+      return { errorMessage };
+    }
+    return {
+      status: "succ",
+    };
+  };
 }
 
 module.exports = AwardService;

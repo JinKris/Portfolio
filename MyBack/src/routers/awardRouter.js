@@ -74,4 +74,20 @@ awardRouter.get("/awardlist/:user_id", verifyToken, async (req, res, next) => {
   }
 });
 
+awardRouter.delete("/awards/:id", async function (req, res, next) {
+  try {
+    const awardId = req.params.id;
+
+    const result = await AwardService.deleteAward({ awardId });
+
+    if (result.errorMessage) {
+      throw new Error(result.errorMessage);
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = awardRouter;
