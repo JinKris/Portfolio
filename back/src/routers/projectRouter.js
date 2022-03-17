@@ -8,14 +8,14 @@ projectRouter.use(login_required);
 
 projectRouter.post("/project/create", async (req, res, next) => {
   try {
-    const { user_id, title, description, fromDate, toDate } = req.body;
+    const { user_id, title, description, from_date, to_date } = req.body;
 
     const newProject = await projectService.addProject({
       user_id,
       title,
       description,
-      fromDate: fromDate,
-      toDate: toDate,
+      from_date: from_date,
+      to_date: to_date,
     });
 
     res.json({
@@ -45,9 +45,9 @@ projectRouter.put("/projects/:id", async (req, res, next) => {
   try {
     const projectId = req.params.id;
 
-    const { title, description, fromDate, toDate } = req.body;
+    const { title, description, from_date, to_date } = req.body;
 
-    const updateData = { title, description, fromDate, toDate };
+    const updateData = { title, description, from_date, to_date };
 
     const project = await projectService.setProject({ projectId, updateData });
     if (project.errorMessage) {
