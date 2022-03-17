@@ -5,21 +5,25 @@ import AwardEditForm from "./AwardEditForm";
 
 const Award = ({ award, setAwardLists, isEditable }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [deleted, setDeleted] = useState(false);
 
   return (
     <>
       {isEditing ? (
         <AwardEditForm
-          currentAward={award}
-          setAwardLists={setAwardLists}
           setIsEditing={setIsEditing}
+          setAwardLists={setAwardLists}
+          currentAward={award}
         />
       ) : (
-        <AwardCard
-          award={award}
-          isEditable={isEditable}
-          setIsEditing={setIsEditing}
-        />
+        !deleted && (
+          <AwardCard
+            award={award}
+            isEditable={isEditable}
+            setIsEditing={setIsEditing}
+            setDeleted={setDeleted}
+          />
+        )
       )}
     </>
   );

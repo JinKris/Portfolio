@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import { Button, Form, Col } from "react-bootstrap";
 import * as Api from "../../api";
 
 const EducationAddForm = ({
   portfolioOwnerId,
-  setEducationlists,
+  setEducationLists,
   setIsAdding,
 }) => {
   const [position, setPosition] = useState("재학중");
@@ -23,7 +23,9 @@ const EducationAddForm = ({
     });
 
     const res = await Api.get("educationlist", user_id);
-    setEducationlists(res.data);
+
+    setEducationLists(res.data);
+
     setIsAdding(false);
   };
 

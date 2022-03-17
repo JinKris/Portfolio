@@ -3,14 +3,13 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import Education from "./Education";
 import EducationAddForm from "./EducationAddForm";
-import EducationCard from "./EducationCard";
 
 const Educations = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [educationLists, setEducationLists] = useState([]);
 
   useEffect(() => {
-    Api.get("educationList", portfolioOwnerId).then((res) =>
+    Api.get("educationlist", portfolioOwnerId).then((res) =>
       setEducationLists(res.data)
     );
   }, [portfolioOwnerId]);
@@ -19,10 +18,9 @@ const Educations = ({ portfolioOwnerId, isEditable }) => {
     <Card style={{ width: "80rem" }}>
       <Card.Body>
         <Card.Title>학력</Card.Title>
-        <EducationCard />
         {educationLists.map((education) => (
           <Education
-            key={education?.user_id}
+            key={education.id}
             education={education}
             setEducationLists={setEducationLists}
             isEditable={isEditable}

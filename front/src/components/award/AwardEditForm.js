@@ -2,24 +2,27 @@ import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const AwardEditForm = ({ currentAward, setAwardlists, setIsEditing }) => {
-  const [title, setTitle] = useState(currentAward.description);
+const AwardEditForm = ({ currentAward, setAwardLists, setIsEditing }) => {
+  const [title, setTitle] = useState("");
 
-  const [description, setDescription] = useState(currentAward.description);
+  const [description, setDescription] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const user_id = currentAward.user_id;
+
     await Api.put(`awards/${currentAward.id}`, {
       user_id,
       title,
       description,
     });
+
     const res = await Api.get("awardlist", user_id);
-    setAwardlists(res.data);
+
+    setAwardLists(res.data);
     setIsEditing(false);
   };
-
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">

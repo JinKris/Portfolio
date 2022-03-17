@@ -4,7 +4,7 @@ import * as Api from "../../api";
 
 const EducationEditForm = ({
   currentEducation,
-  setEducationlists,
+  setEducationLists,
   setIsEditing,
 }) => {
   const [position, setPosition] = useState(currentEducation.school);
@@ -25,9 +25,10 @@ const EducationEditForm = ({
 
     const res = await Api.get("educationlist", user_id);
 
-    setEducationlists(res.data);
+    setEducationLists(res.data);
     setIsEditing(false);
   };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
