@@ -3,10 +3,10 @@ import { User } from "./models/User";
 import Project from "./models/Project";
 import { Certificate } from "./models/Certificate";
 import Award from "./models/Award";
-import { Education} from "./models/Education";
-import dotenv from "dotenv"
+import { Education } from "./models/Education";
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
 const DB_URL =
   process.env.MONGODB_URL ||
@@ -14,8 +14,6 @@ const DB_URL =
 
 mongoose.connect(DB_URL);
 const db = mongoose.connection;
-console.log(db);
-console.log(DB_URL)
 
 db.on("connected", () =>
   console.log("정상적으로 MongoDB 서버에 연결되었습니다.  " + DB_URL)
@@ -24,4 +22,4 @@ db.on("error", (error) =>
   console.error("MongoDB 연결에 실패하였습니다...\n" + DB_URL + "\n" + error)
 );
 
-export { User, Project, Certificate, Award,Education };
+export { User, Project, Certificate, Award, Education };
