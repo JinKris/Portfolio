@@ -2,7 +2,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 
 function ProjectCard({ project, isEditable, setIsEditing }) {
   return (
-    <Card.Text>
+    <Card.Body>
       <Row className="align-items-center">
         <Col>
           <span>{project.title}</span>
@@ -22,7 +22,7 @@ function ProjectCard({ project, isEditable, setIsEditing }) {
           </Col>
         )}
       </Row>
-    </Card.Text>
+    </Card.Body>
   );
 }
 
