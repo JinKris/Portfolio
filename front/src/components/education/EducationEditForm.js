@@ -2,17 +2,32 @@ import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const EducationEditForm = ({ setIsEditing }) => {
-  const [position, setPosition] = useState("");
-  const [univ, setUniv] = useState("");
-  const [major, setMajor] = useState("");
+const EducationEditForm = ({
+  currentEducation,
+  setEducationlists,
+  setIsEditing,
+}) => {
+  const [position, setPosition] = useState(currentEducation.school);
+  const [school, setSchool] = useState(currentEducation.school);
+  const [major, setMajor] = useState(currentEducation.school);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const message = `상태: ${position} 졸업학교: ${univ} 전공: ${major}`;
-    alert(message);
-  };
 
+    const user_id = currentEducation.user_id;
+
+    await Api.put(`educations/${currentEducation.id}`, {
+      user_id,
+      school,
+      major,
+      position,
+    });
+
+    const res = await Api.get("educationlist", user_id);
+
+    setEducationlists(res.data);
+    setIsEditing(false);
+  };
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -20,8 +35,8 @@ const EducationEditForm = ({ setIsEditing }) => {
           type="text"
           placeholder="학교이름"
           autoComplete="off"
-          value={univ}
-          onChange={(e) => setUniv(e.target.value)}
+          value={school}
+          onChange={(e) => setSchool(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -78,19 +93,13 @@ const EducationEditForm = ({ setIsEditing }) => {
       {/*   </fieldset> */}
       <Form.Group className="mt-3 text-center">
         <Col>
-          <Button
-            variant="primary"
-            type="submit"
-            className="me-3"
-            onClick={handleSubmit}
-          >
+          <Button variant="primary" type="submit" className="me-3">
             확인
           </Button>
           <Button
             variant="secondary"
-            type="submit"
             className="me-3"
-            onClick={setIsEditing(true)}
+            onClick={() => setIsEditing(false)}
           >
             취소
           </Button>

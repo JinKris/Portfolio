@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const AwardEditForm = ({ setIsEditing }) => {
-  const [position, setPosition] = useState("재학중");
-  const [univ, setUniv] = useState("");
-  const [major, setMajor] = useState("");
+const AwardEditForm = ({ currentAward, setAwardlists, setIsEditing }) => {
+  const [title, setTitle] = useState(currentAward.description);
+
+  const [description, setDescription] = useState(currentAward.description);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const message = `상태: ${position} 졸업학교: ${univ} 전공: ${major}`;
-    alert(message);
+    const user_id = currentAward.user_id;
+    await Api.put(`awards/${currentAward.id}`, {
+      user_id,
+      title,
+      description,
+    });
+    const res = await Api.get("awardlist", user_id);
+    setAwardlists(res.data);
+    setIsEditing(false);
   };
 
   return (
@@ -20,33 +27,28 @@ const AwardEditForm = ({ setIsEditing }) => {
           type="text"
           placeholder="수상내역"
           autoComplete="off"
-          value={univ}
-          onChange={(e) => setUniv(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Control
           type="text"
           placeholder="상세내역"
-          value={major}
-          onChange={(e) => setMajor(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
-      <Form.Group as={Row} className="mt-3 text-center">
-        <Col sm={{ span: 20 }}>
-          <Button
-            variant="primary"
-            type="submit"
-            className="me-3"
-            onClick={handleSubmit()}
-          >
+
+      <Form.Group className="mt-3 text-center">
+        <Col>
+          <Button variant="primary" type="submit" className="me-3">
             확인
           </Button>
           <Button
             variant="secondary"
-            type="submit"
             className="me-3"
-            onClick={setIsEditing(true)}
+            onClick={() => setIsEditing(false)}
           >
             취소
           </Button>

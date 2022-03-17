@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
-import Award from "./Award";
-import AwardAddForm from "./AwardAddForm";
 
 const AwardCard = ({ award, isEditable, setIsEditing }) => {
   return (
     <Card.Text>
-      {/* <span>{education.school}</span> */}
+      <span>{award.title}</span>
+      <br />
+      <span className="text-muted">{award.description}</span>
       {isEditable && (
         <Col>
           <Row className="mt-3 text-center text-info">
@@ -20,15 +20,11 @@ const AwardCard = ({ award, isEditable, setIsEditing }) => {
                 편집
               </Button>
             </Col>
-            <Col sm={{ span: 20 }}>
-              <Button
-                variant="outline-info"
-                size="sm"
-                onClick={() => setIsEditing((prev) => !prev)}
-              >
+            {/*             <Col sm={{ span: 20 }}>
+              <Button variant="outline-info" size="sm">
                 삭제
               </Button>
-            </Col>
+            </Col> */}
           </Row>
         </Col>
       )}

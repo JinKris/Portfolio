@@ -2,26 +2,23 @@ import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const AwardAddForm = ({ portfolioOwnerId, setAwards, setIsAdding }) => {
-  const [position, setPosition] = useState("재학중");
-  const [univ, setUniv] = useState("");
-  const [major, setMajor] = useState("");
+const AwardAddForm = ({ portfolioOwnerId, setAwardlists, setIsAdding }) => {
+  const [title, setTitle] = useState("");
+
+  const [description, setDescription] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const user_id = portfolioOwnerId;
 
-    /*     const user_Id = portfolioOwnerId;
-
-    await Api.post("education/create", {
-      user_Id,
-      univ,
-      major,
-      position,
+    await Api.post("award/create", {
+      user_id: portfolioOwnerId,
+      title,
+      description,
     });
 
-    const res = await Api.get("educationlist", portfolioOwnerId);
-    setEducations(res.data); */
-
+    const res = await Api.get("awardlist", user_id);
+    setAwardlists(res.data);
     setIsAdding(false);
   };
 
@@ -32,22 +29,21 @@ const AwardAddForm = ({ portfolioOwnerId, setAwards, setIsAdding }) => {
           type="text"
           placeholder="수상내역"
           autoComplete="off"
-          value={univ}
-          onChange={(e) => setUniv(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Control
           type="text"
           placeholder="상세내역"
-          value={major}
-          onChange={(e) => setMajor(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
 
-      {/*   </fieldset> */}
-      <Form.Group as={Row} className="mt-2 text-center">
-        <Col sm={{ span: 20 }}>
+      <Form.Group className="mt-3 text-center">
+        <Col>
           <Button variant="primary" type="submit" className="me-3">
             확인
           </Button>

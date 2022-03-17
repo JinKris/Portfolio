@@ -6,11 +6,11 @@ import AwardAddForm from "./AwardAddForm";
 
 const Awards = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState();
-  const [awardList, setAwardList] = useState([]);
+  const [awardLists, setAwardLists] = useState([]);
 
   useEffect(() => {
     Api.get("awardList", portfolioOwnerId).then((res) =>
-      setAwardList(res.data)
+      setAwardLists(res.data)
     );
   }, [portfolioOwnerId]);
 
@@ -19,11 +19,11 @@ const Awards = ({ portfolioOwnerId, isEditable }) => {
       <Card.Body>
         <Card.Title>수상 이력</Card.Title>
 
-        {awardList.map((award) => (
+        {awardLists.map((award) => (
           <Award
             key={award.id}
             award={award}
-            awardList={setAwardList}
+            awardLists={setAwardLists}
             isEditable={isEditable}
           />
         ))}
@@ -37,7 +37,7 @@ const Awards = ({ portfolioOwnerId, isEditable }) => {
         {isAdding && (
           <AwardAddForm
             portfolioOwnerId={portfolioOwnerId}
-            setAwardList={setAwardList}
+            setAwardLists={setAwardLists}
             setIsAdding={setIsAdding}
           />
         )}

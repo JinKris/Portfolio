@@ -2,26 +2,28 @@ import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const EducationAddForm = ({ portfolioOwnerId, setEducations, setIsAdding }) => {
+const EducationAddForm = ({
+  portfolioOwnerId,
+  setEducationlists,
+  setIsAdding,
+}) => {
   const [position, setPosition] = useState("재학중");
-  const [univ, setUniv] = useState("");
+  const [school, setSchool] = useState("");
   const [major, setMajor] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    /*     const user_Id = portfolioOwnerId;
+    const user_id = portfolioOwnerId;
 
     await Api.post("education/create", {
-      user_Id,
-      univ,
+      user_id,
+      school,
       major,
       position,
     });
 
-    const res = await Api.get("어디에 연결해야하죠?", portfolioOwnerId);
-    setEducations(res.data); */
-
+    const res = await Api.get("educationlist", user_id);
+    setEducationlists(res.data);
     setIsAdding(false);
   };
 
@@ -32,8 +34,8 @@ const EducationAddForm = ({ portfolioOwnerId, setEducations, setIsAdding }) => {
           type="text"
           placeholder="학교이름"
           autoComplete="off"
-          value={univ}
-          onChange={(e) => setUniv(e.target.value)}
+          value={school}
+          onChange={(e) => setSchool(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
