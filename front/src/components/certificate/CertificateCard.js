@@ -1,7 +1,7 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 
 function CertificateCard({ certificate, isEditable, setIsEditing }) {
-  console.log(`certificateCard : ${certificate}`)
+  // console.log(`certificateCard : ${certificate}`)
   return (
     <Card.Text>
       <Row className="align-items-center">

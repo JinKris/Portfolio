@@ -56,7 +56,7 @@ function CertificateAddForm({ portfolioOwnerId, setCertificates, setIsAdding }) 
 
       <Form.Group controlId="formBasicWhenDate" className="mt-3">
         <Form.Control
-          type="text"
+          type="date"
           placeholder="취득날짜"
           value={when_date}
           onChange={(e) => setWhenDate(e.target.value)}

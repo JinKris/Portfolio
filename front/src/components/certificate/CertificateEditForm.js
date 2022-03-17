@@ -19,7 +19,6 @@ function CertificateEditForm({ currentCertificate, setCertificates, setIsEditing
 
     // "certificates/수상 id" 엔드포인트로 PUT 요청함.
     await Api.put(`certificates/${currentCertificate.user_id}`, {
-      user_id,
       title,
       description,
       when_date,
