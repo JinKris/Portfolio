@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const awardRouter = Router();
-const AwardService = require("../Service/awardService");
+const AwardService = require("../services/awardService");
 
-const verifyToken = require("../middleware/verifyToken");
+const verifyToken = require("../middlewares/verifyToken");
 
 awardRouter.post("/award/create", verifyToken, async (req, res, next) => {
   try {
