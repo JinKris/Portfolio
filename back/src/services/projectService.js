@@ -6,11 +6,11 @@ class projectService {
     user_id,
     title,
     description,
-    fromDate,
-    toDate,
+    from_date,
+    to_date,
   }) => {
     const id = uuidv4();
-    const newProject = { user_id, title, description, fromDate, toDate, id };
+    const newProject = { user_id, title, description, from_date, to_date, id };
     const createdProject = await Project.create({ newProject });
     return createdProject;
   };
@@ -44,14 +44,14 @@ class projectService {
       const newValue = updateData.description;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
-    if (updateData.fromDate) {
-      const updateDataField = "fromDate";
-      const newValue = updateData.fromDate;
+    if (updateData.from_date) {
+      const updateDataField = "from_date";
+      const newValue = updateData.from_date;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
-    if (updateData.toDate) {
-      const updateDataField = "toDate";
-      const newValue = updateData.toDate;
+    if (updateData.to_date) {
+      const updateDataField = "to_date";
+      const newValue = updateData.to_date;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
     return project;
