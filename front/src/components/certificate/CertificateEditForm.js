@@ -17,7 +17,7 @@ function CertificateEditForm({ currentCertificate, setCertificates, setIsEditing
     // currentCertificate의 user_id를 user_id 변수에 할당함.
     const user_id = currentCertificate.user_id;
 
-    // "certificates/수상 id" 엔드포인트로 PUT 요청함.
+    // "certificates/수상 id" 엔드포인트로 PUT 요청함...
     await Api.put(`certificates/${currentCertificate.user_id}`, {
       title,
       description,
