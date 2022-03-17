@@ -58,7 +58,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
 
       <Form.Group controlId="formBasicFromDate" className="mt-3">
         <Form.Control
-          type="text"
+          type="date"
           placeholder="시작날짜"
           value={from_date}
           onChange={(e) => setFromDate(e.target.value)}
@@ -67,7 +67,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
 
       <Form.Group controlId="formBasicToDate" className="mt-3">
         <Form.Control
-          type="text"
+          type="date"
           placeholder="종료날짜"
           value={to_date}
           onChange={(e) => setToDate(e.target.value)}
