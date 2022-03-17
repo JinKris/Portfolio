@@ -1,4 +1,4 @@
-const awardModel = require("../schema/award");
+const awardModel = require("../schemas/award");
 
 class Award {
   static create = async ({ id, user_id, title, description }) => {
