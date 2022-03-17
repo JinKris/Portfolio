@@ -1,7 +1,7 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api"
 
-function ProjectCard({ project, isEditable, setIsEditing,isDelete,setIsDelete }) {
+function ProjectCard({ project,isEditable, setIsEditing,isDelete,setIsDelete }) {
   const handleDelete = async (e) => {
     e.preventDefault();
     e.stopPropagation();
