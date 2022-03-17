@@ -6,11 +6,11 @@ class projectService {
     user_id,
     title,
     description,
-    fromDate,
-    toDate,
+    from_date,
+    to_date,
   }) => {
     const id = uuidv4();
-    const newProject = { user_id, title, description, fromDate, toDate, id };
+    const newProject = { user_id, title, description, from_date, to_date, id };
     const createdProject = await Project.create({ newProject });
     return createdProject;
   };
@@ -39,19 +39,22 @@ class projectService {
       const newValue = updateData.title;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
+
     if (updateData.description) {
       const updateDataField = "description";
       const newValue = updateData.description;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
-    if (updateData.fromDate) {
-      const updateDataField = "fromDate";
-      const newValue = updateData.fromDate;
+
+    if (updateData.from_date) {
+      const updateDataField = "from_date";
+      const newValue = updateData.from_date;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
-    if (updateData.toDate) {
-      const updateDataField = "toDate";
-      const newValue = updateData.toDate;
+
+    if (updateData.to_date) {
+      const updateDataField = "to_date";
+      const newValue = updateData.to_date;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
     return project;
@@ -60,6 +63,18 @@ class projectService {
   static getProjectList = async ({ user_id }) => {
     const projects = await Project.findByUserId({ user_id });
     return projects;
+  };
+
+  static deleteProject = async ({ projectId }) => {
+    const deletedProject = await Project.deleteById({ projectId });
+
+    if (!deletedProject) {
+      const errorMessage = "해당 id의 프로젝트는 없습니다.";
+      return { errorMessage };
+    }
+    return {
+      sataus: "succ",
+    };
   };
 }
 
