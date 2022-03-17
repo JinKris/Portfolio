@@ -34,13 +34,6 @@ awardRouter.get("/awards/:id", verifyToken, async (req, res, next) => {
   }
 });
 
-/**
- * {
-    "title": "행복한 상",
-    "description":"행복해서 상을 받았습니다."
-}
-
- */
 awardRouter.put("/awards/:id", verifyToken, async (req, res, next) => {
   try {
     const { title, description } = req.body;
@@ -69,6 +62,22 @@ awardRouter.get("/awardlist/:user_id", verifyToken, async (req, res, next) => {
     }
 
     res.status(200).json(awardList);
+  } catch (error) {
+    next(error);
+  }
+});
+
+awardRouter.delete("/awards/:id", async function (req, res, next) {
+  try {
+    const awardId = req.params.id;
+
+    const result = await AwardService.deleteAward({ awardId });
+
+    if (result.errorMessage) {
+      throw new Error(result.errorMessage);
+    }
+
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }

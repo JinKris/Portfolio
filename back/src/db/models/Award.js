@@ -36,6 +36,12 @@ class Award {
 
     return updatedAward;
   };
+
+  static deleteById = async ({ awardId }) => {
+    const deletedData = await awardModel.deleteOne({ id: awardId });
+    const isDataDeleted = deletedData.deletedCount === 1;
+    return isDataDeleted;
+  };
 }
 
 module.exports = Award;

@@ -61,6 +61,18 @@ class projectService {
     const projects = await Project.findByUserId({ user_id });
     return projects;
   };
+
+  static deleteProject = async ({ projectId }) => {
+    const deletedProject = await Project.deleteById({ projectId });
+
+    if (!deletedProject) {
+      const errorMessage = "해당 id의 프로젝트는 없습니다.";
+      return { errorMessage };
+    }
+    return {
+      sataus: "succ",
+    };
+  };
 }
 
 module.exports = projectService;

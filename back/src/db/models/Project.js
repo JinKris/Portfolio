@@ -29,6 +29,12 @@ class Project {
     const projects = projectModel.find({ user_id });
     return projects;
   };
+
+  static deleteById = async ({ projectId }) => {
+    const result = await projectModel.deleteOne({ id: projectId });
+    const isDataDeleted = result.deletedCount === 1;
+    return isDataDeleted;
+  };
 }
 
 module.exports = Project;

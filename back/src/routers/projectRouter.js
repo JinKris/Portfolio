@@ -18,7 +18,7 @@ projectRouter.post("/project/create", async (req, res, next) => {
       to_date: to_date,
     });
 
-    res.json({
+    res.status(200).json({
       newProject,
     });
   } catch (error) {
@@ -67,6 +67,22 @@ projectRouter.get("/projectlist/:user_id", async (req, res, next) => {
     const user_id = req.params.user_id;
     const projectList = await projectService.getProjectList({ user_id });
     res.status(200).json(projectList);
+  } catch (error) {
+    next(error);
+  }
+});
+
+projectRouter.delete("/projects/:id", async (req, res, next) => {
+  try {
+    const projectId = req.params.id;
+    console.log(projectId);
+
+    const result = await projectService.deleteProject({ projectId });
+
+    if (result.errorMessage) {
+      throw new Error(result.errorMessage);
+    }
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
