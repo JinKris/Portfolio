@@ -22,9 +22,9 @@ const Educations = ({ portfolioOwnerId, isEditable }) => {
         <EducationCard />
         {educationLists.map((education) => (
           <Education
-            key={education.id}
+            key={education?.user_id}
             education={education}
-            educationLists={setEducationLists}
+            setEducationLists={setEducationLists}
             isEditable={isEditable}
           />
         ))}

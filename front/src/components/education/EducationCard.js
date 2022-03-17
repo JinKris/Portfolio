@@ -5,7 +5,7 @@ import * as Api from "../../api";
 const EducationCard = ({ education, isEditable, setIsEditing }) => {
   return (
     <Card.Text>
-      {/* <span>{education.school}</span> */}
+      <span>{education.school}</span>
       {isEditable && (
         <Col>
           <Row className="mt-3 text-center text-info">
