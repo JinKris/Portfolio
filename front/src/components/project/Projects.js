@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import * as Api from "../../api"
+import * as Api from "../../api";
 import Project from "./Project";
 import ProjectAddForm from "./ProjectAddForm";
 
@@ -12,15 +12,17 @@ function Projects({ portfolioOwnerId, isEditable }) {
 
   useEffect(() => {
     // "projectlist/유저id"로 GET 요청하고, response의 data로 projects를 세팅함.
-    Api.get("projectlist", portfolioOwnerId).then((res) => setProjects(res.data));
+    Api.get("projectlist", portfolioOwnerId).then((res) =>
+      setProjects(res.data)
+    );
   }, [portfolioOwnerId]);
 
   return (
     <Card>
       <Card.Body>
-        <Card.Title>수상이력</Card.Title>
+        <Card.Title>프로젝트</Card.Title>
         {projects.map((project) => (
-            <Project
+          <Project
             key={project?.user_id}
             project={project}
             setProjects={setProjects}

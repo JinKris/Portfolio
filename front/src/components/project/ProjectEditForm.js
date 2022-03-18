@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
-import * as Api from "../../api"
+import * as Api from "../../api";
 
 function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
   //useState로 title 상태를 생성함.
@@ -29,9 +29,9 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
     });
 
     // "projectlist/유저id" 엔드포인트로 GET 요청함.
-    const res = await Api.get("projectlist", user_id)
-    console.log(`projectlist data : ${res}`)
-    
+    const res = await Api.get("projectlist", user_id);
+    console.log(`projectlist data : ${res}`);
+
     // projects를 response의 data로 세팅함.
     setProjects(res.data);
     // 편집 과정이 끝났으므로, isEditing을 false로 세팅함.

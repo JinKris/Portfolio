@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
-import * as Api from "../../api"
+import * as Api from "../../api";
 
 function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
   //useState로 title 상태를 생성함.
@@ -11,7 +11,6 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
   const [from_date, setFromDate] = useState("");
   //useState로 to_date 상태를 생성함.
   const [to_date, setToDate] = useState("");
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,12 +25,13 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
       title,
       description,
       from_date,
-      to_date
+      to_date,
     });
 
     // "projectlist/유저id" 엔드포인트로 get요청함.
     const res = await Api.get("projectlist", user_id);
     // projects를 response의 data로 세팅함.
+    console.log(res.data);
     setProjects(res.data);
     // project를 추가하는 과정이 끝났으므로, isAdding을 false로 세팅함.
     setIsAdding(false);
