@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
+import { makeToken } from "../utils/makeToken";
 class userAuthService {
   static async addUser({ name, email, password }) {
     // 이메일 중복 확인
@@ -49,8 +50,10 @@ class userAuthService {
     }
 
     // 로그인 성공 -> JWT 웹 토큰 생성
-    const secretKey = process.env.JWT_SECRET_KEY || "jwt-secret-key";
-    const token = jwt.sign({ userId: user.id }, secretKey);
+    // const secretKey = process.env.JWT_SECRET_KEY || "jwt-secret-key";
+    // const token = jwt.sign({ userId: user.id }, secretKey);
+
+    const token = makeToken({ userId: user.id });
 
     // 반환할 loginuser 객체를 위한 변수 설정
     const id = user.id;
