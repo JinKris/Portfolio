@@ -1,22 +1,22 @@
 import { certificateModel } from "../schemas/certificate";
 
 class Certificate {
-  static async create({ newCertificate }) {
+  static create = async ({ newCertificate }) => {
     const createdNewCertificate = await certificateModel.create(newCertificate);
     return createdNewCertificate;
-  }
+  };
 
-  static async findById({ certificateId }) {
+  static findById = async ({ certificateId }) => {
     const certificate = await certificateModel.findOne({ id: certificateId });
     return certificate;
-  }
+  };
 
-  static async findByUserId({ userId }) {
+  static findByUserId = async ({ userId }) => {
     const certificates = await certificateModel.find({ userId });
     return certificates;
-  }
+  };
 
-  static async update({ certificateId, fieldToUpdate, newValue }) {
+  static update = async ({ certificateId, fieldToUpdate, newValue }) => {
     const filter = { id: certificateId };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
@@ -27,15 +27,15 @@ class Certificate {
       option
     );
     return updatedCertificate;
-  }
+  };
 
-  static async deleteById({ certificateId }) {
+  static deleteById = async ({ certificateId }) => {
     const deleteResult = await certificateModel.deleteOne({
       id: certificateId,
     });
     const isDataDeleted = deleteResult.deletedCount === 1;
     return isDataDeleted;
-  }
+  };
 }
 
 export { Certificate };

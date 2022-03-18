@@ -2,7 +2,7 @@ import { Certificate } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
 class CertificateService {
-  static async addCertificate({ userId, title, description, whenDate }) {
+  static addCertificate = async ({ userId, title, description, whenDate }) => {
     // id로 유니크 값 사용
     const id = uuidv4();
 
@@ -11,9 +11,9 @@ class CertificateService {
     const createdNewCertificate = await Certificate.create({ newCertificate });
 
     return createdNewCertificate;
-  }
+  };
 
-  static async getCertificate({ certificateId }) {
+  static getCertificate = async ({ certificateId }) => {
     // 해당 id를 가진 데이터가 db에 존재 여부 확인
     const certificate = await Certificate.findById({ certificateId });
     if (!certificate) {
@@ -23,14 +23,14 @@ class CertificateService {
     }
 
     return certificate;
-  }
+  };
 
-  static async getCertificateList({ userId }) {
+  static getCertificateList = async ({ userId }) => {
     const certificates = await Certificate.findByUserId({ userId });
     return certificates;
-  }
+  };
 
-  static async setCertificate({ certificateId, toUpdate }) {
+  static setCertificate = async ({ certificateId, toUpdate }) => {
     let certificate = await Certificate.findById({ certificateId });
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
@@ -71,9 +71,9 @@ class CertificateService {
     }
 
     return certificate;
-  }
+  };
 
-  static async deleteCertificate({ certificateId }) {
+  static deleteCertificate = async ({ certificateId }) => {
     const isDataDeleted = await Certificate.deleteById({ certificateId });
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
@@ -84,7 +84,7 @@ class CertificateService {
     }
 
     return { status: "ok" };
-  }
+  };
 }
 
 export { CertificateService };
