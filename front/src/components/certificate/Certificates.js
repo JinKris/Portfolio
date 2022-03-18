@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import * as Api from "../../api"
+import * as Api from "../../api";
 import Certificate from "./Certificate";
 import CertificateAddForm from "./CertificateAddForm";
 
@@ -12,49 +12,40 @@ function Certificates({ portfolioOwnerId, isEditable }) {
 
   useEffect(() => {
     // "certificatelist/유저id"로 GET 요청하고, response의 data로 certificates를 세팅함.
-    Api.get("certificatelist", portfolioOwnerId).then((res) => setCertificates(res.data));
+    Api.get("certificatelist", portfolioOwnerId).then((res) =>
+      setCertificates(res.data)
+    );
   }, [portfolioOwnerId]);
-
-    // Api.get("certificatelist", portfolioOwnerId).then((res) => setCertificates(res.data));
-    // console.log(`Certificates : ${certificates}`)
-
-    // setCertificates([
-    //   {
-    //     "user_id":"0",
-    //     "title":"운전면허증 2탄",
-    //     "description":"수정용 2탄입니다.",
-    //     "when_date":"2099-01-20"
-    // },])
 
   return (
     <>
-    <Card>
-      <Card.Body>
-        <Card.Title>자격증이력</Card.Title>
-        {certificates.map((certificate) => (
+      <Card>
+        <Card.Body>
+          <Card.Title>자격증이력</Card.Title>
+          {certificates.map((certificate) => (
             <Certificate
-            key={certificate?.id}
-            certificate={certificate}
-            setAwards={setCertificates}
-            isEditable={isEditable}
-          />
-        ))}
-        {isEditable && (
-          <Row className="mt-3 text-center mb-4">
-            <Col sm={{ span: 20 }}>
-              <Button onClick={() => setIsAdding(true)}>+</Button>
-            </Col>
-          </Row>
-        )}
-        {isAdding && (
-          <CertificateAddForm
-            portfolioOwnerId={portfolioOwnerId}
-            setCertificates={setCertificates}
-            setIsAdding={setIsAdding}
-          />
-        )}
-      </Card.Body>
-    </Card>
+              key={certificate?.id}
+              certificate={certificate}
+              setCertificates={setCertificates}
+              isEditable={isEditable}
+            />
+          ))}
+          {isEditable && (
+            <Row className="mt-3 text-center mb-4">
+              <Col sm={{ span: 20 }}>
+                <Button onClick={() => setIsAdding(true)}>+</Button>
+              </Col>
+            </Row>
+          )}
+          {isAdding && (
+            <CertificateAddForm
+              portfolioOwnerId={portfolioOwnerId}
+              setCertificates={setCertificates}
+              setIsAdding={setIsAdding}
+            />
+          )}
+        </Card.Body>
+      </Card>
     </>
   );
 }
