@@ -44,7 +44,7 @@ certificateRouter.get("/certificates/:id", async function (req, res, next) {
       throw new Error(certificate.errorMessage);
     }
 
-    res.status(200).send(certificate);
+    res.status(200).json(certificate);
   } catch (error) {
     next(error);
   }
@@ -68,7 +68,7 @@ certificateRouter.put("/certificates/:id", async function (req, res, next) {
       throw new Error(certificate.errorMessage);
     }
 
-    res.status(200).send(certificate);
+    res.status(200).json(certificate);
   } catch (error) {
     next(error);
   }
@@ -86,7 +86,7 @@ certificateRouter.delete("/certificates/:id", async function (req, res, next) {
       throw new Error(result.errorMessage);
     }
 
-    res.status(200).send(result);
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
@@ -100,7 +100,7 @@ certificateRouter.get(
       const certificateList = await CertificateService.getCertificateList({
         userId,
       });
-      res.status(200).send(certificateList);
+      res.status(200).json(certificateList);
     } catch (error) {
       next(error);
     }
