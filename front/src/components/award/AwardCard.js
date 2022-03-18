@@ -1,17 +1,7 @@
 import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
-import * as Api from "../../api";
 
-const AwardCard = ({ award, isEditable, setIsEditing, setDeleted }) => {
-  async function del(e) {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      e.preventDefault();
-      e.stopPropagation();
-      await Api.delete("awards", award.id);
-      setDeleted(true);
-    }
-  }
-
+const AwardCard = ({ award, isEditable, setIsEditing }) => {
   return (
     <Card.Text>
       <Row className="align-items-center">
@@ -30,12 +20,7 @@ const AwardCard = ({ award, isEditable, setIsEditing, setDeleted }) => {
             >
               편집
             </Button>
-            <Button
-              variant="outline-info"
-              size="sm"
-              onClick={del}
-              className="mr-3"
-            >
+            <Button variant="outline-info" size="sm" className="mr-3">
               삭제
             </Button>
           </Col>

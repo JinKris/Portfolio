@@ -3,7 +3,6 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import Award from "./Award";
 import AwardAddForm from "./AwardAddForm";
-import AwardCard from "./AwardCard";
 
 const Awards = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
