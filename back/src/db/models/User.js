@@ -1,4 +1,4 @@
-import { userModel } from "../schemas/user.js";
+import { userModel } from "../schemas/user";
 
 class User {
   static async create({ newUser }) {

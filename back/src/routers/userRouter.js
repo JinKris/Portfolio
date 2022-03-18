@@ -48,12 +48,23 @@ userAuthRouter.post("/user/login", async function (req, res, next) {
       throw new Error(user.errorMessage);
     }
 
-    res.status(200).send(user);
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
 });
 
+userAuthRouter.get("/userlist", loginRequired, async function (req, res, next) {
+  try {
+    // 전체 사용자 목록을 얻음
+    const users = await userAuthService.getUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+});
+
+<<<<<<< HEAD
 userAuthRouter.get("/userlist", loginRequired, async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
@@ -64,6 +75,8 @@ userAuthRouter.get("/userlist", loginRequired, async function (req, res, next) {
   }
 });
 
+=======
+>>>>>>> efde2aac6b64cc2da6fcc8b17850288dfa540edc
 userAuthRouter.get(
   "/user/current",
   loginRequired,
@@ -71,6 +84,10 @@ userAuthRouter.get(
     try {
       // jwt토큰에서 추출된 사용자 id를 가지고 db에서 사용자 정보를 찾음.
       const userId = req.currentUserId;
+<<<<<<< HEAD
+=======
+      console.log(userId);
+>>>>>>> efde2aac6b64cc2da6fcc8b17850288dfa540edc
       const currentUserInfo = await userAuthService.getUserInfo({
         userId,
       });
@@ -79,7 +96,7 @@ userAuthRouter.get(
         throw new Error(currentUserInfo.errorMessage);
       }
 
-      res.status(200).send(currentUserInfo);
+      res.status(200).json(currentUserInfo);
     } catch (error) {
       next(error);
     }
@@ -127,7 +144,7 @@ userAuthRouter.get(
         throw new Error(currentUserInfo.errorMessage);
       }
 
-      res.status(200).send(currentUserInfo);
+      res.status(200).json(currentUserInfo);
     } catch (error) {
       next(error);
     }
@@ -138,7 +155,7 @@ userAuthRouter.get(
 userAuthRouter.get("/afterlogin", loginRequired, function (req, res, next) {
   res
     .status(200)
-    .send(
+    .json(
       `안녕하세요 ${req.currentUserId}님, jwt 웹 토큰 기능 정상 작동 중입니다.`
     );
 });
