@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const CertificateSchema = new Schema(
+const certificateSchema = new Schema(
   {
     id: {
       type: String,
@@ -28,6 +28,6 @@ const CertificateSchema = new Schema(
   }
 );
 
-const certificateModel = model("Certificate", CertificateSchema);
+const certificateModel = model("Certificate", certificateSchema);
 
 export { certificateModel };

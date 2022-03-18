@@ -1,4 +1,4 @@
-import { certificateModel } from "../schemas/certificate";
+import { certificateModel } from "../schemas/certificate.js";
 
 class Certificate {
   static create = async ({ newCertificate }) => {
