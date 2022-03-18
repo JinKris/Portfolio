@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 
 class projectService {
   static addProject = async ({
-    user_id,
+    userId,
     title,
     description,
-    from_date,
-    to_date,
+    fromDate,
+    toDate,
   }) => {
     const id = uuidv4();
-    const newProject = { user_id, title, description, from_date, to_date, id };
+    const newProject = { userId, title, description, fromDate, toDate, id };
     const createdProject = await Project.create({ newProject });
     return createdProject;
   };
@@ -44,21 +44,21 @@ class projectService {
       const newValue = updateData.description;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
-    if (updateData.from_date) {
-      const updateDataField = "from_date";
-      const newValue = updateData.from_date;
+    if (updateData.fromDate) {
+      const updateDataField = "fromDate";
+      const newValue = updateData.fromDate;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
-    if (updateData.to_date) {
-      const updateDataField = "to_date";
-      const newValue = updateData.to_date;
+    if (updateData.toDate) {
+      const updateDataField = "toDate";
+      const newValue = updateData.toDate;
       project = await Project.update({ projectId, updateDataField, newValue });
     }
     return project;
   };
 
-  static getProjectList = async ({ user_id }) => {
-    const projects = await Project.findByUserId({ user_id });
+  static getProjectList = async ({ userId }) => {
+    const projects = await Project.findByUserId({ userId });
     return projects;
   };
 

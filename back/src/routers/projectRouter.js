@@ -14,14 +14,14 @@ projectRouter.post("/project/create", async (req, res, next) => {
         "headers의 Content-Type을 application/json으로 설정해주세요"
       );
     }
-    const { user_id, title, description, from_date, to_date } = req.body;
+    const { userId, title, description, fromDate, toDate } = req.body;
 
     const newProject = await projectService.addProject({
-      user_id,
+      userId,
       title,
       description,
-      from_date: from_date,
-      to_date: to_date,
+      fromDate: fromDate,
+      toDate: toDate,
     });
 
     res.status(200).json({
@@ -51,9 +51,9 @@ projectRouter.put("/projects/:id", async (req, res, next) => {
   try {
     const projectId = req.params.id;
 
-    const { title, description, from_date, to_date } = req.body;
+    const { title, description, fromDate, toDate } = req.body;
 
-    const updateData = { title, description, from_date, to_date };
+    const updateData = { title, description, fromDate, toDate };
 
     const project = await projectService.setProject({ projectId, updateData });
     if (project.errorMessage) {
@@ -68,10 +68,10 @@ projectRouter.put("/projects/:id", async (req, res, next) => {
   }
 });
 
-projectRouter.get("/projectlist/:user_id", async (req, res, next) => {
+projectRouter.get("/projectlist/:userId", async (req, res, next) => {
   try {
-    const user_id = req.params.user_id;
-    const projectList = await projectService.getProjectList({ user_id });
+    const userId = req.params.userId;
+    const projectList = await projectService.getProjectList({ userId });
     res.status(200).json(projectList);
   } catch (error) {
     next(error);

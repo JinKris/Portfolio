@@ -25,8 +25,8 @@ class Project {
     return updatedProject;
   };
 
-  static findByUserId = async ({ user_id }) => {
-    const projects = projectModel.find({ user_id });
+  static findByUserId = async ({ userId }) => {
+    const projects = projectModel.find({ userId });
     return projects;
   };
 

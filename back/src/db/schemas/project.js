@@ -6,7 +6,7 @@ const projectSchema = new Schema(
       type: String,
       required: true,
     },
-    user_id: {
+    userId: {
       type: String,
       required: true,
     },
@@ -18,11 +18,11 @@ const projectSchema = new Schema(
       type: String,
       required: true,
     },
-    from_date: {
+    fromDate: {
       type: String,
       required: true,
     },
-    to_date: {
+    toDate: {
       type: String,
       required: true,
     },
