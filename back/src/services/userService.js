@@ -1,7 +1,9 @@
 import { User } from "../db"; // from을 폴더(db) 로 설정 시, 디폴트로 index.js 로부터 import함.
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import jwt from "jsonwebtoken";
+
+import { hashPassword } from "../utils/hashPassword";
+import { verifyPassword } from "../utils/verifyPassword";
 
 import { makeToken } from "../utils/makeToken";
 class userAuthService {
@@ -15,7 +17,8 @@ class userAuthService {
     }
 
     // 비밀번호 해쉬화
-    const hashedPassword = await bcrypt.hash(password, 10);
+    //const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await hashPassword(password, 10);
 
     // id 는 유니크 값 부여
     const id = uuidv4();
@@ -38,12 +41,15 @@ class userAuthService {
     }
 
     // 비밀번호 일치 여부 확인
-    const correctPasswordHash = user.password;
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      correctPasswordHash
-    );
-    if (!isPasswordCorrect) {
+    // const correctPasswordHash = user.password;
+    // const isPasswordCorrect = await bcrypt.compare(
+    //   password,
+    //   correctPasswordHash
+    // );
+
+    const verifiedPassword = await verifyPassword(password, user.password);
+    console.log(verifiedPassword);
+    if (!verifiedPassword) {
       const errorMessage =
         "비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
