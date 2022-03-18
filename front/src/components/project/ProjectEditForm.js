@@ -21,7 +21,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
 
     // "projects/수상 id" 엔드포인트로 PUT 요청함.
     await Api.put(`projects/${currentProject.id}`, {
-      /*user_id,*/
+      user_id,
       title,
       description,
       from_date,
