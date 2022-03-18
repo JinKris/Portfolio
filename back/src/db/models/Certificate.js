@@ -1,18 +1,18 @@
-import { CertificateModel } from "../schemas/certificate";
+import { certificateModel } from "../schemas/certificate";
 
 class Certificate {
   static async create({ newCertificate }) {
-    const createdNewCertificate = await CertificateModel.create(newCertificate);
+    const createdNewCertificate = await certificateModel.create(newCertificate);
     return createdNewCertificate;
   }
 
   static async findById({ certificateId }) {
-    const certificate = await CertificateModel.findOne({ id: certificateId });
+    const certificate = await certificateModel.findOne({ id: certificateId });
     return certificate;
   }
 
   static async findByUserId({ userId }) {
-    const certificates = await CertificateModel.find({ userId });
+    const certificates = await certificateModel.find({ userId });
     return certificates;
   }
 
@@ -21,7 +21,7 @@ class Certificate {
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
-    const updatedCertificate = await CertificateModel.findOneAndUpdate(
+    const updatedCertificate = await certificateModel.findOneAndUpdate(
       filter,
       update,
       option
@@ -30,7 +30,7 @@ class Certificate {
   }
 
   static async deleteById({ certificateId }) {
-    const deleteResult = await CertificateModel.deleteOne({
+    const deleteResult = await certificateModel.deleteOne({
       id: certificateId,
     });
     const isDataDeleted = deleteResult.deletedCount === 1;
