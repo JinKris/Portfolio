@@ -1,14 +1,7 @@
 import { awardModel } from "../schemas/award";
 class Award {
-  static create = async ({ id, userId, title, description }) => {
-    const updateData = {
-      id,
-      userId,
-      title,
-      description,
-    };
-
-    const createdAward = await awardModel.create(updateData);
+  static create = async (newAward) => {
+    const createdAward = await awardModel.create(newAward);
     return createdAward;
   };
 

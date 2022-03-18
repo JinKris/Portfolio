@@ -4,12 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 class awardService {
   static addAward = async ({ userId, title, description }) => {
     const id = uuidv4();
-    const createdAward = await Award.create({
-      id,
-      userId,
-      title,
-      description,
-    });
+    const newAward = { id, userId, title, description };
+    const createdAward = await Award.create(newAward);
     return createdAward;
   };
 
@@ -17,7 +13,8 @@ class awardService {
     const award = await Award.findById({ userId });
 
     if (!award) {
-      const errorMessage = "해당 id로 받은 수상 이력이 없습니다.";
+      const errorMessage =
+        "해당 id로 받은 수상 이력이 없습니다. 다시한 번 확인해 주세요";
       return { errorMessage };
     }
 
@@ -33,7 +30,8 @@ class awardService {
     let award = await Award.findById({ userId });
     console.log(award);
     if (!award) {
-      const errorMessage = "해당 id로 받은 수상 이력이 없습니다.";
+      const errorMessage =
+        "해당 id로 받은 수상 이력이 없습니다. 다시한 번 확인해 주세요";
       return { errorMessage };
     }
 
@@ -57,11 +55,12 @@ class awardService {
     const deletedData = await Award.deleteById({ awardId });
 
     if (!deletedData) {
-      const errorMessage = "해당 id 데이터 없습니다.";
+      const errorMessage =
+        "해당 id로 받은 수상 이력이 없습니다. 다시한 번 확인해 주세요";
       return { errorMessage };
     }
     return {
-      status: "succ",
+      status: "success",
     };
   };
 }

@@ -48,7 +48,7 @@ userAuthRouter.post("/user/login", async function (req, res, next) {
       throw new Error(user.errorMessage);
     }
 
-    res.status(200).send(user);
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
@@ -58,7 +58,7 @@ userAuthRouter.get("/userlist", loginRequired, async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
     const users = await userAuthService.getUsers();
-    res.status(200).send(users);
+    res.status(200).json(users);
   } catch (error) {
     next(error);
   }
@@ -79,7 +79,7 @@ userAuthRouter.get(
         throw new Error(currentUserInfo.errorMessage);
       }
 
-      res.status(200).send(currentUserInfo);
+      res.status(200).json(currentUserInfo);
     } catch (error) {
       next(error);
     }
@@ -127,7 +127,7 @@ userAuthRouter.get(
         throw new Error(currentUserInfo.errorMessage);
       }
 
-      res.status(200).send(currentUserInfo);
+      res.status(200).json(currentUserInfo);
     } catch (error) {
       next(error);
     }
@@ -138,7 +138,7 @@ userAuthRouter.get(
 userAuthRouter.get("/afterlogin", loginRequired, function (req, res, next) {
   res
     .status(200)
-    .send(
+    .json(
       `안녕하세요 ${req.currentUserId}님, jwt 웹 토큰 기능 정상 작동 중입니다.`
     );
 });
