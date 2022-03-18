@@ -19,7 +19,8 @@ class projectService {
     const project = await Project.findById({ projectId });
 
     if (!project) {
-      const errorMessage = "해당 id를 가진 수상 데이터는 없습니다";
+      const errorMessage =
+        "해당 id를 가진 프로젝트는 없습니다. 다시 한 번 확인해 주세요";
       return { errorMessage };
     }
 
@@ -30,7 +31,8 @@ class projectService {
     let project = await Project.findById({ projectId });
 
     if (!project) {
-      const errorMessage = "해당 id의 수상 이력은 없습니다.";
+      const errorMessage =
+        "해당 id를 가진 프로젝트는 없습니다. 다시 한 번 확인해 주세요";
       return { errorMessage };
     }
 
@@ -66,11 +68,12 @@ class projectService {
     const deletedProject = await Project.deleteById({ projectId });
 
     if (!deletedProject) {
-      const errorMessage = "해당 id의 프로젝트는 없습니다.";
+      const errorMessage =
+        "해당 id를 가진 프로젝트는 없습니다. 다시 한 번 확인해 주세요";
       return { errorMessage };
     }
     return {
-      sataus: "succ",
+      sataus: "success",
     };
   };
 }

@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { makeToken } from "../utils/makeToken";
 import { hashPassword } from "../utils/hashPassword";
+import { verifyPassword } from "../utils/verifyPassword";
 
 class userAuthService {
   static async addUser({ name, email, password }) {
@@ -40,11 +41,12 @@ class userAuthService {
     }
 
     // 비밀번호 일치 여부 확인
-    const correctPasswordHash = user.password;
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      correctPasswordHash
-    );
+    // const correctPasswordHash = user.password;
+    // const isPasswordCorrect = await bcrypt.compare(
+    //   password,
+    //   correctPasswordHash
+    // );
+    const isPasswordCorrect = await verifyPassword(password, user.password);
     if (!isPasswordCorrect) {
       const errorMessage =
         "비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.";

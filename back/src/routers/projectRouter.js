@@ -88,6 +88,7 @@ projectRouter.delete("/projects/:id", async (req, res, next) => {
     if (result.errorMessage) {
       throw new Error(result.errorMessage);
     }
+
     res.status(200).json(result);
   } catch (error) {
     next(error);
