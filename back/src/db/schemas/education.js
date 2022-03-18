@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const EducationSchema = new Schema(
+const educationSchema = new Schema(
   {
     userId: {
       type: String,
@@ -28,6 +28,6 @@ const EducationSchema = new Schema(
   }
 );
 
-const EducationModel = model("Education", EducationSchema);
+const educationModel = model("education", educationSchema);
 
-export { EducationModel };
+export { educationModel };

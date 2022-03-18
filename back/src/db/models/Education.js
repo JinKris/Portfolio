@@ -1,6 +1,6 @@
 import { educationModel } from "../schemas/education";
 
-class Education {
+class education {
   static async create({ newEducation }) {
     console.log('newEducation',newEducation)
     const createdNewEducation = await educationModel.create(newEducation)
@@ -15,8 +15,8 @@ class Education {
 
   static async findByUserID({userId}) {
     console.log(userId)
-    const educations = await educationModel.find({userId:userId});
-    return educations;
+    const educationList = await educationModel.find({userId:userId});
+    return educationList;
   }
 
   static async update({ educationId, fieldToUpdate, newValue }) {
@@ -40,4 +40,4 @@ class Education {
 
 
 
-export { Education };
+export { education };
