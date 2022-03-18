@@ -3,10 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 
 
 class educationService {
-  static async addEdu({ user_id,school,major,position }) {
+  static async addEdu({ userId,school,major,position }) {
     // id 는 유니크 값 부여
     const id = uuidv4();
-    const newEducation = { user_id,id,school,major,position };
+    const newEducation = { userId,id,school,major,position };
     console.log("newEducation",newEducation)
     // db에 저장
     const createdNewEducation = await Education.create({ newEducation });
@@ -14,8 +14,8 @@ class educationService {
 
     return createdNewEducation;
   }
-  static async getEduInfo({ education_id }) {
-    const education = await Education.findById({ education_id });
+  static async getEduInfo({ educationId }) {
+    const education = await Education.findById({ educationId });
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!education) {
@@ -26,9 +26,9 @@ class educationService {
 
     return education;
   }
-  static async setEducation({ education_id, toUpdate }) {
+  static async setEducation({ educationId, toUpdate }) {
     // 우선 해당 id 의 유저가 db에 존재하는지 여부 확인
-    let education = await Education.findById({ education_id });
+    let education = await Education.findById({ educationId });
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!education) {
@@ -41,27 +41,27 @@ class educationService {
     if (toUpdate.school) {
       const fieldToUpdate = "school";
       const newValue = toUpdate.school;
-      education = await Education.update({ education_id, fieldToUpdate, newValue });
+      education = await Education.update({ educationId, fieldToUpdate, newValue });
     }
 
     if (toUpdate.major) {
       const fieldToUpdate = "major";
       const newValue = toUpdate.major;
-      education = await Education.update({ education_id, fieldToUpdate, newValue });
+      education = await Education.update({ educationId, fieldToUpdate, newValue });
     }
 
     if (toUpdate.position) {
       const fieldToUpdate = "position";
       const newValue = toUpdate.position;
-      education = await Education.update({ education_id, fieldToUpdate, newValue });
+      education = await Education.update({ educationId, fieldToUpdate, newValue });
     }
 
     return education;
   }
 
-  static async getEduUserInfo({ user_id }) {
+  static async getEduUserInfo({ userId }) {
     // 이메일 db에 존재 여부 확인
-    const education = await Education.findByUserID({ user_id });
+    const education = await Education.findByUserID({ userId });
     if (!education) {
       const errorMessage =
         "해당 사용자 가입 내역이 없습니다. 다시 한 번 확인해 주세요.";

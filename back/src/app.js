@@ -1,7 +1,7 @@
 import cors from "cors"; // cors error prevention 
 import express from "express";
 import { userAuthRouter } from "./routers/userRouter"; 
-import { eduRouter} from "./routers/EducationRouter"
+import { eduRouter} from "./routers/educationRouter"
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 

@@ -8,19 +8,19 @@ class Education {
   }
 
 
-  static async findById({ education_id }) {
-    const education = await EducationModel.findOne({ id: education_id });
+  static async findById({ educationId }) {
+    const education = await EducationModel.findOne({ id: educationId });
     return education;
   }
 
-  static async findByUserID({user_id}) {
-    console.log(user_id)
-    const educations = await EducationModel.find({user_id:user_id});
+  static async findByUserID({userId}) {
+    console.log(userId)
+    const educations = await EducationModel.find({userId:userId});
     return educations;
   }
 
-  static async update({ education_id, fieldToUpdate, newValue }) {
-    const filter = { id: education_id };
+  static async update({ educationId, fieldToUpdate, newValue }) {
+    const filter = { id: educationId };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 

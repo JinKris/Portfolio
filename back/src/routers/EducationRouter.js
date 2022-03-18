@@ -1,13 +1,13 @@
 import is from "@sindresorhus/is"; // ?무엇인지?
 import { Router } from "express";
-import { login_required } from "../middlewares/login_required";
+import { loginRequired } from "../middlewares/loginRequired";
 import { educationService } from "../services/educationService";
 
 const eduRouter = Router();
+eduRouter.use(loginRequired)
 
 eduRouter.post(
     "/education/create", 
-    login_required,
     async function (req, res, next) {
     try {
         if (is.emptyObject(req.body)) {
@@ -17,14 +17,14 @@ eduRouter.post(
         }
 
         // req (request) 에서 데이터 가져오기
-        const user_id = req.body.user_id;
+        const userId = req.body.userId;
         const school = req.body.school;
         const major = req.body.major;
         const position = req.body.position;
 
         // 위 데이터를 education db에 추가하기
         const newEducation = await educationService.addEdu({
-        user_id,
+        userId,
         school,
         major,
         position, 
@@ -42,11 +42,10 @@ eduRouter.post(
 // education 항목 아이디별 확인
 eduRouter.get(
     "/educations/:id",
-    login_required,
     async function (req, res, next) {
       try {
-        const education_id = req.params.id;
-        const currentEduInfo = await educationService.getEduInfo({ education_id });
+        const educationId = req.params.id;
+        const currentEduInfo = await educationService.getEduInfo({ educationId });
   
         if (currentEduInfo.errorMessage) {
           throw new Error(currentEduInfo.errorMessage);
@@ -62,13 +61,12 @@ eduRouter.get(
 // education ID 별 수정변경
 eduRouter.put(
   "/educations/:id",
-  login_required,
   async function (req, res, next) {
     try {
       // URI로부터 education id를 추출함.
-      const education_id = req.params.id;
+      const educationId = req.params.id;
       // body data 로부터 업데이트할 사용자 정보를 추출함.
-      //const user_id = req.body.user_id ?? null;
+      //const userId = req.body.userId ?? null;
       const school = req.body.school ?? null;
       const major = req.body.major ?? null;
       const position = req.body.position ?? null;
@@ -76,7 +74,7 @@ eduRouter.put(
       const toUpdate = { school, major, position };
 
       // 해당 education id로 education 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-      const updatedEducation = await educationService.setEducation({ education_id, toUpdate });
+      const updatedEducation = await educationService.setEducation({ educationId, toUpdate });
 
       if (updatedEducation.errorMessage) {
         throw new Error(updatedEducation.errorMessage);
@@ -90,12 +88,11 @@ eduRouter.put(
 );
 
 eduRouter.get(
-    "/educationlist/:user_id",
-    login_required,
+    "/educationlist/:userId",
     async function (req, res, next) {
       try {
-        const user_id = req.params.user_id;
-        const currentEduUserInfo = await educationService.getEduUserInfo({ user_id });
+        const userId = req.params.userId;
+        const currentEduUserInfo = await educationService.getEduUserInfo({ userId });
   
         if (currentEduUserInfo.errorMessage) {
           throw new Error(currentEduUserInfo.errorMessage);
@@ -109,7 +106,7 @@ eduRouter.get(
   );
 
 // jwt 토큰 기능 확인용, 삭제해도 되는 라우터임.
-eduRouter.get("/afterlogin", login_required, function (req, res, next) {
+eduRouter.get("/afterlogin", function (req, res, next) {
   res
     .status(200)
     .send(
