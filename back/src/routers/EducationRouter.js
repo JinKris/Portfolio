@@ -104,7 +104,22 @@ eduRouter.get(
       }
     }
   );
-
+  eduRouter.delete("/educations/:id", async (req, res, next) => {
+    try {
+      const educationId = req.params.id;
+      console.log(educationId);
+  
+      const result = await educationService.deleteEducation({ educationId });
+  
+      if (result.errorMessage) {
+        throw new Error(result.errorMessage);
+      }
+  
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  });
 // jwt 토큰 기능 확인용, 삭제해도 되는 라우터임.
 eduRouter.get("/afterlogin", function (req, res, next) {
   res
