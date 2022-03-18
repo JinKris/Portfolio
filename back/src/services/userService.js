@@ -1,20 +1,11 @@
 import { User } from "../db"; // from을 폴더(db) 로 설정 시, 디폴트로 index.js 로부터 import함.
-<<<<<<< HEAD
-import bcrypt from "bcrypt";
+
 import { v4 as uuidv4 } from "uuid";
 
 import { makeToken } from "../utils/makeToken";
 import { hashPassword } from "../utils/hashPassword";
 import { verifyPassword } from "../utils/verifyPassword";
-=======
->>>>>>> ab02ad991b37cc80e2f9ae3e4e3638a2bb89413e
 
-import { v4 as uuidv4 } from "uuid";
-
-import { hashPassword } from "../utils/hashPassword";
-import { verifyPassword } from "../utils/verifyPassword";
-
-import { makeToken } from "../utils/makeToken";
 class userAuthService {
   static async addUser({ name, email, password }) {
     // 이메일 중복 확인
@@ -26,11 +17,6 @@ class userAuthService {
     }
 
     // 비밀번호 해쉬화
-<<<<<<< HEAD
-    // const hashedPassword = await bcrypt.hash(password, 10);
-=======
-    //const hashedPassword = await bcrypt.hash(password, 10);
->>>>>>> ab02ad991b37cc80e2f9ae3e4e3638a2bb89413e
     const hashedPassword = await hashPassword(password, 10);
 
     // id 는 유니크 값 부여
@@ -59,15 +45,10 @@ class userAuthService {
     //   password,
     //   correctPasswordHash
     // );
-<<<<<<< HEAD
-    const isPasswordCorrect = await verifyPassword(password, user.password);
-    if (!isPasswordCorrect) {
-=======
 
     const verifiedPassword = await verifyPassword(password, user.password);
     console.log(verifiedPassword);
     if (!verifiedPassword) {
->>>>>>> ab02ad991b37cc80e2f9ae3e4e3638a2bb89413e
       const errorMessage =
         "비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
@@ -141,11 +122,9 @@ class userAuthService {
 
   static async getUserInfo({ userId }) {
     const user = await User.findById({ userId });
-<<<<<<< HEAD
-    console.log(user);
-=======
 
->>>>>>> ab02ad991b37cc80e2f9ae3e4e3638a2bb89413e
+    console.log(user);
+
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
       const errorMessage =
