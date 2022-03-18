@@ -1,9 +1,9 @@
 import { awardModel } from "../schemas/award";
 class Award {
-  static create = async ({ id, user_id, title, description }) => {
+  static create = async ({ id, userId, title, description }) => {
     const updateData = {
       id,
-      user_id,
+      userId,
       title,
       description,
     };
@@ -12,18 +12,18 @@ class Award {
     return createdAward;
   };
 
-  static findById = async ({ user_id }) => {
-    const award = await awardModel.findOne({ id: user_id });
+  static findById = async ({ userId }) => {
+    const award = await awardModel.findOne({ id: userId });
     return award;
   };
 
-  static findByUserId = async ({ user_id }) => {
-    const awards = await awardModel.find({ user_id });
+  static findByUserId = async ({ userId }) => {
+    const awards = await awardModel.find({ userId });
     return awards;
   };
 
-  static update = async ({ user_id, updataField, newValue }) => {
-    const filter = { id: user_id };
+  static update = async ({ userId, updataField, newValue }) => {
+    const filter = { id: userId };
     const update = { [updataField]: newValue };
     const option = { returnOriginal: false };
 
