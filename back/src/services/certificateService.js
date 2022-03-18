@@ -2,15 +2,15 @@ import { Certificate } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
 class CertificateService {
-  static async addCertificate({ user_id, title, description, when_date }) {
+  static addCertificate = async ({ userId, title, description, whenDate }) => {
     const id = uuidv4();
-    const newCertificate = { id, user_id, title, description, when_date };
+    const newCertificate = { id, userId, title, description, whenDate };
     const createdNewCertificate = await Certificate.create({ newCertificate });
 
     return createdNewCertificate;
-  }
+  };
 
-  static async getCertificate({ certificateId }) {
+  static getCertificate = async ({ certificateId }) => {
     const certificate = await Certificate.findById({ certificateId });
     if (!certificate) {
       const errorMessage =
@@ -19,14 +19,14 @@ class CertificateService {
     }
 
     return certificate;
-  }
+  };
 
-  static async getCertificateList({ user_id }) {
-    const certificates = await Certificate.findByUserId({ user_id });
+  static getCertificateList = async ({ userId }) => {
+    const certificates = await Certificate.findByUserId({ userId });
     return certificates;
-  }
+  };
 
-  static async setCertificate({ certificateId, toUpdate }) {
+  static setCertificate = async ({ certificateId, toUpdate }) => {
     let certificate = await Certificate.findById({ certificateId });
 
     if (!certificate) {
@@ -55,9 +55,9 @@ class CertificateService {
       });
     }
 
-    if (toUpdate.when_date) {
-      const fieldToUpdate = "when_date";
-      const newValue = toUpdate.when_date;
+    if (toUpdate.whenDate) {
+      const fieldToUpdate = "whenDate";
+      const newValue = toUpdate.whenDate;
       certificate = await Certificate.update({
         certificateId,
         fieldToUpdate,
@@ -66,9 +66,9 @@ class CertificateService {
     }
 
     return certificate;
-  }
+  };
 
-  static async deleteCertificate({ certificateId }) {
+  static deleteCertificate = async ({ certificateId }) => {
     const isDataDeleted = await Certificate.deleteById({ certificateId });
 
     if (!isDataDeleted) {
@@ -78,7 +78,7 @@ class CertificateService {
     }
 
     return { status: "success" };
-  }
+  };
 }
 
 export { CertificateService };
