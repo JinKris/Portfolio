@@ -25,7 +25,7 @@ function Projects({ portfolioOwnerId, isEditable }) {
           <Project
             key={project?.user_id}
             project={project}
-            setProjects={setProjects}
+            setAwards={setProjects}
             isEditable={isEditable}
           />
         ))}

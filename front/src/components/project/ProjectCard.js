@@ -17,7 +17,7 @@ function ProjectCard({
     }
   }
   return (
-    <Card.Body>
+    <Card.Text>
       <Row className="align-items-center">
         <Col>
           <span className="primary">{project.title}</span>
@@ -54,7 +54,7 @@ function ProjectCard({
           </Col>
         )}
       </Row>
-    </Card.Body>
+    </Card.Text>
   );
 }
 
