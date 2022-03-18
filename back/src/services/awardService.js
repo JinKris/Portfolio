@@ -14,7 +14,7 @@ class awardService {
 
     if (!award) {
       const errorMessage =
-        "해당 id로 받은 수상 이력이 없습니다. 다시한 번 확인해 주세요";
+        "해당 id로 받은 수상 이력이 없습니다. 다시 한 번 확인해 주세요";
       return { errorMessage };
     }
 
@@ -31,7 +31,7 @@ class awardService {
     console.log(award);
     if (!award) {
       const errorMessage =
-        "해당 id로 받은 수상 이력이 없습니다. 다시한 번 확인해 주세요";
+        "해당 id로 받은 수상 이력이 없습니다. 다시 한 번 확인해 주세요";
       return { errorMessage };
     }
 
@@ -56,7 +56,7 @@ class awardService {
 
     if (!deletedData) {
       const errorMessage =
-        "해당 id로 받은 수상 이력이 없습니다. 다시한 번 확인해 주세요";
+        "해당 id로 받은 수상 이력이 없습니다. 다시 한 번 확인해 주세요";
       return { errorMessage };
     }
     return {
