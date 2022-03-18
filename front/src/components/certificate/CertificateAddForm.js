@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
-import * as Api from "../../api"
+import * as Api from "../../api";
 
-function CertificateAddForm({ portfolioOwnerId, setCertificates, setIsAdding }) {
+function CertificateAddForm({
+  portfolioOwnerId,
+  setCertificates,
+  setIsAdding,
+}) {
   //useState로 title 상태를 생성함.
   const [title, setTitle] = useState("");
   //useState로 description 상태를 생성함.
   const [description, setDescription] = useState("");
   //useState로 when_date 상태를 생성함.
   const [when_date, setWhenDate] = useState("");
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,12 +26,12 @@ function CertificateAddForm({ portfolioOwnerId, setCertificates, setIsAdding }) 
       user_id: portfolioOwnerId,
       title,
       description,
-      when_date
+      when_date,
     });
 
-    // "certificatelist/유저id" 엔드포인트로 get요청함.
-    const res = await Api.get("certificatetlist", user_id);
-    // certifiactes를 response의 data로 세팅함.
+    // "certificatelist/유저id" 엔드포인트로 GET 요청함.
+    const res = await Api.get("certificatelist", user_id);
+    // certificates를 response의 data로 세팅함.
     setCertificates(res.data);
     // ceritificate를 추가하는 과정이 끝났으므로, isAdding을 false로 세팅함.
     setIsAdding(false);

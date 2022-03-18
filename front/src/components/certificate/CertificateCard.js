@@ -11,18 +11,14 @@ function CertificateCard({
     if (window.confirm("정말 삭제하시겠습니까?")) {
       e.preventDefault();
       e.stopPropagation();
-      // await Api.delete("Certificate", project.id);
+      await Api.delete("certificates", certificate.id);
     }
-
-    // certificate의 user_id를 user_id 변수에 할당함.
+    // currentCertificate의 user_id를 user_id 변수에 할당함.
     const user_id = certificate.user_id;
+    // "certificatelist/유저id" 엔드포인트로 GET 요청함.
     const res = await Api.get("certificatelist", user_id);
-    let currentCertificates = [...res.data];
-
-    const card = currentCertificates.find((c) => c.id === certificate.id);
-    const idx = currentCertificates.indexOf(card);
-    currentCertificates.splice(idx, 1);
-    setCertificates(currentCertificates);
+    // certificates를 response의 data로 세팅함.
+    setCertificates(res.data);
   };
 
   return (
