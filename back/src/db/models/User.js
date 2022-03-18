@@ -1,32 +1,33 @@
-import { UserModel } from "../schemas/user";
+import { userModel } from "../schemas/user";
 
 class User {
   static async create({ newUser }) {
-    const createdNewUser = await UserModel.create(newUser);
+    const createdNewUser = await userModel.create(newUser);
     return createdNewUser;
   }
 
   static async findByEmail({ email }) {
-    const user = await UserModel.findOne({ email });
+    const user = await userModel.findOne({ email });
     return user;
   }
 
-  static async findById({ user_id }) {
-    const user = await UserModel.findOne({ id: user_id });
+  static async findById({ userId }) {
+    const user = await userModel.findOne({ id: userId });
+    console.log(user);
     return user;
   }
 
   static async findAll() {
-    const users = await UserModel.find({});
+    const users = await userModel.find({});
     return users;
   }
 
-  static async update({ user_id, fieldToUpdate, newValue }) {
-    const filter = { id: user_id };
+  static async update({ userId, fieldToUpdate, newValue }) {
+    const filter = { id: userId };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
-    const updatedUser = await UserModel.findOneAndUpdate(
+    const updatedUser = await userModel.findOneAndUpdate(
       filter,
       update,
       option
