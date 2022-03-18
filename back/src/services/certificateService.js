@@ -2,12 +2,12 @@ import { Certificate } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
 class CertificateService {
-  static async addCertificate({ user_id, title, description, when_date }) {
+  static async addCertificate({ userId, title, description, whenDate }) {
     // id로 유니크 값 사용
     const id = uuidv4();
 
     // db에 저장
-    const newCertificate = { id, user_id, title, description, when_date };
+    const newCertificate = { id, userId, title, description, whenDate };
     const createdNewCertificate = await Certificate.create({ newCertificate });
 
     return createdNewCertificate;
@@ -25,8 +25,8 @@ class CertificateService {
     return certificate;
   }
 
-  static async getCertificateList({ user_id }) {
-    const certificates = await Certificate.findByUserId({ user_id });
+  static async getCertificateList({ userId }) {
+    const certificates = await Certificate.findByUserId({ userId });
     return certificates;
   }
 
@@ -60,9 +60,9 @@ class CertificateService {
       });
     }
 
-    if (toUpdate.when_date) {
-      const fieldToUpdate = "when_date";
-      const newValue = toUpdate.when_date;
+    if (toUpdate.whenDate) {
+      const fieldToUpdate = "whenDate";
+      const newValue = toUpdate.whenDate;
       certificate = await Certificate.update({
         certificateId,
         fieldToUpdate,
