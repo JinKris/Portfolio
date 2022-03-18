@@ -28,6 +28,6 @@ const CertificateSchema = new Schema(
   }
 );
 
-const CertificateModel = model("Certificate", CertificateSchema);
+const certificateModel = model("Certificate", CertificateSchema);
 
-export { CertificateModel };
+export { certificateModel };

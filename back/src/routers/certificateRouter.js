@@ -1,10 +1,10 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
-import { login_required } from "../middlewares/login_required";
+import { loginRequired } from "../middlewares/loginRequired";
 import { CertificateService } from "../services/certificateService";
 
 const certificateRouter = Router();
-certificateRouter.use(login_required);
+certificateRouter.use(loginRequired);
 
 certificateRouter.post("/certificate/create", async function (req, res, next) {
   try {
@@ -14,16 +14,16 @@ certificateRouter.post("/certificate/create", async function (req, res, next) {
       );
     }
 
-    const user_id = req.body.user_id;
+    const userId = req.body.userId;
     const title = req.body.title;
     const description = req.body.description;
-    const when_date = req.body.when_date;
+    const whenDate = req.body.whenDate;
 
     const newCertificate = await CertificateService.addCertificate({
-      user_id,
+      userId,
       title,
       description,
-      when_date,
+      whenDate,
     });
 
     res.status(201).json(newCertificate);
@@ -56,8 +56,8 @@ certificateRouter.put("/certificates/:id", async function (req, res, next) {
 
     const title = req.body.title ?? null;
     const description = req.body.description ?? null;
-    const when_date = req.body.when_date ?? null;
-    const toUpdate = { title, description, when_date };
+    const whenDate = req.body.whenDate ?? null;
+    const toUpdate = { title, description, whenDate };
 
     const certificate = await CertificateService.setCertificate({
       certificateId,
@@ -93,12 +93,12 @@ certificateRouter.delete("/certificates/:id", async function (req, res, next) {
 });
 
 certificateRouter.get(
-  "/certificatelist/:user_id",
+  "/certificatelist/:userId",
   async function (req, res, next) {
     try {
-      const user_id = req.params.user_id;
+      const userId = req.params.userId;
       const certificateList = await CertificateService.getCertificateList({
-        user_id,
+        userId,
       });
       res.status(200).send(certificateList);
     } catch (error) {
