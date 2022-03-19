@@ -1,12 +1,12 @@
 import { Schema, model } from "mongoose";
 
-const CertificateSchema = new Schema(
+const certificateSchema = new Schema(
   {
     id: {
       type: String,
       required: true,
     },
-    user_id: {
+    userId: {
       type: String,
       required: true,
     },
@@ -18,7 +18,7 @@ const CertificateSchema = new Schema(
       type: String,
       required: true,
     },
-    when_date: {
+    whenDate: {
       type: Date,
       required: true,
     },
@@ -28,6 +28,6 @@ const CertificateSchema = new Schema(
   }
 );
 
-const CertificateModel = model("Certificate", CertificateSchema);
+const certificateModel = model("Certificate", certificateSchema);
 
-export { CertificateModel };
+export { certificateModel };
