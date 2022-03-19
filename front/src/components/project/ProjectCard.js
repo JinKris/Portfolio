@@ -1,20 +1,19 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 
-function ProjectCard({
-  project,
-  isEditable,
-  setIsEditing,
-  isDelete,
-  setIsDelete,
-}) {
+function ProjectCard({ project, isEditable, setIsEditing, setProjects }) {
   async function handleDelete(e) {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       e.preventDefault();
       e.stopPropagation();
       await Api.delete("projects", project.id);
-      setIsDelete(!isDelete);
     }
+    // currentCertificate의 user_id를 user_id 변수에 할당함.
+    const user_id = project.user_id;
+    // "certificatelist/유저id" 엔드포인트로 GET 요청함.
+    const res = await Api.get("projectlist", user_id);
+    // certificates를 response의 data로 세팅함.
+    setProjects(res.data);
   }
   return (
     <Card.Text>

@@ -31,7 +31,6 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
     // "projectlist/유저id" 엔드포인트로 get요청함.
     const res = await Api.get("projectlist", user_id);
     // projects를 response의 data로 세팅함.
-    console.log(res.data);
     setProjects(res.data);
     // project를 추가하는 과정이 끝났으므로, isAdding을 false로 세팅함.
     setIsAdding(false);

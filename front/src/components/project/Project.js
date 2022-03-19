@@ -6,14 +6,6 @@ import * as Api from "../../api";
 function Project({ project, setProjects, isEditable }) {
   //useState로 isEditing 상태를 생성함.
   const [isEditing, setIsEditing] = useState(false);
-  //
-  const [isDelete, setIsDelete] = useState(false);
-
-  //Office Hour
-  const user_id = project.user_id;
-  useEffect(() => {
-    Api.get("projectlist", user_id).then((res) => setProjects(res.data));
-  }, [isDelete]);
 
   return (
     <>
@@ -28,8 +20,7 @@ function Project({ project, setProjects, isEditable }) {
           project={project}
           isEditable={isEditable}
           setIsEditing={setIsEditing}
-          isDelete={isDelete}
-          setIsDelete={setIsDelete}
+          setProjects={setProjects}
         />
       )}
     </>
