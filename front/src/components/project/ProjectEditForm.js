@@ -7,10 +7,10 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
   const [title, setTitle] = useState(currentProject.title);
   //useState로 description 상태를 생성함.
   const [description, setDescription] = useState(currentProject.description);
-  //useState로 from_date 상태를 생성함.
-  const [from_date, setFromDate] = useState(currentProject.from_date);
-  //useState로 to_date 상태를 생성함.
-  const [to_date, setToDate] = useState(currentProject.to_date);
+  //useState로 fromDate 상태를 생성함.
+  const [fromDate, setFromDate] = useState(currentProject.fromDate);
+  //useState로 toDate 상태를 생성함.
+  const [toDate, setToDate] = useState(currentProject.toDate);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +24,8 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
       user_id,
       title,
       description,
-      from_date,
-      to_date,
+      fromDate,
+      toDate,
     });
 
     // "projectlist/유저id" 엔드포인트로 GET 요청함.
@@ -60,7 +60,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
         <Form.Control
           type="date"
           placeholder="시작날짜"
-          value={from_date}
+          value={fromDate}
           onChange={(e) => setFromDate(e.target.value)}
         />
       </Form.Group>
@@ -69,7 +69,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
         <Form.Control
           type="date"
           placeholder="종료날짜"
-          value={to_date}
+          value={toDate}
           onChange={(e) => setToDate(e.target.value)}
         />
       </Form.Group>

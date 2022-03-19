@@ -24,11 +24,11 @@ function ProjectCard({ project, isEditable, setIsEditing, setProjects }) {
           <span>{project.description}</span>
           <br />
           <span className="text-muted">
-            {project.from_date.toString().substr(0, 10)}
+            {project.fromDate.toString().substr(0, 10)}
           </span>
           <br />
           <span className="text-muted">
-            {project.to_date.toString().substr(0, 10)}
+            {project.toDate.toString().substr(0, 10)}
           </span>
           <br />
         </Col>
