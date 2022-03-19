@@ -19,6 +19,7 @@ const Education = ({ education, setEducationLists, isEditable }) => {
           education={education}
           isEditable={isEditable}
           setIsEditing={setIsEditing}
+          setEducationLists={setEducationLists}
         />
       )}
     </>

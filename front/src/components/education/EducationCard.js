@@ -2,13 +2,19 @@ import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const EducationCard = ({ education, isEditable, setIsEditing }) => {
+const EducationCard = ({
+  education,
+  isEditable,
+  setIsEditing,
+  setEducationLists,
+}) => {
   async function del(e) {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      e.preventDefault();
-      e.stopPropagation();
       await Api.delete("educations", education.id);
     }
+    const user_id = education.user_id;
+    const res = await Api.get("educationlist", user_id);
+    setEducationLists(res.data);
   }
 
   return (

@@ -4,7 +4,7 @@ import * as Api from "../../api";
 import Award from "./Award";
 import AwardAddForm from "./AwardAddForm";
 
-const Awards = ({ portfolioOwnerId, isEditable }) => {
+const Awards = ({ portfolioOwnerId, isEditable, award }) => {
   const [isAdding, setIsAdding] = useState(false);
 
   const [awardLists, setAwardLists] = useState([]);
