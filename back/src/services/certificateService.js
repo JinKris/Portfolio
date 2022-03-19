@@ -5,9 +5,10 @@ class CertificateService {
   static async addCertificate({ user_id, title, description, when_date }) {
     // id로 유니크 값 사용
     const id = uuidv4();
-
+    console.log(123123)
+    const w = '충돌?'
     // db에 저장
-    const newCertificate = { id, user_id, title, description, when_date };
+    const newCertificate = { id, user_id, title, description, when_date, w };
     const createdNewCertificate = await Certificate.create({ newCertificate });
 
     return createdNewCertificate;
@@ -21,7 +22,9 @@ class CertificateService {
         "해당 id를 가진 자격증 데이터는 없습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
-
+    if (certificate.id) {
+      return false;
+    }
     return certificate;
   }
 
@@ -59,7 +62,9 @@ class CertificateService {
         newValue,
       });
     }
-
+    if (certificate.id) {
+      return false;
+    }
     if (toUpdate.when_date) {
       const fieldToUpdate = "when_date";
       const newValue = toUpdate.when_date;
