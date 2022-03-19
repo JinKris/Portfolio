@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
-import * as Api from "../../api"
+import * as Api from "../../api";
 
-function CertificateEditForm({ currentCertificate, setCertificates, setIsEditing }) {
+function CertificateEditForm({
+  currentCertificate,
+  setCertificates,
+  setIsEditing,
+}) {
   //useState로 title 상태를 생성함.
   const [title, setTitle] = useState(currentCertificate.title);
   //useState로 description 상태를 생성함.
-  const [description, setDescription] = useState(currentCertificate.description);
+  const [description, setDescription] = useState(
+    currentCertificate.description
+  );
   //useState로 when_date 상태를 생성함.
   const [when_date, setWhenDate] = useState(currentCertificate.when_date);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    // currentCertificate의 user_id를 user_id 변수에 할당함.
-    const user_id = currentCertificate.user_id;
 
     // "certificates/수상 id" 엔드포인트로 PUT 요청함...
     await Api.put(`certificates/${currentCertificate.id}`, {
@@ -24,7 +27,8 @@ function CertificateEditForm({ currentCertificate, setCertificates, setIsEditing
       description,
       when_date,
     });
-
+    // currentCertificate의 user_id를 user_id 변수에 할당함.
+    const user_id = currentCertificate.user_id;
     // "certificatelist/유저id" 엔드포인트로 GET 요청함.
     const res = await Api.get("certificatelist", user_id);
     // certificates를 response의 data로 세팅함.
