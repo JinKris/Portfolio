@@ -8,14 +8,16 @@ const EducationCard = ({
   setIsEditing,
   setEducationLists,
 }) => {
-  async function del(e) {
+  const handleDelete = async (e) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
+      e.preventDefault();
+      e.stopPropagation();
       await Api.delete("educations", education.id);
     }
     const user_id = education.user_id;
     const res = await Api.get("educationlist", user_id);
     setEducationLists(res.data);
-  }
+  };
 
   return (
     <Card.Text>
@@ -40,7 +42,7 @@ const EducationCard = ({
             <Button
               variant="outline-info"
               size="sm"
-              onClick={del}
+              onClick={handleDelete}
               className="mr-3"
             >
               삭제
