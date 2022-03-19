@@ -6,7 +6,7 @@ import { makeToken } from "../utils/makeToken";
 import { hashPassword } from "../utils/hashPassword";
 import { verifyPassword } from "../utils/verifyPassword";
 
-class userAuthService {
+class UserAuthService {
   static async addUser({ name, email, password }) {
     // 이메일 중복 확인
     const user = await User.findByEmail({ email });
@@ -134,4 +134,4 @@ class userAuthService {
   }
 }
 
-export { userAuthService };
+export { UserAuthService };

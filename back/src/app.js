@@ -1,19 +1,13 @@
 import cors from "cors"; // cors error prevention 
 import express from "express";
-<<<<<<< HEAD
-import { userAuthRouter } from "./routers/userRouter"; 
-import { eduRouter} from "./routers/educationRouter"
-import { errorMiddleware } from "./middlewares/errorMiddleware";
-
-=======
 import { userAuthRouter } from "./routers/userRouter";
 import { certificateRouter } from "./routers/certificateRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 import { projectRouter } from "./routers/projectRouter";
-
+import { eduRouter} from "./routers/educationRouter"
 import { awardRouter } from "./routers/awardRouter";
->>>>>>> Dev
+
 
 const app = express();
 
@@ -33,14 +27,12 @@ app.get("/", (req, res) => {
 
 // router, service 구현 (userAuthRouter는 맨 위에 있어야 함.)
 app.use(userAuthRouter);
-<<<<<<< HEAD
-app.use(eduRouter)
 
-=======
 app.use(certificateRouter);
 app.use(projectRouter);
 app.use(awardRouter);
->>>>>>> Dev
+app.use(eduRouter)
+
 
 app.use(errorMiddleware);
 

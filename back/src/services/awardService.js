@@ -1,7 +1,7 @@
 import { Award } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
-class awardService {
+class AwardService {
   static addAward = async ({ userId, title, description }) => {
     const id = uuidv4();
     const newAward = { id, userId, title, description };
@@ -65,4 +65,4 @@ class awardService {
   };
 }
 
-export { awardService };
+export { AwardService };

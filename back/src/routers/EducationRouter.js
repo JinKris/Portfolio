@@ -1,7 +1,7 @@
 import is from "@sindresorhus/is"; // ?무엇인지?
 import { Router } from "express";
 import { loginRequired } from "../middlewares/loginRequired";
-import { educationService } from "../services/educationService";
+import { EducationService } from "../services/educationService";
 
 const eduRouter = Router();
 eduRouter.use(loginRequired)
@@ -23,7 +23,7 @@ eduRouter.post(
         const position = req.body.position;
 
         // 위 데이터를 education db에 추가하기
-        const newEducation = await educationService.addEdu({
+        const newEducation = await EducationService.addEdu({
         userId,
         school,
         major,
@@ -45,7 +45,7 @@ eduRouter.get(
     async function (req, res, next) {
       try {
         const educationId = req.params.id;
-        const currentEduInfo = await educationService.getEduInfo({ educationId });
+        const currentEduInfo = await EducationService.getEduInfo({ educationId });
   
         if (currentEduInfo.errorMessage) {
           throw new Error(currentEduInfo.errorMessage);
@@ -74,7 +74,7 @@ eduRouter.put(
       const toUpdate = { school, major, position };
 
       // 해당 education id로 education 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-      const updatedEducation = await educationService.setEducation({ educationId, toUpdate });
+      const updatedEducation = await EducationService.setEducation({ educationId, toUpdate });
 
       if (updatedEducation.errorMessage) {
         throw new Error(updatedEducation.errorMessage);
@@ -92,7 +92,7 @@ eduRouter.get(
     async function (req, res, next) {
       try {
         const userId = req.params.userId;
-        const currentEduUserInfo = await educationService.getEduUserInfo({ userId });
+        const currentEduUserInfo = await EducationService.getEduUserInfo({ userId });
   
         if (currentEduUserInfo.errorMessage) {
           throw new Error(currentEduUserInfo.errorMessage);
@@ -109,7 +109,7 @@ eduRouter.get(
       const educationId = req.params.id;
       console.log(educationId);
   
-      const result = await educationService.deleteEducation({ educationId });
+      const result = await EducationService.deleteEducation({ educationId });
   
       if (result.errorMessage) {
         throw new Error(result.errorMessage);

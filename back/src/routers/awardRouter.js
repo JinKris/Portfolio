@@ -1,7 +1,7 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { loginRequired } from "../middlewares/loginRequired";
-import { awardService } from "../services/awardService";
+import { AwardService } from "../services/awardService";
 
 const awardRouter = Router();
 
@@ -16,7 +16,7 @@ awardRouter.post("/award/create", async (req, res, next) => {
     }
 
     const { userId, title, description } = req.body;
-    const createdData = await awardService.addAward({
+    const createdData = await AwardService.addAward({
       userId,
       title,
       description,
@@ -31,7 +31,7 @@ awardRouter.post("/award/create", async (req, res, next) => {
 awardRouter.get("/awards/:id", async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const award = await awardService.getAward({ userId });
+    const award = await AwardService.getAward({ userId });
 
     if (award.errorMessage) {
       throw new Error(award.errorMessage);
@@ -49,7 +49,7 @@ awardRouter.put("/awards/:id", async (req, res, next) => {
     const userId = req.params.id;
     console.log(req.body);
 
-    const updateData = await awardService.setAward({
+    const updateData = await AwardService.setAward({
       userId,
       title,
       description,
@@ -64,7 +64,7 @@ awardRouter.put("/awards/:id", async (req, res, next) => {
 awardRouter.get("/awardlist/:userId", async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const awardList = await awardService.getAwardList({ userId });
+    const awardList = await AwardService.getAwardList({ userId });
 
     if (awardList.errorMessage) {
       throw new Error(awardList.errorMessage);
@@ -80,7 +80,7 @@ awardRouter.delete("/awards/:id", async function (req, res, next) {
   try {
     const awardId = req.params.id;
 
-    const result = await awardService.deleteAward({ awardId });
+    const result = await AwardService.deleteAward({ awardId });
 
     if (result.errorMessage) {
       throw new Error(result.errorMessage);
