@@ -7,23 +7,23 @@ const EducationEditForm = ({
   setEducationLists,
   setIsEditing,
 }) => {
-  const [position, setPosition] = useState(currentEducation.school);
+  const [position, setPosition] = useState(currentEducation.position);
   const [school, setSchool] = useState(currentEducation.school);
-  const [major, setMajor] = useState(currentEducation.school);
+  const [major, setMajor] = useState(currentEducation.major);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user_id = currentEducation.user_id;
+    const userId = currentEducation.userId;
 
     await Api.put(`educations/${currentEducation.id}`, {
-      user_id,
+      userId,
       school,
       major,
       position,
     });
 
-    const res = await Api.get("educationlist", user_id);
+    const res = await Api.get("educationlist", userId);
 
     setEducationLists(res.data);
     setIsEditing(false);
@@ -35,7 +35,6 @@ const EducationEditForm = ({
         <Form.Control
           type="text"
           placeholder="학교이름"
-          autoComplete="off"
           value={school}
           onChange={(e) => setSchool(e.target.value)}
         />

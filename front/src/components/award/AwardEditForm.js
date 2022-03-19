@@ -10,15 +10,15 @@ const AwardEditForm = ({ currentAward, setAwardLists, setIsEditing }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user_id = currentAward.user_id;
+    const userId = currentAward.userId;
 
     await Api.put(`awards/${currentAward.id}`, {
-      user_id,
+      userId,
       title,
       description,
     });
 
-    const res = await Api.get("awardlist", user_id);
+    const res = await Api.get("awardlist", userId);
 
     setAwardLists(res.data);
     setIsEditing(false);

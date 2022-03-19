@@ -9,8 +9,8 @@ const AwardCard = ({ award, isEditable, setIsEditing, setAwardLists }) => {
       e.stopPropagation();
       await Api.delete("awards", award.id);
     }
-    const user_id = award.user_id;
-    const res = await Api.get("awardlist", user_id);
+    const userId = award.userId;
+    const res = await Api.get("awardlist", userId);
     setAwardLists(res.data);
   };
 

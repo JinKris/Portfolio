@@ -9,15 +9,15 @@ const AwardAddForm = ({ portfolioOwnerId, setAwardLists, setIsAdding }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user_id = portfolioOwnerId;
+    const userId = portfolioOwnerId;
 
     await Api.post("award/create", {
-      user_id: portfolioOwnerId,
+      userId: portfolioOwnerId,
       title,
       description,
     });
 
-    const res = await Api.get("awardlist", user_id);
+    const res = await Api.get("awardlist", userId);
 
     setAwardLists(res.data);
 

@@ -14,8 +14,8 @@ const EducationCard = ({
       e.stopPropagation();
       await Api.delete("educations", education.id);
     }
-    const user_id = education.user_id;
-    const res = await Api.get("educationlist", user_id);
+    const userId = education.userId;
+    const res = await Api.get("educationlist", userId);
     setEducationLists(res.data);
   };
 
@@ -25,9 +25,7 @@ const EducationCard = ({
         <Col>
           <span>{education.school}</span>
           <br />
-          <span className="text-muted">{`${education.major} (${
-            education.position || ""
-          })`}</span>
+          <span className="text-muted">{`${education.major} (${education.position})`}</span>
         </Col>
         {isEditable && (
           <Col xs lg="1">
