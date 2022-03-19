@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import { Button, Form, Col } from "react-bootstrap";
 import * as Api from "../../api";
 
-const AwardAddForm = ({ portfolioOwnerId, setAwardlists, setIsAdding }) => {
+const AwardAddForm = ({ portfolioOwnerId, setAwardLists, setIsAdding }) => {
   const [title, setTitle] = useState("");
 
   const [description, setDescription] = useState("");
@@ -18,7 +18,9 @@ const AwardAddForm = ({ portfolioOwnerId, setAwardlists, setIsAdding }) => {
     });
 
     const res = await Api.get("awardlist", user_id);
-    setAwardlists(res.data);
+
+    setAwardLists(res.data);
+
     setIsAdding(false);
   };
 

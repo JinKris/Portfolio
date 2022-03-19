@@ -2,32 +2,47 @@ import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const AwardCard = ({ award, isEditable, setIsEditing }) => {
+const AwardCard = ({ award, isEditable, setIsEditing, setAwardLists }) => {
+  const handleDelete = async (e) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      e.preventDefault();
+      e.stopPropagation();
+      await Api.delete("awards", award.id);
+    }
+    const user_id = award.user_id;
+    const res = await Api.get("awardlist", user_id);
+    setAwardLists(res.data);
+  };
+
   return (
     <Card.Text>
-      <span>{award.title}</span>
-      <br />
-      <span className="text-muted">{award.description}</span>
-      {isEditable && (
+      <Row className="align-items-center">
         <Col>
-          <Row className="mt-3 text-center text-info">
-            <Col sm={{ span: 20 }}>
-              <Button
-                variant="outline-info"
-                size="sm"
-                onClick={() => setIsEditing((prev) => !prev)}
-              >
-                편집
-              </Button>
-            </Col>
-            {/*             <Col sm={{ span: 20 }}>
-              <Button variant="outline-info" size="sm">
-                삭제
-              </Button>
-            </Col> */}
-          </Row>
+          <span>{award.title}</span>
+          <br />
+          <span className="text-muted">{award.description}</span>
         </Col>
-      )}
+        {isEditable && (
+          <Col xs lg="1">
+            <Button
+              variant="outline-info"
+              size="sm"
+              onClick={() => setIsEditing((prev) => !prev)}
+              className="mr-3"
+            >
+              편집
+            </Button>
+            <Button
+              variant="outline-info"
+              size="sm"
+              className="mr-3"
+              onClick={handleDelete}
+            >
+              삭제
+            </Button>
+          </Col>
+        )}
+      </Row>
     </Card.Text>
   );
 };
