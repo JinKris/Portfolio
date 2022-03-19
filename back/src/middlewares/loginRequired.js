@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 function loginRequired(req, res, next) {
+
   const userToken = req.headers["authorization"]?.split(" ")[1] ?? "null";
 
   if (userToken === "null") {
