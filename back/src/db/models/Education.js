@@ -1,6 +1,6 @@
 import { educationModel } from "../schemas/education";
 
-class education {
+class Education {
   static async create({ newEducation }) {
     console.log('newEducation',newEducation)
     const createdNewEducation = await educationModel.create(newEducation)
@@ -40,4 +40,4 @@ class education {
 
 
 
-export { education };
+export { Education };
