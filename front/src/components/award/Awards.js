@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import Award from "./Award";
-import AwardAddForm from "./AwardAddForm";
+import AwardForm from "./AwardForm";
 
 const Awards = ({ portfolioOwnerId, isEditable, award }) => {
   const [isAdding, setIsAdding] = useState(false);
-
   const [awardLists, setAwardLists] = useState([]);
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const Awards = ({ portfolioOwnerId, isEditable, award }) => {
           </Row>
         )}
         {isAdding && (
-          <AwardAddForm
+          <AwardForm
             portfolioOwnerId={portfolioOwnerId}
             setAwardLists={setAwardLists}
             setIsAdding={setIsAdding}
