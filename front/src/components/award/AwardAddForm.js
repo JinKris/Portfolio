@@ -7,20 +7,31 @@ const AwardAddForm = ({ portfolioOwnerId, setAwardLists, setIsAdding }) => {
 
   const [description, setDescription] = useState("");
 
+  /* const [form, setForm] = useState({ title: "", description: "" }); */
+
+  /*   const handleAwardValue = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  }; */
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const userId = portfolioOwnerId;
 
-    await Api.post("award/create", {
-      userId: portfolioOwnerId,
-      title,
-      description,
-    });
-
-    const res = await Api.get("awardlist", userId);
-
-    setAwardLists(res.data);
-
+    try {
+      await Api.post("award/create", {
+        userId,
+        title,
+        description,
+      });
+      const res = await Api.get("awardlist", userId);
+      setAwardLists(res.data);
+    } catch (e) {
+      console.log(e);
+    }
     setIsAdding(false);
   };
 
