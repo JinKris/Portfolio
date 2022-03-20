@@ -7,6 +7,7 @@ function CertificateCard({
   setIsEditing,
   setCertificates,
 }) {
+  const { title = "", description = "", whenDate = "" } = certificate;
   const handleDelete = async (e) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       e.preventDefault();
@@ -25,9 +26,11 @@ function CertificateCard({
     <Card.Text>
       <Row className="align-items-center">
         <Col>
-          <span>{certificate.title}</span>
+          <span>{title}</span>
           <br />
-          <span className="text-muted">{certificate.description}</span>
+          <span className="text-muted">{description}</span>
+          <br />
+          <span className="text-muted">{whenDate}</span>
         </Col>
         {isEditable && (
           <Col xs lg="1">
