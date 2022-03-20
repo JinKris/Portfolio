@@ -14,6 +14,8 @@ const AwardCard = ({ award, isEditable, setIsEditing, setAwardLists }) => {
     setAwardLists(res.data);
   };
 
+  const { title = "", description = "" } = award;
+
   return (
     <Card.Text>
       <Row className="align-items-center">

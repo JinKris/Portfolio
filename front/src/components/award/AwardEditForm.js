@@ -3,26 +3,40 @@ import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
 const AwardEditForm = ({ currentAward, setAwardLists, setIsEditing }) => {
-  const [title, setTitle] = useState("");
+  /*   const [title, setTitle] = useState("");
 
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(""); */
+
+  const [form, setForm] = useState({ title: "", description: "" });
+
+  const handleAwardValue = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userId = currentAward.userId;
+    /* const userId = currentAward.userId; */
+    const { userId, id } = currentAward;
 
-    await Api.put(`awards/${currentAward.id}`, {
-      userId,
-      title,
-      description,
-    });
+    try {
+      await Api.put(`awards/${currentAward.id}`, {
+        userId,
+        title: form.title,
+        description: form.description,
+      });
+      const res = await Api.get("awardlist", currentAward.userId);
 
-    const res = await Api.get("awardlist", userId);
-
-    setAwardLists(res.data);
-    setIsEditing(false);
+      setAwardLists(res.data);
+      setIsEditing(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -30,16 +44,16 @@ const AwardEditForm = ({ currentAward, setAwardLists, setIsEditing }) => {
           type="text"
           placeholder="수상내역"
           autoComplete="off"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={form.title}
+          onChange={(e) => handleAwardValue("title", e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Control
           type="text"
           placeholder="상세내역"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={form.description}
+          onChange={(e) => handleAwardValue("description", e.target.value)}
         />
       </Form.Group>
 

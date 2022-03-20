@@ -3,18 +3,18 @@ import { Button, Form, Col } from "react-bootstrap";
 import * as Api from "../../api";
 
 const AwardAddForm = ({ portfolioOwnerId, setAwardLists, setIsAdding }) => {
-  const [title, setTitle] = useState("");
+  /*   const [title, setTitle] = useState("");
 
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(""); */
 
-  /* const [form, setForm] = useState({ title: "", description: "" }); */
+  const [form, setForm] = useState({ title: "", description: "" });
 
-  /*   const handleAwardValue = (name, value) => {
+  const handleAwardValue = (name, value) => {
     setForm({
       ...form,
       [name]: value,
     });
-  }; */
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,15 +24,15 @@ const AwardAddForm = ({ portfolioOwnerId, setAwardLists, setIsAdding }) => {
     try {
       await Api.post("award/create", {
         userId,
-        title,
-        description,
+        title: form.title,
+        description: form.description,
       });
       const res = await Api.get("awardlist", userId);
       setAwardLists(res.data);
+      setIsAdding(false);
     } catch (e) {
       console.log(e);
     }
-    setIsAdding(false);
   };
 
   return (
@@ -42,16 +42,16 @@ const AwardAddForm = ({ portfolioOwnerId, setAwardLists, setIsAdding }) => {
           type="text"
           placeholder="수상내역"
           autoComplete="off"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={form.title}
+          onChange={(e) => handleAwardValue("title", e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Control
           type="text"
           placeholder="상세내역"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={form.description}
+          onChange={(e) => handleAwardValue("description", e.target.value)}
         />
       </Form.Group>
 
