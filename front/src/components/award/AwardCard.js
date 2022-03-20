@@ -8,10 +8,10 @@ const AwardCard = ({ award, isEditable, setIsEditing, setAwardLists }) => {
       e.preventDefault();
       e.stopPropagation();
       await Api.delete("awards", award.id);
-    }
-    const userId = award.userId;
-    const res = await Api.get("awardlist", userId);
-    setAwardLists(res.data);
+      const userId = award.userId;
+      const res = await Api.get("awardlist", userId);
+      setAwardLists(res.data);
+    } else return;
   };
 
   const { title = "", description = "" } = award;
