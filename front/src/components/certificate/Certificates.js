@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import Certificate from "./Certificate";
-import CertificateAddForm from "./CertificateAddForm";
+import CertificateForm from "./CertificateForm";
 
-function Certificates({ portfolioOwnerId, isEditable }) {
+function Certificates({ portfolioOwnerId, isEditable, certificate }) {
   //useState로 certificate 상태를 생성함.
   const [certificates, setCertificates] = useState([]);
   //useState로 isAdding 상태를 생성함.
@@ -38,7 +38,7 @@ function Certificates({ portfolioOwnerId, isEditable }) {
             </Row>
           )}
           {isAdding && (
-            <CertificateAddForm
+            <CertificateForm
               portfolioOwnerId={portfolioOwnerId}
               setCertificates={setCertificates}
               setIsAdding={setIsAdding}
