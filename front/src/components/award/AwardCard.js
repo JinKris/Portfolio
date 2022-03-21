@@ -3,6 +3,7 @@ import { Card, Button, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
 const AwardCard = ({ award, isEditable, setIsEditing, setAwardLists }) => {
+  const { title = "", description = "" } = award;
   const handleDelete = async (e) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       e.preventDefault();
@@ -14,15 +15,13 @@ const AwardCard = ({ award, isEditable, setIsEditing, setAwardLists }) => {
     } else return;
   };
 
-  const { title = "", description = "" } = award;
-
   return (
     <Card.Text>
       <Row className="align-items-center">
         <Col>
-          <span>{award.title}</span>
+          <span>{title}</span>
           <br />
-          <span className="text-muted">{award.description}</span>
+          <span className="text-muted">{description}</span>
         </Col>
         {isEditable && (
           <Col xs lg="1">
