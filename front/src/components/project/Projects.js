@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ProjectContext } from "./ProjectContext";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import Project from "./Project";
@@ -15,33 +16,33 @@ function Projects({ portfolioOwnerId, isEditable }) {
   }, [portfolioOwnerId]);
 
   return (
-    <Card>
-      <Card.Body>
-        <Card.Title>프로젝트</Card.Title>
-        {projects.map((project) => (
-          <Project
-            key={project?.user_id}
-            project={project}
-            setProjects={setProjects}
-            isEditable={isEditable}
-          />
-        ))}
-        {isEditable && (
-          <Row className="mt-3 text-center mb-4">
-            <Col sm={{ span: 20 }}>
-              <Button onClick={() => setIsAdding(true)}>+</Button>
-            </Col>
-          </Row>
-        )}
-        {isAdding && (
-          <ProjectForm
-            portfolioOwnerId={portfolioOwnerId}
-            setProjects={setProjects}
-            setIsAdding={setIsAdding}
-          />
-        )}
-      </Card.Body>
-    </Card>
+    <ProjectContext.Provider value={{ projects, setProjects }}>
+      <Card>
+        <Card.Body>
+          <Card.Title>프로젝트</Card.Title>
+          {projects.map((project) => (
+            <Project
+              key={project?.user_id}
+              project={project}
+              isEditable={isEditable}
+            />
+          ))}
+          {isEditable && (
+            <Row className="mt-3 text-center mb-4">
+              <Col sm={{ span: 20 }}>
+                <Button onClick={() => setIsAdding(true)}>+</Button>
+              </Col>
+            </Row>
+          )}
+          {isAdding && (
+            <ProjectForm
+              portfolioOwnerId={portfolioOwnerId}
+              setIsAdding={setIsAdding}
+            />
+          )}
+        </Card.Body>
+      </Card>
+    </ProjectContext.Provider>
   );
 }
 

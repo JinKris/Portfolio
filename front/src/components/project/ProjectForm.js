@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
+import { ProjectContext } from "./ProjectContext";
 
 const ProjectForm = ({
   portfolioOwnerId,
   currentProject,
-  setProjects,
   setIsEditing,
   setIsAdding,
 }) => {
@@ -15,6 +15,7 @@ const ProjectForm = ({
     fromDate: "",
     toDate: "",
   });
+  const { projects, setProjects } = useContext(ProjectContext);
 
   const handleProjectValue = (name, value) => {
     setForm({
@@ -33,10 +34,20 @@ const ProjectForm = ({
           description: form.description,
           fromDate: form.fromDate,
           toDate: form.toDate,
-        }).then(setIsAdding(false));
-        await Api.get("projectlist", userId).then((res) =>
-          setProjects(res.data)
-        );
+        })
+          .then(setIsAdding(false))
+          .then(
+            setProjects([
+              ...projects,
+              {
+                userId,
+                title: form.title,
+                description: form.description,
+                fromDate: form.fromDate,
+                toDate: form.toDate,
+              },
+            ])
+          );
       } else if (setIsEditing) {
         await Api.put(`projects/${currentProject.id}`, {
           userId: currentProject.userId,
@@ -48,6 +59,19 @@ const ProjectForm = ({
         await Api.get("projectlist", currentProject.userId).then((res) =>
           setProjects(res.data)
         );
+        /////////////////////////////////////////////////////////////////////////////
+        // const idx = projects.findIndex((item) => item.id === projects.id);
+        // const newProjects = [...projects];
+        // newProjects[idx] = {
+        //   userId: currentProject.userId,
+        //   id: currentProject.id,
+        //   title: form.title,
+        //   description: form.description,
+        //   fromDate: form.fromDate,
+        //   toDate: form.toDate,
+        // };
+        // setProjects([...newProjects]);
+        /////////////////////////////////////////////////////////////////////////
       }
     } catch (e) {
       console.log(e);
@@ -97,7 +121,13 @@ const ProjectForm = ({
           <Button variant="primary" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsEditing(false)}>
+          <Button
+            variant="secondary"
+            onClick={(e) => {
+              setIsAdding(false);
+              setIsEditing(false);
+            }}
+          >
             취소
           </Button>
         </Col>
