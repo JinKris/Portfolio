@@ -5,7 +5,7 @@ import * as Api from "../../api";
 const CertificateForm = ({
   portfolioOwnerId,
   currentCertificate,
-  setCertificateLists,
+  setCertificates,
   setIsEditing,
   setIsAdding,
 }) => {
@@ -33,7 +33,7 @@ const CertificateForm = ({
           whenDate: form.whenDate,
         }).then(setIsAdding(false));
         await Api.get("certificatelist", userId).then((res) =>
-          setCertificateLists(res.data)
+          setCertificates(res.data)
         );
       } else if (setIsEditing) {
         await Api.put(`certificates/${currentCertificate.id}`, {
@@ -43,7 +43,7 @@ const CertificateForm = ({
           whenDate: form.whenDate,
         }).then(setIsEditing(false));
         await Api.get("certificatelist", currentCertificate.userId).then(
-          (res) => setCertificateLists(res.data)
+          (res) => setCertificates(res.data)
         );
       }
     } catch (e) {
