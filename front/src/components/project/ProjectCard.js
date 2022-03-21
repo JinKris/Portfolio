@@ -8,6 +8,10 @@ function ProjectCard({ project, isEditable, setIsEditing, setProjects }) {
       e.preventDefault();
       e.stopPropagation();
       await Api.delete("projects", project.id);
+
+      const userId = project.userId;
+      const res = await Api.get("projectlist", userId);
+      setProjects(res.data);
     }
     // currentCertificate의 userId를 userId 변수에 할당함.
     const userId = project.userId;

@@ -13,19 +13,21 @@ const EducationCard = ({
       e.preventDefault();
       e.stopPropagation();
       await Api.delete("educations", education.id);
-    }
-    const userId = education.userId;
-    const res = await Api.get("educationlist", userId);
-    setEducationLists(res.data);
+      const userId = education.userId;
+      const res = await Api.get("educationlist", userId);
+      setEducationLists(res.data);
+    } else return;
   };
+
+  const { school = "", major = "", position = "" } = education;
 
   return (
     <Card.Text>
       <Row className="align-items-center">
         <Col>
-          <span>{education.school}</span>
+          <span>{school}</span>
           <br />
-          <span className="text-muted">{`${education.major} (${education.position})`}</span>
+          <span className="text-muted">{`${major} (${position})`}</span>
         </Col>
         {isEditable && (
           <Col xs lg="1">
@@ -40,8 +42,8 @@ const EducationCard = ({
             <Button
               variant="outline-info"
               size="sm"
-              onClick={handleDelete}
               className="mr-3"
+              onClick={handleDelete}
             >
               삭제
             </Button>
