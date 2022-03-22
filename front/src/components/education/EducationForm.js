@@ -66,8 +66,8 @@ const EducationForm = ({
           onChange={(e) => handleEducationValue("major", e.target.value)}
         />
       </Form.Group>
-      {/* <fieldset> */}
-      <div key={`inline-radio`} className="mb-3 mt-3">
+      <div className="mb-3 mt-3">
+        {}
         <Form.Check
           inline
           label="재학중"

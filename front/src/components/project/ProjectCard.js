@@ -3,25 +3,27 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import { ProjectContext } from "./ProjectContext";
 
-function ProjectCard({ project, isEditable, setIsEditing }) {
+function ProjectCard({ project, isEditable, setIsEditing, handleDelete }) {
   const { title = "", description = "", fromDate = "", toDate = "" } = project;
   const { projects, setProjects } = useContext(ProjectContext);
 
-  async function handleDelete(e) {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      // e.preventDefault();
-      // e.stopPropagation();
-      try {
-        await Api.delete("projects", project.id); //db반영
-        //
-        const idx = projects.findIndex((item) => item.id === project.id);
-        projects.splice(idx, 1);
-        setProjects([...projects]);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }
+  // async function handleDelete(e) {
+  //   if (window.confirm("정말 삭제하시겠습니까?")) {
+  //     // e.preventDefault();
+  //     // e.stopPropagation();
+  //     try {
+  //       await Api.delete("projects", project.id);
+  //       // 1
+  //       setProjects(projects.filter((card) => card.id !== project.id));
+  //       // 2
+  //       // const idx = projects.findIndex((item) => item.id === project.id);
+  //       // projects.splice(idx, 1);
+  //       // setProjects([...projects]);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
+  // }
   return (
     <Card.Text>
       <Row className="align-items-center">

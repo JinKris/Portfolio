@@ -19,10 +19,7 @@ function Portfolio() {
   // 아래 코드를 보면, isFetchCompleted가 false이면 "loading..."만 반환되어서, 화면에 이 로딩 문구만 뜨게 됨.
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   const userState = useContext(UserStateContext);
-  // const isEditable = useMemo(
-  //   () => portfolioOwner.id === userState.user?.id,
-  //   [params, userState, navigate]
-  // );
+
   const fetchPorfolioOwner = async (ownerId) => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
     const res = await Api.get("users", ownerId);
@@ -51,6 +48,11 @@ function Portfolio() {
     }
   }, [params, userState, navigate]);
 
+  const isEditable = useMemo(
+    () => portfolioOwner?.id === userState.user?.id,
+    [portfolioOwner, userState]
+  );
+
   if (!isFetchCompleted) {
     return "loading...";
   }
@@ -59,27 +61,24 @@ function Portfolio() {
     <Container fluid>
       <Row>
         <Col md="3" lg="3">
-          <User
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
-          />
+          <User portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
         </Col>
         <Col>
           <Projects
             portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={isEditable}
           />
           <Certificates
             portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={isEditable}
           />
           <Educations
             portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={isEditable}
           />
           <Awards
             portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={isEditable}
           />
         </Col>
       </Row>

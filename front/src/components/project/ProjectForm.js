@@ -5,15 +5,15 @@ import { ProjectContext } from "./ProjectContext";
 
 const ProjectForm = ({
   portfolioOwnerId,
+  setIsAdding,
   currentProject,
   setIsEditing,
-  setIsAdding,
 }) => {
   const [form, setForm] = useState({
-    title: "",
-    description: "",
-    fromDate: "",
-    toDate: "",
+    title: currentProject?.title ? currentProject.title : "",
+    description: currentProject?.description ? currentProject.title : "",
+    fromDate: currentProject?.fromDate ? currentProject.title : "",
+    toDate: currentProject?.toDate ? currentProject.title : "",
   });
   const { projects, setProjects } = useContext(ProjectContext);
 
@@ -60,9 +60,8 @@ const ProjectForm = ({
           setProjects(res.data)
         );
         /////////////////////////////////////////////////////////////////////////////
-        // const idx = projects.findIndex((item) => item.id === projects.id);
-        // const newProjects = [...projects];
-        // newProjects[idx] = {
+        // const idx = projects.findIndex((card) => card.id !== projects.id);
+        // projects[idx] = {
         //   userId: currentProject.userId,
         //   id: currentProject.id,
         //   title: form.title,
@@ -70,7 +69,7 @@ const ProjectForm = ({
         //   fromDate: form.fromDate,
         //   toDate: form.toDate,
         // };
-        // setProjects([...newProjects]);
+        // setProjects([...projects]);
         /////////////////////////////////////////////////////////////////////////
       }
     } catch (e) {
@@ -111,6 +110,7 @@ const ProjectForm = ({
         <Form.Control
           type="date"
           placeholder="종료날짜"
+          min={form?.fromDate}
           value={form.toDate}
           onChange={(e) => handleProjectValue("toDate", e.target.value)}
         />
@@ -124,8 +124,7 @@ const ProjectForm = ({
           <Button
             variant="secondary"
             onClick={(e) => {
-              setIsAdding(false);
-              setIsEditing(false);
+              setIsAdding ? setIsAdding(false) : setIsEditing(false);
             }}
           >
             취소
