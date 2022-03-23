@@ -39,13 +39,6 @@ class UserAuthService {
       return { errorMessage };
     }
 
-    // 비밀번호 일치 여부 확인
-    // const correctPasswordHash = user.password;
-    // const isPasswordCorrect = await bcrypt.compare(
-    //   password,
-    //   correctPasswordHash
-    // );
-
     const verifiedPassword = await verifyPassword(password, user.password);
     console.log(verifiedPassword);
     if (!verifiedPassword) {
@@ -53,10 +46,6 @@ class UserAuthService {
         "비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
-
-    // 로그인 성공 -> JWT 웹 토큰 생성
-    // const secretKey = process.env.JWT_SECRET_KEY || "jwt-secret-key";
-    // const token = jwt.sign({ userId: user.id }, secretKey);
 
     const token = makeToken({ userId: user.id });
 
@@ -132,6 +121,20 @@ class UserAuthService {
 
     return user;
   }
+
+  static removeUser = async ({ userId }) => {
+    const user = User.findById({ userId });
+
+    if (!user) {
+      const errorMessage = "해당 id로 가입된 유저가 없습니다.";
+      return { errorMessage };
+    }
+
+    await User.removeUser({ userId });
+    return {
+      status: "success",
+    };
+  };
 }
 
 export { UserAuthService };

@@ -33,6 +33,10 @@ class User {
     );
     return updatedUser;
   }
+
+  static removeUser = async ({ userId }) => {
+    await userModel.deleteOne({ id: userId });
+  };
 }
 
 export { User };
