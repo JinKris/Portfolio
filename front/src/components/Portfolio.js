@@ -9,6 +9,7 @@ import Projects from "./project/Projects";
 import Certificates from "./certificate/Certificates";
 import Educations from "./education/Educations";
 import Awards from "./award/Awards";
+import Header from "./Header";
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function Portfolio() {
   useEffect(() => {
     // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
     if (!userState.user) {
-      navigate("/login", { replace: true });
+      navigate("/main", { replace: true });
       return;
     }
 
@@ -58,31 +59,37 @@ function Portfolio() {
   }
 
   return (
-    <Container fluid>
-      <Row>
-        <Col md="3" lg="3">
-          <User portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
-        </Col>
-        <Col>
-          <Projects
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={isEditable}
-          />
-          <Certificates
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={isEditable}
-          />
-          <Educations
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={isEditable}
-          />
-          <Awards
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={isEditable}
-          />
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <Header />
+      <Container fluid>
+        <Row>
+          <Col md="3" lg="3">
+            <User
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={isEditable}
+            />
+          </Col>
+          <Col>
+            <Projects
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={isEditable}
+            />
+            <Certificates
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={isEditable}
+            />
+            <Educations
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={isEditable}
+            />
+            <Awards
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={isEditable}
+            />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 

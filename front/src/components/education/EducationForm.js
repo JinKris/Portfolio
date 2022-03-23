@@ -67,7 +67,6 @@ const EducationForm = ({
         />
       </Form.Group>
       <div className="mb-3 mt-3">
-        {}
         <Form.Check
           inline
           label="재학중"

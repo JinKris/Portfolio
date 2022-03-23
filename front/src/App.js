@@ -9,6 +9,7 @@ import LoginForm from "./components/user/LoginForm";
 import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
+import MainPage from "./components/MainPage";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -56,8 +57,9 @@ function App() {
     <DispatchContext.Provider value={dispatch}>
       <UserStateContext.Provider value={userState}>
         <Router>
-          <Header />
+          {/* <Header /> */}
           <Routes>
+            <Route path="/main" element={<MainPage />} />
             <Route path="/" exact element={<Portfolio />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
