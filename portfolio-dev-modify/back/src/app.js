@@ -1,13 +1,13 @@
-import cors from "cors"; // cors error prevention 
+import cors from "cors"; // cors error prevention
 import express from "express";
 import { userAuthRouter } from "./routers/userRouter";
 import { certificateRouter } from "./routers/certificateRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 import { projectRouter } from "./routers/projectRouter";
-import { eduRouter} from "./routers/educationRouter"
+import { eduRouter } from "./routers/educationRouter";
 import { awardRouter } from "./routers/awardRouter";
-
+import { likeRouter } from "./routers/likeRouter";
 
 const app = express();
 
@@ -31,8 +31,8 @@ app.use(userAuthRouter);
 app.use(certificateRouter);
 app.use(projectRouter);
 app.use(awardRouter);
-app.use(eduRouter)
-
+app.use(eduRouter);
+app.use(likeRouter);
 
 app.use(errorMiddleware);
 
