@@ -23,20 +23,20 @@ function Network() {
   }, [userState, navigate]);
 
   return (
-    // <Container fluid>
-    //   <Row xs="auto" className="jusify-content-center">
+    <Container fluid>
+      <Row xs="auto" className="jusify-content-center">
+        {users.map((user) => (
+          <UserCard key={user.id} user={user} isLiking isNetwork />
+        ))}
+      </Row>
+    </Container>
+    // <div>
+    //   <div style={{ display: "flex" }}>
     //     {users.map((user) => (
     //       <UserCard key={user.id} user={user} isNetwork />
     //     ))}
-    //   </Row>
-    // </Container>
-    <div>
-      <div style={{ display: "flex" }}>
-        {users.map((user) => (
-          <UserCard key={user.id} user={user} isNetwork />
-        ))}
-      </div>
-    </div>
+    //   </div>
+    // </div>
   );
 }
 
