@@ -18,13 +18,24 @@ class Post {
 
   static deletePost = async ({ postId }) => {
     const deletePost = await postModel.findOneAndDelete({ id: postId });
-    console.log(deletePost);
     return deletePost;
   };
 
   static findAll = async () => {
     const posts = await postModel.find({});
     return posts;
+  };
+
+  static update = async (postId, context) => {
+    const filter = { id: postId };
+    const updateContext = { context };
+    const option = { returnOriginal: false };
+    const updatedData = postModel.findOneAndUpdate(
+      filter,
+      updateContext,
+      option
+    );
+    return updatedData;
   };
 }
 

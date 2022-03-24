@@ -10,7 +10,6 @@ class PostService {
 
   static deletePost = async ({ postId, writeUser }) => {
     const post = await Post.findById({ postId });
-    console.log(post);
     if (post.writeUser !== writeUser) {
       const errorMessage =
         "사용자와 작성자가 다릅니다. 다시 한 번 확인 해주세요.";
@@ -20,6 +19,23 @@ class PostService {
     return {
       sataus: "success",
     };
+  };
+
+  static modifiedPost = async ({ postId, writeUser, context }) => {
+    const post = await Post.findById({ postId });
+    if (!post) {
+      const errorMessage = "게시물을 찾을 수 없습니다.";
+      return { errorMessage };
+    }
+
+    if (post.writeUser !== writeUser) {
+      const errorMessage =
+        "사용자와 작성자가 다릅니다. 다시 한 번 확인 해주세요.";
+      return { errorMessage };
+    }
+
+    const modifiedPost = await Post.update(postId, context);
+    return modifiedPost;
   };
 
   static findAll = async () => {

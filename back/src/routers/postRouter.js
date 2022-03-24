@@ -10,7 +10,7 @@ postRouter.use(loginRequired);
 postRouter.post("/post/create", async (req, res, next) => {
   try {
     console.log(req.currentUserId);
-    const writeUser = req.currentUserId;
+    const writeUser = req.body.writeUser;
     const context = req.body.context;
     const newPost = await PostService.addPost({ writeUser, context });
     res.status(200).json({
@@ -23,7 +23,7 @@ postRouter.post("/post/create", async (req, res, next) => {
 
 postRouter.post("/post/delete", async (req, res, next) => {
   try {
-    const writeUser = req.currentUserId;
+    const writeUser = req.body.writeUser;
     const postId = req.body.postId;
     const result = await PostService.deletePost({ postId, writeUser });
     if (result.errorMessage) {
@@ -35,6 +35,20 @@ postRouter.post("/post/delete", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+postRouter.put("/post/modify/:id", async (req, res, next) => {
+  const postId = req.params.id;
+  const writeUser = req.body.writeUser;
+  const context = req.body.context;
+
+  const modifiedPost = await PostService.modifiedPost({
+    postId,
+    writeUser,
+    context,
+  });
+
+  res.status(200).json({ modifiedPost: modifiedPost });
 });
 
 postRouter.get("/postlist", async (req, res, next) => {
