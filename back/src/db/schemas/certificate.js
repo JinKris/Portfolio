@@ -24,7 +24,7 @@ const certificateSchema = new Schema(
     },
   },
   {
-    timestamps: true, // 필요 여부는 확실치 않으나 userSchema에도 있어서 일단 추가했습니다.
+    timestamps: true,
   }
 );
 
