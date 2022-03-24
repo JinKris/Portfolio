@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import CertificateCard from "./CertificateCard";
 import CertificateForm from "./CertificateForm";
+import * as Api from "../../api";
+import { CertificateContext } from "./CertificateContext";
 
-function Certificate({ certificate, setCertificates, isEditable }) {
-  //useState로 isEditing 상태를 생성함.
+function Certificate({ certificate, isEditable }) {
   const [isEditing, setIsEditing] = useState(false);
+  const { certificates, setCertificates } = useContext(CertificateContext);
+  async function handleDelete(e) {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      e.preventDefault();
+      e.stopPropagation();
+      try {
+        await Api.delete("certificates", certificate.id);
+        const idx = certificates.findIndex(
+          (item) => item.id === certificate.id
+        );
+        certificates.splice(idx, 1);
+        setCertificates([...certificates]);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
   return (
     <>
       {isEditing ? (
         <CertificateForm
           currentCertificate={certificate}
-          setCertificates={setCertificates}
           setIsEditing={setIsEditing}
         />
       ) : (
@@ -19,7 +36,7 @@ function Certificate({ certificate, setCertificates, isEditable }) {
           portfolioOwnerId={certificate.userId}
           isEditable={isEditable}
           setIsEditing={setIsEditing}
-          setCertificates={setCertificates}
+          handleDelete={handleDelete}
         />
       )}
     </>

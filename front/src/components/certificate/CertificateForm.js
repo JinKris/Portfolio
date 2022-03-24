@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
+import { CertificateContext } from "./CertificateContext";
+import MvpButton from "../../MvpButton";
 
 const CertificateForm = ({
   portfolioOwnerId,
   currentCertificate,
-  setCertificates,
   setIsEditing,
   setIsAdding,
 }) => {
   const [form, setForm] = useState({
-    title: "",
-    description: "",
-    whenDate: "",
+    title: currentCertificate?.title ? currentCertificate.title : "",
+    description: currentCertificate?.description
+      ? currentCertificate.description
+      : "",
+    whenDate: currentCertificate?.whenDate ? currentCertificate.whenDate : "",
   });
+  const { certificates, setCertificates } = useContext(CertificateContext);
 
   const handleCertificateValue = (name, value) => {
     setForm({
@@ -31,10 +35,19 @@ const CertificateForm = ({
           title: form.title,
           description: form.description,
           whenDate: form.whenDate,
-        }).then(setIsAdding(false));
-        await Api.get("certificatelist", userId).then((res) =>
-          setCertificates(res.data)
-        );
+        })
+          .then(setIsAdding(false))
+          .then(
+            setCertificates([
+              ...certificates,
+              {
+                userId,
+                title: form.title,
+                description: form.description,
+                whenDate: form.whenDate,
+              },
+            ])
+          );
       } else if (setIsEditing) {
         await Api.put(`certificates/${currentCertificate.id}`, {
           userId: currentCertificate.userId,
@@ -82,18 +95,16 @@ const CertificateForm = ({
         />
       </Form.Group>
 
-      <Form.Group className="mt-3 text-center">
-        <Col>
-          <Button variant="primary" type="submit" className="me-3">
-            확인
-          </Button>
-          <Button
-            variant="secondary"
-            className="me-3"
-            onClick={() => setIsEditing(false)}
-          >
-            취소
-          </Button>
+      <Form.Group as={Row} className="mt-3 text-center mb-4">
+        <Col sm={{ span: 20 }}>
+          <MvpButton type="submit" name="확인" />
+          <MvpButton
+            type="submit"
+            name="취소"
+            onClick={(e) => {
+              setIsAdding ? setIsAdding(false) : setIsEditing(false);
+            }}
+          />
         </Col>
       </Form.Group>
     </Form>
