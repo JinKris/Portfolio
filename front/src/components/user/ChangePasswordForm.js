@@ -20,16 +20,23 @@ function ChangePasswordForm({ user, setChangingPW, setUser }) {
     /////newPassword 랑 checknewPassword 검증
 
     try {
-      const res = await Api.put(`users/${user.id}`, {
+      console.log(currentPassword);
+      const res = await Api.post(`users/currentPassword/${user.id}`, {
         currentPassword,
-        newPassword,
       });
-      setUser(res.data);
-      alert("비밀번호가 변경되었습니다!");
-      setChangingPW(false);
-      navigate("/login");
+      console.log(res.data);
+      if (res.data.result) {
+        await Api.put(`users/${user.id}`, {
+          newPassword,
+        });
+        alert("비밀번호 변경 완료!");
+        setChangingPW(false);
+        navigate("/login");
+      } else {
+        alert("현재 비밀번호가 일치하지 않습니다.");
+      }
     } catch (err) {
-      alert("현재 비밀번호가 아닙니다!");
+      console.log(err);
     }
   };
 
