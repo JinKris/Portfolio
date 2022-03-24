@@ -19,6 +19,6 @@ const boardSchema = new Schema(
   }
 );
 
-const boardModel = model("Post", boardSchema);
+const boardModel = model("Board", boardSchema);
 
 export { boardModel };

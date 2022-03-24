@@ -1,33 +1,33 @@
 import { boardModel } from "../schemas/board";
 
 class Board {
-  static addPost = async ({ id, writeUser, context }) => {
-    const newPostData = {
+  static addBoard = async ({ id, writeUser, context }) => {
+    const newBoardData = {
       id,
       writeUser,
       context,
     };
-    const newPost = await boardModel.create(newPostData);
-    return newPost;
+    const newBoard = await boardModel.create(newBoardData);
+    return newBoard;
   };
 
-  static findById = async ({ postId }) => {
-    const foundPost = await boardModel.findOne({ id: postId });
-    return foundPost;
+  static findById = async ({ boardId }) => {
+    const foundBoard = await boardModel.findOne({ id: boardId });
+    return foundBoard;
   };
 
-  static deletePost = async ({ postId }) => {
-    const deletePost = await boardModel.findOneAndDelete({ id: postId });
-    return deletePost;
+  static deleteBoard = async ({ boardId }) => {
+    const deleteBoard = await boardModel.findOneAndDelete({ id: boardId });
+    return deleteBoard;
   };
 
   static findAll = async () => {
-    const posts = await boardModel.find({});
-    return posts;
+    const boards = await boardModel.find({});
+    return boards;
   };
 
-  static update = async (postId, context) => {
-    const filter = { id: postId };
+  static update = async (boardId, context) => {
+    const filter = { id: boardId };
     const updateContext = { context };
     const option = { returnOriginal: false };
     const updatedData = boardModel.findOneAndUpdate(
@@ -39,8 +39,8 @@ class Board {
   };
 
   static findByUserId = async (userId) => {
-    const posts = await boardModel.find({ writeUser: userId });
-    return posts;
+    const boards = await boardModel.find({ writeUser: userId });
+    return boards;
   };
 }
 

@@ -8,12 +8,11 @@ boardRouter.use(loginRequired);
 
 boardRouter.post("/board/create", async (req, res, next) => {
   try {
-    console.log(req.currentUserId);
     const writeUser = req.body.writeUser;
     const context = req.body.context;
-    const newPost = await BoardService.addPost({ writeUser, context });
+    const newBoard = await BoardService.addBoard({ writeUser, context });
     res.status(200).json({
-      newPost,
+      newBoard,
     });
   } catch (error) {
     next(error);
@@ -23,8 +22,8 @@ boardRouter.post("/board/create", async (req, res, next) => {
 boardRouter.post("/board/delete", async (req, res, next) => {
   try {
     const writeUser = req.body.writeUser;
-    const postId = req.body.postId;
-    const result = await BoardService.deletePost({ postId, writeUser });
+    const boardId = req.body.boardId;
+    const result = await BoardService.deleteBoard({ boardId, writeUser });
     if (result.errorMessage) {
       throw new Error(result.errorMessage);
     }
@@ -37,27 +36,27 @@ boardRouter.post("/board/delete", async (req, res, next) => {
 });
 
 boardRouter.put("/board/modify/:id", async (req, res, next) => {
-  const postId = req.params.id;
+  const boardId = req.params.id;
   const writeUser = req.body.writeUser;
   const context = req.body.context;
 
-  const modifiedPost = await BoardService.modifiedPost({
-    postId,
+  const modifiedBoard = await BoardService.modifiedBoard({
+    boardId,
     writeUser,
     context,
   });
 
-  res.status(200).json({ modifiedPost: modifiedPost });
+  res.status(200).json({ modifiedBoard: modifiedBoard });
 });
 
 boardRouter.get("/boardlist", async (req, res, next) => {
   try {
-    const posts = await BoardService.findAll();
-    if (posts.errorMessage) {
-      throw new Error(posts.errorMessage);
+    const boards = await BoardService.findAll();
+    if (boards.errorMessage) {
+      throw new Error(boards.errorMessage);
     }
     res.status(200).json({
-      posts,
+      boards,
     });
   } catch (error) {
     next(error);
@@ -67,16 +66,15 @@ boardRouter.get("/boardlist", async (req, res, next) => {
 boardRouter.get("/boardlist/:userId", async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const posts = await BoardService.findByUserId(userId);
-    console.log(posts);
+    const boards = await BoardService.findByUserId(userId);
 
-    res.status(200).json(posts);
+    res.status(200).json(boards);
   } catch (error) {
     next(error);
   }
 });
 
-boardRouter.get("/post", (req, res, next) => {
+boardRouter.get("/board", (req, res, next) => {
   res.json({
     status: "succ",
   });
