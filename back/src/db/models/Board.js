@@ -1,10 +1,10 @@
 import { boardModel } from "../schemas/board";
 
 class Board {
-  static addBoard = async ({ id, writeUser, context, title }) => {
+  static addBoard = async ({ id, userId, context, title }) => {
     const newBoardData = {
       id,
-      writeUser,
+      userId,
       context,
       title,
     };
@@ -40,7 +40,7 @@ class Board {
   };
 
   static findByUserId = async (userId) => {
-    const boards = await boardModel.find({ writeUser: userId });
+    const boards = await boardModel.find({ userId: userId });
     return boards;
   };
 }

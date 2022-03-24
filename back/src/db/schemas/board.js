@@ -10,7 +10,7 @@ const boardSchema = new Schema(
       type: String,
       required: true,
     },
-    writeUser: {
+    userId: {
       type: String,
       required: true,
     },
