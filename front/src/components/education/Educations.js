@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import Education from "./Education";
-import EducationAddForm from "./EducationAddForm";
+import EducationForm from "./EducationForm";
 
 const Educations = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -34,7 +34,7 @@ const Educations = ({ portfolioOwnerId, isEditable }) => {
           </Row>
         )}
         {isAdding && (
-          <EducationAddForm
+          <EducationForm
             portfolioOwnerId={portfolioOwnerId}
             setEducationLists={setEducationLists}
             setIsAdding={setIsAdding}

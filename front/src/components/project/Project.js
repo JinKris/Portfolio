@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
-import ProjectEditForm from "./ProjectEditForm";
+import ProjectForm from "./ProjectForm";
 // import * as Api from "../../api";
 
 function Project({ project, setProjects, isEditable }) {
@@ -10,7 +10,7 @@ function Project({ project, setProjects, isEditable }) {
   return (
     <>
       {isEditing ? (
-        <ProjectEditForm
+        <ProjectForm
           setIsEditing={setIsEditing}
           setProjects={setProjects}
           currentProject={project}
@@ -18,6 +18,7 @@ function Project({ project, setProjects, isEditable }) {
       ) : (
         <ProjectCard
           project={project}
+          portfolioOwnerId={project.userId}
           isEditable={isEditable}
           setIsEditing={setIsEditing}
           setProjects={setProjects}

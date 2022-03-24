@@ -2,11 +2,16 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 
 function ProjectCard({ project, isEditable, setIsEditing, setProjects }) {
+  const { title = "", description = "", fromDate = "", toDate = "" } = project;
   async function handleDelete(e) {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       e.preventDefault();
       e.stopPropagation();
       await Api.delete("projects", project.id);
+
+      const userId = project.userId;
+      const res = await Api.get("projectlist", userId);
+      setProjects(res.data);
     }
     // currentCertificate의 userId를 userId 변수에 할당함.
     const userId = project.userId;
@@ -19,17 +24,13 @@ function ProjectCard({ project, isEditable, setIsEditing, setProjects }) {
     <Card.Text>
       <Row className="align-items-center">
         <Col>
-          <span className="primary">{project.title}</span>
+          <span className="primary">{title}</span>
           <br />
-          <span>{project.description}</span>
+          <span>{description}</span>
           <br />
-          <span className="text-muted">
-            {project.fromDate.toString().substr(0, 10)}
-          </span>
+          <span className="text-muted">{fromDate}</span>
           <br />
-          <span className="text-muted">
-            {project.toDate.toString().substr(0, 10)}
-          </span>
+          <span className="text-muted">{toDate}</span>
           <br />
         </Col>
         {isEditable && (

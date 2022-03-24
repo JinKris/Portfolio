@@ -2,31 +2,49 @@ import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const EducationEditForm = ({
+const EducationForm = ({
+  portfolioOwnerId,
   currentEducation,
   setEducationLists,
   setIsEditing,
+  setIsAdding,
 }) => {
-  const [position, setPosition] = useState(currentEducation.position);
-  const [school, setSchool] = useState(currentEducation.school);
-  const [major, setMajor] = useState(currentEducation.major);
+  const [form, setForm] = useState({ school: "", major: "", position: "" });
 
+  const handleEducationValue = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const userId = currentEducation.userId;
-
-    await Api.put(`educations/${currentEducation.id}`, {
-      userId,
-      school,
-      major,
-      position,
-    });
-
-    const res = await Api.get("educationlist", userId);
-
-    setEducationLists(res.data);
-    setIsEditing(false);
+    try {
+      if (setIsAdding) {
+        const userId = portfolioOwnerId;
+        await Api.post("education/create", {
+          userId,
+          school: form.school,
+          major: form.major,
+          position: form.position,
+        }).then(setIsAdding(false));
+        await Api.get("educationlist", userId).then((res) =>
+          setEducationLists(res.data)
+        );
+      } else if (setIsEditing) {
+        await Api.put(`educations/${currentEducation.id}`, {
+          userId: currentEducation.userId,
+          school: form.school,
+          major: form.major,
+          position: form.position,
+        }).then(setIsEditing(false));
+        await Api.get("educationlist", currentEducation.userId).then((res) =>
+          setEducationLists(res.data)
+        );
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -35,16 +53,17 @@ const EducationEditForm = ({
         <Form.Control
           type="text"
           placeholder="학교이름"
-          value={school}
-          onChange={(e) => setSchool(e.target.value)}
+          autoComplete="off"
+          value={form.school}
+          onChange={(e) => handleEducationValue("school", e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Control
           type="text"
           placeholder="전공"
-          value={major}
-          onChange={(e) => setMajor(e.target.value)}
+          value={form.major}
+          onChange={(e) => handleEducationValue("major", e.target.value)}
         />
       </Form.Group>
       {/* <fieldset> */}
@@ -56,8 +75,8 @@ const EducationEditForm = ({
           type="radio"
           name="position"
           value="재학중"
-          checked={position === "재학중"}
-          onChange={(e) => setPosition(e.target.value)}
+          checked={form.position === "재학중"}
+          onChange={(e) => handleEducationValue("position", e.target.value)}
         />
         <Form.Check
           inline
@@ -66,8 +85,8 @@ const EducationEditForm = ({
           type="radio"
           name="position"
           value="학사졸업"
-          checked={position === "학사졸업"}
-          onChange={(e) => setPosition(e.target.value)}
+          checked={form.position === "학사졸업"}
+          onChange={(e) => handleEducationValue("position", e.target.value)}
         />
         <Form.Check
           inline
@@ -76,8 +95,8 @@ const EducationEditForm = ({
           type="radio"
           name="position"
           value="석사졸업"
-          checked={position === "석사졸업"}
-          onChange={(e) => setPosition(e.target.value)}
+          checked={form.position === "석사졸업"}
+          onChange={(e) => handleEducationValue("position", e.target.value)}
         />
         <Form.Check
           inline
@@ -86,11 +105,11 @@ const EducationEditForm = ({
           type="radio"
           name="position"
           value="박사졸업"
-          checked={position === "박사졸업"}
-          onChange={(e) => setPosition(e.target.value)}
+          checked={form.position === "박사졸업"}
+          onChange={(e) => handleEducationValue("position", e.target.value)}
         />
       </div>
-      {/*   </fieldset> */}
+
       <Form.Group className="mt-3 text-center">
         <Col>
           <Button variant="primary" type="submit" className="me-3">
@@ -109,4 +128,4 @@ const EducationEditForm = ({
   );
 };
 
-export default EducationEditForm;
+export default EducationForm;
