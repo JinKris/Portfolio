@@ -8,9 +8,10 @@ boardRouter.use(loginRequired);
 
 boardRouter.post("/board/create", async (req, res, next) => {
   try {
-    const writeUser = req.body.writeUser;
+    const userId = req.body.userId;
     const context = req.body.context;
-    const newBoard = await BoardService.addBoard({ writeUser, context });
+    const title = req.body.title;
+    const newBoard = await BoardService.addBoard({ userId, context, title });
     res.status(200).json({
       newBoard,
     });
@@ -21,9 +22,9 @@ boardRouter.post("/board/create", async (req, res, next) => {
 
 boardRouter.post("/board/delete", async (req, res, next) => {
   try {
-    const writeUser = req.body.writeUser;
+    const userId = req.body.userId;
     const boardId = req.body.boardId;
-    const result = await BoardService.deleteBoard({ boardId, writeUser });
+    const result = await BoardService.deleteBoard({ boardId, userId });
     if (result.errorMessage) {
       throw new Error(result.errorMessage);
     }
@@ -37,13 +38,15 @@ boardRouter.post("/board/delete", async (req, res, next) => {
 
 boardRouter.put("/board/modify/:id", async (req, res, next) => {
   const boardId = req.params.id;
-  const writeUser = req.body.writeUser;
+  const userId = req.body.userId;
   const context = req.body.context;
+  const title = req.body.title;
 
   const modifiedBoard = await BoardService.modifiedBoard({
     boardId,
-    writeUser,
+    userId,
     context,
+    title,
   });
 
   res.status(200).json({ modifiedBoard: modifiedBoard });

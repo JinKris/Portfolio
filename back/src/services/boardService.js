@@ -2,15 +2,15 @@ import { Board } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
 class BoardService {
-  static addBoard = async ({ writeUser, context }) => {
+  static addBoard = async ({ userId, context, title }) => {
     const id = uuidv4();
-    const newBoard = await Board.addBoard({ id, writeUser, context });
+    const newBoard = await Board.addBoard({ id, userId, context, title });
     return newBoard;
   };
 
-  static deleteBoard = async ({ boardId, writeUser }) => {
+  static deleteBoard = async ({ boardId, userId }) => {
     const board = await Board.findById({ boardId });
-    if (board.writeUser !== writeUser) {
+    if (board.userId !== userId) {
       const errorMessage =
         "사용자와 작성자가 다릅니다. 다시 한 번 확인 해주세요.";
       return { errorMessage };
@@ -21,20 +21,20 @@ class BoardService {
     };
   };
 
-  static modifiedBoard = async ({ boardId, writeUser, context }) => {
+  static modifiedBoard = async ({ boardId, userId, context, title }) => {
     const board = await Board.findById({ boardId });
     if (!board) {
       const errorMessage = "게시물을 찾을 수 없습니다.";
       return { errorMessage };
     }
 
-    if (board.writeUser !== writeUser) {
+    if (board.userId !== userId) {
       const errorMessage =
         "사용자와 작성자가 다릅니다. 다시 한 번 확인 해주세요.";
       return { errorMessage };
     }
 
-    const modifiedBoard = await Board.update(boardId, context);
+    const modifiedBoard = await Board.update(boardId, context, title);
     return modifiedBoard;
   };
 

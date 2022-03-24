@@ -1,11 +1,12 @@
 import { boardModel } from "../schemas/board";
 
 class Board {
-  static addBoard = async ({ id, writeUser, context }) => {
+  static addBoard = async ({ id, userId, context, title }) => {
     const newBoardData = {
       id,
-      writeUser,
+      userId,
       context,
+      title,
     };
     const newBoard = await boardModel.create(newBoardData);
     return newBoard;
@@ -26,9 +27,9 @@ class Board {
     return boards;
   };
 
-  static update = async (boardId, context) => {
+  static update = async (boardId, context, title) => {
     const filter = { id: boardId };
-    const updateContext = { context };
+    const updateContext = { context, title };
     const option = { returnOriginal: false };
     const updatedData = boardModel.findOneAndUpdate(
       filter,
@@ -39,7 +40,7 @@ class Board {
   };
 
   static findByUserId = async (userId) => {
-    const boards = await boardModel.find({ writeUser: userId });
+    const boards = await boardModel.find({ userId: userId });
     return boards;
   };
 }
