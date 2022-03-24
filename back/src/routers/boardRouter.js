@@ -10,7 +10,8 @@ boardRouter.post("/board/create", async (req, res, next) => {
   try {
     const writeUser = req.body.writeUser;
     const context = req.body.context;
-    const newBoard = await BoardService.addBoard({ writeUser, context });
+    const title = req.body.title;
+    const newBoard = await BoardService.addBoard({ writeUser, context, title });
     res.status(200).json({
       newBoard,
     });
@@ -39,11 +40,13 @@ boardRouter.put("/board/modify/:id", async (req, res, next) => {
   const boardId = req.params.id;
   const writeUser = req.body.writeUser;
   const context = req.body.context;
+  const title = req.body.title;
 
   const modifiedBoard = await BoardService.modifiedBoard({
     boardId,
     writeUser,
     context,
+    title,
   });
 
   res.status(200).json({ modifiedBoard: modifiedBoard });

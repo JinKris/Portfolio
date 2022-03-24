@@ -54,7 +54,6 @@ awardRouter.put("/awards/:id", async (req, res, next) => {
       title,
       description,
     });
-    console.log(updateData);
     res.status(200).json(updateData);
   } catch (error) {
     next(error);
