@@ -148,5 +148,4 @@ userAuthRouter.delete("/users/:id", loginRequired, async (req, res, next) => {
   }
 });
 
-
 export { userAuthRouter };
