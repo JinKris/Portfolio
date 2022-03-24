@@ -4,6 +4,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import Project from "./Project";
 import ProjectForm from "./ProjectForm";
+import MvpButton from "../../MvpButton";
 
 function Projects({ portfolioOwnerId, isEditable }) {
   const [projects, setProjects] = useState([]);
@@ -30,7 +31,7 @@ function Projects({ portfolioOwnerId, isEditable }) {
           {isEditable && (
             <Row className="mt-3 text-center mb-4">
               <Col sm={{ span: 20 }}>
-                <Button onClick={() => setIsAdding(true)}>+</Button>
+                <MvpButton onClick={() => setIsAdding(true)} name="+" />
               </Col>
             </Row>
           )}

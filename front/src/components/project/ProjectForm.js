@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import { ProjectContext } from "./ProjectContext";
+import MvpButton from "../../MvpButton";
 
 const ProjectForm = ({
   portfolioOwnerId,
@@ -11,9 +12,9 @@ const ProjectForm = ({
 }) => {
   const [form, setForm] = useState({
     title: currentProject?.title ? currentProject.title : "",
-    description: currentProject?.description ? currentProject.title : "",
-    fromDate: currentProject?.fromDate ? currentProject.title : "",
-    toDate: currentProject?.toDate ? currentProject.title : "",
+    description: currentProject?.description ? currentProject.description : "",
+    fromDate: currentProject?.fromDate ? currentProject.fromDate : "",
+    toDate: currentProject?.toDate ? currentProject.toDate : "",
   });
   const { projects, setProjects } = useContext(ProjectContext);
 
@@ -118,17 +119,14 @@ const ProjectForm = ({
 
       <Form.Group as={Row} className="mt-3 text-center mb-4">
         <Col sm={{ span: 20 }}>
-          <Button variant="primary" type="submit" className="me-3">
-            확인
-          </Button>
-          <Button
-            variant="secondary"
+          <MvpButton type="submit" name="확인" />
+          <MvpButton
+            type="submit"
+            name="취소"
             onClick={(e) => {
               setIsAdding ? setIsAdding(false) : setIsEditing(false);
             }}
-          >
-            취소
-          </Button>
+          />
         </Col>
       </Form.Group>
     </Form>
