@@ -96,10 +96,10 @@ userAuthRouter.put(
     try {
       const userId = req.params.id;
 
-      const email = req.body.email;
-      const password = req.body.password;
-      const description = req.body.description;
-      const name = req.body.name;
+      const email = req.body.email ?? undefined;
+      const password = req.body.password ?? undefined;
+      const description = req.body.description ?? undefined;
+      const name = req.body.name ?? undefined;
 
       const toUpdate = { name, email, password, description };
 
