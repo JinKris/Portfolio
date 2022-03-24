@@ -37,6 +37,11 @@ class Post {
     );
     return updatedData;
   };
+
+  static findByUserId = async (userId) => {
+    const posts = await postModel.find({ writeUser: userId });
+    return posts;
+  };
 }
 
 export { Post };

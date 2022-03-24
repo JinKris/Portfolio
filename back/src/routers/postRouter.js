@@ -65,6 +65,18 @@ postRouter.get("/postlist", async (req, res, next) => {
   }
 });
 
+postRouter.get("/postlist/:userId", async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const posts = await PostService.findByUserId(userId);
+    console.log(posts);
+
+    res.status(200).json(posts);
+  } catch (error) {
+    next(error);
+  }
+});
+
 postRouter.get("/post", (req, res, next) => {
   res.json({
     status: "succ",

@@ -68,6 +68,7 @@ class UserAuthService {
   static async setUser({ userId, toUpdate }) {
     let user = await User.findById({ userId });
     console.log(user);
+
     if (!user) {
       const errorMessage = "가입 내역이 없습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
@@ -80,6 +81,7 @@ class UserAuthService {
       const errorMessage = "이미 가입되어 있는 email입니다.";
       return { errorMessage };
     }
+
     if (toUpdate.password && toUpdate.password.length < 4) {
       const errorMessage =
         "비밀번호가 너무 짧습니다. 다시 한 번 확인해 주세요.";

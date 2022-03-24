@@ -46,6 +46,11 @@ class PostService {
     }
     return posts;
   };
+
+  static findByUserId = async (userId) => {
+    const posts = await Post.findByUserId(userId);
+    return posts;
+  };
 }
 
 export { PostService };

@@ -102,6 +102,7 @@ userAuthRouter.put(
       const name = req.body.name ?? undefined;
 
       const toUpdate = { name, email, password, description };
+      console.log(password);
 
       const updatedUser = await UserAuthService.setUser({ userId, toUpdate });
 
