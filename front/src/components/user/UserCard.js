@@ -7,8 +7,9 @@ import { UserStateContext } from "../../App";
 
 function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   const navigate = useNavigate();
-  const [likes, setLikes] = useState(null);
-  const [isLiked, setIsLiked] = useState(null);
+  //변수에 넣는것들은 명확하게.. 0...false...
+  const [likes, setLikes] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
   const userState = useContext(UserStateContext);
 
   // useEffect(() => {
@@ -18,23 +19,27 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   //   else setIsLiked(false);
   // }, []);
 
+  //수정
   useEffect(() => {
     async function fetchLikeList() {
       if (!user) return;
-      const res = await Api.get("likelist", user.id);
-
-      if (res.data.giveLike.find((v) => v === userState.user.id)) {
-        setIsLiked(true);
-      } else {
-        setIsLiked(false);
+      try {
+        const res = await Api.get("likelist", user.id);
+        if (res.data.giveLike.find((v) => v === userState.user.id)) {
+          setIsLiked(true);
+        } else {
+          setIsLiked(false);
+        }
+        setLikes(res.data.likes);
+      } catch (e) {
+        console.log(e);
       }
-      setLikes(res.data.likes);
     }
     fetchLikeList();
-  }, [isLiked]);
+  }, [isLiked, user]);
 
   const handleLikes = async () => {
-    //중복X
+    //수정
     try {
       if (isLiked) {
         await Api.post("like/delete", {

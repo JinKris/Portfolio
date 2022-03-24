@@ -70,7 +70,7 @@ function Portfolio() {
             />
           </Col>
           <Col>
-            {/* <Projects
+            <Projects
               portfolioOwnerId={portfolioOwner.id}
               isEditable={isEditable}
             />
@@ -85,7 +85,7 @@ function Portfolio() {
             <Awards
               portfolioOwnerId={portfolioOwner.id}
               isEditable={isEditable}
-            /> */}
+            />
           </Col>
         </Row>
       </Container>
