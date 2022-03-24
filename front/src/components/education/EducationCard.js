@@ -1,24 +1,13 @@
 import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
-import * as Api from "../../api";
+import MvpButton from "../../MvpButton";
 
 const EducationCard = ({
   education,
   isEditable,
   setIsEditing,
-  setEducationLists,
+  handleDelete,
 }) => {
-  const handleDelete = async (e) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      e.preventDefault();
-      e.stopPropagation();
-      await Api.delete("educations", education.id);
-      const userId = education.userId;
-      const res = await Api.get("educationlist", userId);
-      setEducationLists(res.data);
-    } else return;
-  };
-
   const { school = "", major = "", position = "" } = education;
 
   return (
@@ -31,22 +20,11 @@ const EducationCard = ({
         </Col>
         {isEditable && (
           <Col xs lg="1">
-            <Button
-              variant="outline-info"
-              size="sm"
+            <MvpButton
               onClick={() => setIsEditing((prev) => !prev)}
-              className="mr-3"
-            >
-              편집
-            </Button>
-            <Button
-              variant="outline-info"
-              size="sm"
-              className="mr-3"
-              onClick={handleDelete}
-            >
-              삭제
-            </Button>
+              name="편집"
+            />
+            <MvpButton onClick={handleDelete} name="삭제" />
           </Col>
         )}
       </Row>

@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
+import { AwardContext } from "./AwardContext";
+import MvpButton from "../../MvpButton";
 
 const AwardForm = ({
   portfolioOwnerId,
   currentAward,
-  setAwardLists,
   setIsEditing,
   setIsAdding,
 }) => {
-  const [form, setForm] = useState({ title: "", description: "" });
-
+  const [form, setForm] = useState({
+    title: currentAward?.title ? currentAward.title : "",
+    description: currentAward?.description ? currentAward.description : "",
+  });
+  const { awards, setAwards } = useContext(AwardContext);
   const handleAwardValue = (name, value) => {
     setForm({
       ...form,
@@ -26,10 +30,18 @@ const AwardForm = ({
           userId,
           title: form.title,
           description: form.description,
-        }).then(setIsAdding(false));
-        await Api.get("awardlist", userId).then((res) =>
-          setAwardLists(res.data)
-        );
+        })
+          .then(setIsAdding(false))
+          .then(
+            setAwards([
+              ...awards,
+              {
+                userId,
+                title: form.title,
+                description: form.description,
+              },
+            ])
+          );
       } else if (setIsEditing) {
         await Api.put(`awards/${currentAward.id}`, {
           userId: currentAward.userId,
@@ -37,7 +49,7 @@ const AwardForm = ({
           description: form.description,
         }).then(setIsEditing(false));
         await Api.get("awardlist", currentAward.userId).then((res) =>
-          setAwardLists(res.data)
+          setAwards(res.data)
         );
       }
     } catch (e) {
@@ -65,18 +77,16 @@ const AwardForm = ({
         />
       </Form.Group>
 
-      <Form.Group className="mt-3 text-center">
-        <Col>
-          <Button variant="primary" type="submit" className="me-3">
-            확인
-          </Button>
-          <Button
-            variant="secondary"
-            className="me-3"
-            onClick={() => setIsEditing(false)}
-          >
-            취소
-          </Button>
+      <Form.Group as={Row} className="mt-3 text-center mb-4">
+        <Col sm={{ span: 20 }}>
+          <MvpButton type="submit" name="확인" />
+          <MvpButton
+            type="submit"
+            name="취소"
+            onClick={(e) => {
+              setIsAdding ? setIsAdding(false) : setIsEditing(false);
+            }}
+          />
         </Col>
       </Form.Group>
     </Form>

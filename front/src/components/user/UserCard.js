@@ -20,30 +20,34 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
 
   useEffect(() => {
     async function fetchLikeList() {
+      if (!user) return;
       const res = await Api.get("likelist", user.id);
-      if (res.data.giveLike.find((v) => v === userState.user.id))
+
+      if (res.data.giveLike.find((v) => v === userState.user.id)) {
         setIsLiked(true);
-      else setIsLiked(false);
+      } else {
+        setIsLiked(false);
+      }
       setLikes(res.data.likes);
     }
     fetchLikeList();
   }, [isLiked]);
 
   const handleLikes = async () => {
+    //중복X
     try {
       if (isLiked) {
         await Api.post("like/delete", {
           giveLike: userState.user.id,
           getLike: user.id,
         });
-        setIsLiked(false);
       } else {
         await Api.post("like/create", {
           giveLike: userState.user.id,
           getLike: user.id,
         });
-        setIsLiked(true);
       }
+      setIsLiked(!isLiked);
     } catch (e) {
       console.log(e);
     }

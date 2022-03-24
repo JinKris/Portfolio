@@ -1,46 +1,25 @@
-import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
+import MvpButton from "../../MvpButton";
 
-const AwardCard = ({ award, isEditable, setIsEditing, setAwardLists }) => {
+const AwardCard = ({ award, isEditable, setIsEditing, handleDelete }) => {
   const { title = "", description = "" } = award;
-  const handleDelete = async (e) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      e.preventDefault();
-      e.stopPropagation();
-      await Api.delete("awards", award.id);
-      const userId = award.userId;
-      const res = await Api.get("awardlist", userId);
-      setAwardLists(res.data);
-    } else return;
-  };
 
   return (
     <Card.Text>
       <Row className="align-items-center">
         <Col>
-          <span>{title}</span>
+          <span className="primary">{title}</span>
           <br />
           <span className="text-muted">{description}</span>
         </Col>
         {isEditable && (
           <Col xs lg="1">
-            <Button
-              variant="outline-info"
-              size="sm"
+            <MvpButton
               onClick={() => setIsEditing((prev) => !prev)}
-              className="mr-3"
-            >
-              편집
-            </Button>
-            <Button
-              variant="outline-info"
-              size="sm"
-              className="mr-3"
-              onClick={handleDelete}
-            >
-              삭제
-            </Button>
+              name="편집"
+            />
+            <MvpButton onClick={handleDelete} name="삭제" />
           </Col>
         )}
       </Row>

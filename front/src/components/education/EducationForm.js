@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
+import { EducationContext } from "./EducationContext";
+import MvpButton from "../../MvpButton";
 
 const EducationForm = ({
   portfolioOwnerId,
   currentEducation,
-  setEducationLists,
   setIsEditing,
   setIsAdding,
 }) => {
-  const [form, setForm] = useState({ school: "", major: "", position: "" });
+  const [form, setForm] = useState({
+    school: currentEducation?.school ? currentEducation.school : "",
+    major: currentEducation?.major ? currentEducation.major : "",
+    position: currentEducation?.position ? currentEducation.position : "",
+  });
+  const { educations, setEducations } = useContext(EducationContext);
 
   const handleEducationValue = (name, value) => {
     setForm({
@@ -27,10 +33,19 @@ const EducationForm = ({
           school: form.school,
           major: form.major,
           position: form.position,
-        }).then(setIsAdding(false));
-        await Api.get("educationlist", userId).then((res) =>
-          setEducationLists(res.data)
-        );
+        })
+          .then(setIsAdding(false))
+          .then(
+            setEducations([
+              ...educations,
+              {
+                userId,
+                school: form.school,
+                major: form.major,
+                position: form.position,
+              },
+            ])
+          );
       } else if (setIsEditing) {
         await Api.put(`educations/${currentEducation.id}`, {
           userId: currentEducation.userId,
@@ -39,7 +54,7 @@ const EducationForm = ({
           position: form.position,
         }).then(setIsEditing(false));
         await Api.get("educationlist", currentEducation.userId).then((res) =>
-          setEducationLists(res.data)
+          setEducations(res.data)
         );
       }
     } catch (e) {
@@ -109,18 +124,16 @@ const EducationForm = ({
         />
       </div>
 
-      <Form.Group className="mt-3 text-center">
-        <Col>
-          <Button variant="primary" type="submit" className="me-3">
-            확인
-          </Button>
-          <Button
-            variant="secondary"
-            className="me-3"
-            onClick={() => setIsEditing(false)}
-          >
-            취소
-          </Button>
+      <Form.Group as={Row} className="mt-3 text-center mb-4">
+        <Col sm={{ span: 20 }}>
+          <MvpButton type="submit" name="확인" />
+          <MvpButton
+            type="submit"
+            name="취소"
+            onClick={(e) => {
+              setIsAdding ? setIsAdding(false) : setIsEditing(false);
+            }}
+          />
         </Col>
       </Form.Group>
     </Form>
