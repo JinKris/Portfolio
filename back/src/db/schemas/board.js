@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import mongoose from "mongoose";
 
-const postSchema = new Schema(
+const boardSchema = new Schema(
   {
     id: {
       type: String,
@@ -20,6 +20,6 @@ const postSchema = new Schema(
   }
 );
 
-const postModel = model("Post", postSchema);
+const boardModel = model("Post", boardSchema);
 
-export { postModel };
+export { boardModel };

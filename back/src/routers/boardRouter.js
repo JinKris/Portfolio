@@ -1,18 +1,17 @@
-import is from "@sindresorhus/is";
 import { Router } from "express";
 import { loginRequired } from "../middlewares/loginRequired.js";
 
-import { PostService } from "../services/postService";
+import { BoardService } from "../services/boardService.js";
 
-const postRouter = Router();
-postRouter.use(loginRequired);
+const boardRouter = Router();
+boardRouter.use(loginRequired);
 
-postRouter.post("/post/create", async (req, res, next) => {
+boardRouter.post("/board/create", async (req, res, next) => {
   try {
     console.log(req.currentUserId);
     const writeUser = req.body.writeUser;
     const context = req.body.context;
-    const newPost = await PostService.addPost({ writeUser, context });
+    const newPost = await BoardService.addPost({ writeUser, context });
     res.status(200).json({
       newPost,
     });
@@ -21,11 +20,11 @@ postRouter.post("/post/create", async (req, res, next) => {
   }
 });
 
-postRouter.post("/post/delete", async (req, res, next) => {
+boardRouter.post("/board/delete", async (req, res, next) => {
   try {
     const writeUser = req.body.writeUser;
     const postId = req.body.postId;
-    const result = await PostService.deletePost({ postId, writeUser });
+    const result = await BoardService.deletePost({ postId, writeUser });
     if (result.errorMessage) {
       throw new Error(result.errorMessage);
     }
@@ -37,12 +36,12 @@ postRouter.post("/post/delete", async (req, res, next) => {
   }
 });
 
-postRouter.put("/post/modify/:id", async (req, res, next) => {
+boardRouter.put("/board/modify/:id", async (req, res, next) => {
   const postId = req.params.id;
   const writeUser = req.body.writeUser;
   const context = req.body.context;
 
-  const modifiedPost = await PostService.modifiedPost({
+  const modifiedPost = await BoardService.modifiedPost({
     postId,
     writeUser,
     context,
@@ -51,9 +50,9 @@ postRouter.put("/post/modify/:id", async (req, res, next) => {
   res.status(200).json({ modifiedPost: modifiedPost });
 });
 
-postRouter.get("/postlist", async (req, res, next) => {
+boardRouter.get("/boardlist", async (req, res, next) => {
   try {
-    const posts = await PostService.findAll();
+    const posts = await BoardService.findAll();
     if (posts.errorMessage) {
       throw new Error(posts.errorMessage);
     }
@@ -65,10 +64,10 @@ postRouter.get("/postlist", async (req, res, next) => {
   }
 });
 
-postRouter.get("/postlist/:userId", async (req, res, next) => {
+boardRouter.get("/boardlist/:userId", async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const posts = await PostService.findByUserId(userId);
+    const posts = await BoardService.findByUserId(userId);
     console.log(posts);
 
     res.status(200).json(posts);
@@ -77,10 +76,10 @@ postRouter.get("/postlist/:userId", async (req, res, next) => {
   }
 });
 
-postRouter.get("/post", (req, res, next) => {
+boardRouter.get("/post", (req, res, next) => {
   res.json({
     status: "succ",
   });
 });
 
-export { postRouter };
+export { boardRouter };

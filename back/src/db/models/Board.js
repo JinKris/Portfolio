@@ -1,28 +1,28 @@
-import { postModel } from "../schemas/post";
+import { boardModel } from "../schemas/board";
 
-class Post {
+class Board {
   static addPost = async ({ id, writeUser, context }) => {
     const newPostData = {
       id,
       writeUser,
       context,
     };
-    const newPost = await postModel.create(newPostData);
+    const newPost = await boardModel.create(newPostData);
     return newPost;
   };
 
   static findById = async ({ postId }) => {
-    const foundPost = await postModel.findOne({ id: postId });
+    const foundPost = await boardModel.findOne({ id: postId });
     return foundPost;
   };
 
   static deletePost = async ({ postId }) => {
-    const deletePost = await postModel.findOneAndDelete({ id: postId });
+    const deletePost = await boardModel.findOneAndDelete({ id: postId });
     return deletePost;
   };
 
   static findAll = async () => {
-    const posts = await postModel.find({});
+    const posts = await boardModel.find({});
     return posts;
   };
 
@@ -30,7 +30,7 @@ class Post {
     const filter = { id: postId };
     const updateContext = { context };
     const option = { returnOriginal: false };
-    const updatedData = postModel.findOneAndUpdate(
+    const updatedData = boardModel.findOneAndUpdate(
       filter,
       updateContext,
       option
@@ -39,9 +39,9 @@ class Post {
   };
 
   static findByUserId = async (userId) => {
-    const posts = await postModel.find({ writeUser: userId });
+    const posts = await boardModel.find({ writeUser: userId });
     return posts;
   };
 }
 
-export { Post };
+export { Board };
