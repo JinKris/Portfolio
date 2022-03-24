@@ -40,7 +40,7 @@ function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    //////////////////////////////////////// 이메일 중복 체크
     try {
       // "user/register" 엔드포인트로 post요청함.
       await Api.post("user/register", {
@@ -48,10 +48,9 @@ function RegisterForm() {
         password,
         name,
       });
-
-      // 로그인 페이지로 이동함.
       navigate("/login");
     } catch (err) {
+      alert("이미 사용 중인 E-mail 입니다.");
       console.log("회원가입에 실패하였습니다.", err);
     }
   };

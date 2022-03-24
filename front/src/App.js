@@ -10,6 +10,9 @@ import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
 
+import Lottie from "react-lottie";
+import loading from "../src/lotties/loading.json";
+
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
 
@@ -42,6 +45,14 @@ function App() {
     // fetchCurrentUser 과정이 끝났으므로, isFetchCompleted 상태를 true로 바꿔줌
     setIsFetchCompleted(true);
   };
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: loading,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   // useEffect함수를 통해 fetchCurrentUser 함수를 실행함.
   useEffect(() => {
@@ -49,7 +60,7 @@ function App() {
   }, []);
 
   if (!isFetchCompleted) {
-    return "loading...";
+    return <Lottie options={defaultOptions} height={400} width={400} />;
   }
 
   return (

@@ -10,6 +10,9 @@ import Certificates from "./certificate/Certificates";
 import Educations from "./education/Educations";
 import Awards from "./award/Awards";
 
+import Lottie from "react-lottie";
+import loading from "../lotties/loading.json";
+
 function Portfolio() {
   const navigate = useNavigate();
   const params = useParams();
@@ -29,6 +32,15 @@ function Portfolio() {
     setPortfolioOwner(ownerData);
     // fetchPorfolioOwner 과정이 끝났으므로, isFetchCompleted를 true로 바꿈.
     setIsFetchCompleted(true);
+  };
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: loading,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
 
   useEffect(() => {
@@ -52,7 +64,7 @@ function Portfolio() {
   }, [params, userState, navigate]);
 
   if (!isFetchCompleted) {
-    return "loading...";
+    return <Lottie options={defaultOptions} height={400} width={400} />;
   }
 
   return (
