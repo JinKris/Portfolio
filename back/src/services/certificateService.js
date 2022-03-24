@@ -34,38 +34,11 @@ class CertificateService {
         "해당 id를 가진 자격증 데이터는 없습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
-
-    if (toUpdate.title) {
-      const fieldToUpdate = "title";
-      const newValue = toUpdate.title;
-      certificate = await Certificate.update({
-        certificateId,
-        fieldToUpdate,
-        newValue,
-      });
-    }
-
-    if (toUpdate.description) {
-      const fieldToUpdate = "description";
-      const newValue = toUpdate.description;
-      certificate = await Certificate.update({
-        certificateId,
-        fieldToUpdate,
-        newValue,
-      });
-    }
-
-    if (toUpdate.whenDate) {
-      const fieldToUpdate = "whenDate";
-      const newValue = toUpdate.whenDate;
-      certificate = await Certificate.update({
-        certificateId,
-        fieldToUpdate,
-        newValue,
-      });
-    }
-
-    return certificate;
+    const certificates = await Certificate.update({
+      certificateId,
+      toUpdate,
+    });
+    return certificates;
   };
 
   static deleteCertificate = async ({ certificateId }) => {

@@ -31,38 +31,11 @@ class EducationService {
         "해당 아이디로 학력 기록이 없습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
-
-    if (toUpdate.school) {
-      const fieldToUpdate = "school";
-      const newValue = toUpdate.school;
-      updatedEducation = await Education.update({
-        educationId,
-        fieldToUpdate,
-        newValue,
-      });
-    }
-
-    if (toUpdate.major) {
-      const fieldToUpdate = "major";
-      const newValue = toUpdate.major;
-      updatedEducation = await Education.update({
-        educationId,
-        fieldToUpdate,
-        newValue,
-      });
-    }
-
-    if (toUpdate.position) {
-      const fieldToUpdate = "position";
-      const newValue = toUpdate.position;
-      updatedEducation = await Education.update({
-        educationId,
-        fieldToUpdate,
-        newValue,
-      });
-    }
-
-    return updatedEducation;
+    const educations = await Education.update({
+      educationId,
+      toUpdate,
+    });
+    return educations;
   }
 
   static async getEduUserInfo({ userId }) {
