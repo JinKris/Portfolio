@@ -15,6 +15,7 @@ class EducationService {
   static async getEduInfo({ educationId }) {
     let findedEducation = await Education.findById({ educationId });
 
+    // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!findedEducation) {
       const errorMessage = "해당 아이디로 학력 기록이 없습니다.";
       return { errorMessage };

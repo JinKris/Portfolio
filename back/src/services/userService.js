@@ -1,4 +1,4 @@
-import { User } from "../db"; 
+import { User } from "../db";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -78,6 +78,11 @@ class UserAuthService {
 
     if (checkEmail) {
       const errorMessage = "이미 가입되어 있는 email입니다.";
+      return { errorMessage };
+    }
+    if (toUpdate.password.length < 4) {
+      const errorMessage =
+        "비밀번호가 너무 짧습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
 
