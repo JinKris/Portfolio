@@ -1,4 +1,4 @@
-import { User } from "../db"; // from을 폴더(db) 로 설정 시, 디폴트로 index.js 로부터 import함.
+import { User } from "../db"; 
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -27,7 +27,6 @@ class UserAuthService {
   }
 
   static async getUser({ email, password }) {
-    // 이메일 db에 존재 여부 확인
     const user = await User.findByEmail({ email });
     if (!user) {
       const errorMessage =

@@ -148,12 +148,5 @@ userAuthRouter.delete("/users/:id", loginRequired, async (req, res, next) => {
   }
 });
 
-userAuthRouter.get("/afterlogin", loginRequired, function (req, res, next) {
-  res
-    .status(200)
-    .json(
-      `안녕하세요 ${req.currentUserId}님, jwt 웹 토큰 기능 정상 작동 중입니다.`
-    );
-});
 
 export { userAuthRouter };
