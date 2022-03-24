@@ -33,6 +33,9 @@ function Header() {
         <li>
           <a href="/network">네트워크</a>
         </li>
+        <li>
+          <a href="/forum">포럼</a>
+        </li>
         {isLogin && (
           <li>
             <button onClick={logout}>로그아웃</button>

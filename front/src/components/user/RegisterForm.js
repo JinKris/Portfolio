@@ -52,6 +52,7 @@ function RegisterForm() {
       // 로그인 페이지로 이동함.
       navigate("/login");
     } catch (err) {
+      alert("이미 사용 중인 E-mail 입니다."); //이메일 중복 방지
       console.log("회원가입에 실패하였습니다.", err);
     }
   };
