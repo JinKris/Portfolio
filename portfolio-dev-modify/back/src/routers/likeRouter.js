@@ -28,7 +28,7 @@ likeRouter.post("/like/create", async function (req, res, next) {
   }
 });
 
-likeRouter.delete("/like/delete", async function (req, res, next) {
+likeRouter.post("/like/delete", async function (req, res, next) {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error(
