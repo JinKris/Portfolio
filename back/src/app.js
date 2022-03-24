@@ -8,6 +8,7 @@ import { projectRouter } from "./routers/projectRouter";
 import { educationRouter } from "./routers/educationRouter";
 import { awardRouter } from "./routers/awardRouter";
 import { likeRouter } from "./routers/likeRouter";
+import { postRouter } from "./routers/postRouter";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(projectRouter);
 app.use(awardRouter);
 app.use(educationRouter);
 app.use(likeRouter);
+app.use(postRouter);
 
 app.use(errorMiddleware);
 

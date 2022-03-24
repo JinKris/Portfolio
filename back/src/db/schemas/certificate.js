@@ -19,7 +19,7 @@ const certificateSchema = new Schema(
       required: true,
     },
     whenDate: {
-      type: Date,
+      type: String,
       required: true,
     },
   },
