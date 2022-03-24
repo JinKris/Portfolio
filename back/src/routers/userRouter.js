@@ -13,12 +13,10 @@ userAuthRouter.post("/user/register", async function (req, res, next) {
       );
     }
 
-    // req (request) 에서 데이터 가져오기
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
 
-    // 위 데이터를 유저 db에 추가하기
     const newUser = await UserAuthService.addUser({
       name,
       email,
@@ -37,11 +35,9 @@ userAuthRouter.post("/user/register", async function (req, res, next) {
 
 userAuthRouter.post("/user/login", async function (req, res, next) {
   try {
-    // req (request) 에서 데이터 가져오기
     const email = req.body.email;
     const password = req.body.password;
 
-    // 위 데이터를 이용하여 유저 db에서 유저 찾기
     const user = await UserAuthService.getUser({ email, password });
 
     if (user.errorMessage) {
@@ -56,7 +52,6 @@ userAuthRouter.post("/user/login", async function (req, res, next) {
 
 userAuthRouter.get("/userlist", loginRequired, async function (req, res, next) {
   try {
-    // 전체 사용자 목록을 얻음
     const users = await UserAuthService.getUsers();
     res.status(200).json(users);
   } catch (error) {
@@ -66,7 +61,6 @@ userAuthRouter.get("/userlist", loginRequired, async function (req, res, next) {
 
 userAuthRouter.get("/userlist", loginRequired, async function (req, res, next) {
   try {
-    // 전체 사용자 목록을 얻음
     const users = await UserAuthService.getUsers();
     res.status(200).send(users);
   } catch (error) {
@@ -79,7 +73,6 @@ userAuthRouter.get(
   loginRequired,
   async function (req, res, next) {
     try {
-      // jwt토큰에서 추출된 사용자 id를 가지고 db에서 사용자 정보를 찾음.
       const userId = req.currentUserId;
       const currentUserInfo = await UserAuthService.getUserInfo({
         userId,
@@ -101,17 +94,15 @@ userAuthRouter.put(
   loginRequired,
   async function (req, res, next) {
     try {
-      // URI로부터 사용자 id를 추출함.
       const userId = req.params.id;
-      // body data 로부터 업데이트할 사용자 정보를 추출함.
-      const name = req.body.name ?? null;
-      const email = req.body.email ?? null;
-      const password = req.body.password ?? null;
-      const description = req.body.description ?? null;
+
+      const email = req.body.email;
+      const password = req.body.password;
+      const description = req.body.description;
+      const name = req.body.name;
 
       const toUpdate = { name, email, password, description };
 
-      // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
       const updatedUser = await UserAuthService.setUser({ userId, toUpdate });
 
       if (updatedUser.errorMessage) {
@@ -144,7 +135,19 @@ userAuthRouter.get(
   }
 );
 
-// jwt 토큰 기능 확인용, 삭제해도 되는 라우터임.
+userAuthRouter.delete("/users/:id", loginRequired, async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const result = await UserAuthService.removeUser({ userId });
+    if (result.errorMessage) {
+      throw new Error(result.errorMessage);
+    }
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
 userAuthRouter.get("/afterlogin", loginRequired, function (req, res, next) {
   res
     .status(200)
