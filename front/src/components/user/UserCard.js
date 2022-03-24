@@ -1,72 +1,48 @@
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Card, Row, Button, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import { UserStateContext } from "../../App";
-import axios, { Axios } from "axios";
+// import axios, { Axios } from "axios";
 
-function UserCard({ user, setIsEditing, isEditable, isNetwork, isLiking }) {
+function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   const navigate = useNavigate();
+  const [likes, setLikes] = useState(null);
+  const [isLiked, setIsLiked] = useState(null);
   const userState = useContext(UserStateContext);
-  // Api.get("likelist", user?.id).then((res) => {
-  //   let likes = res.data.likes;
-  // });
-  const deleteLikes = async () => {
-    console.log(`Bearer ${sessionStorage.getItem("userToken")}`);
-    try {
-      // let result = await Api.delete("like/delete", {
-      //   giveLike: userState.user.id,
-      //   getLike: user.id,
-      // });
 
-      const result = await axios.delete(
-        "http://localhost:5001/like/delete",
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("userToken")}`,
-          },
-        },
-        {
-          giveLike: userState.user.id,
-          getLike: user.id,
-        }
-      );
-      console.log(result);
-    } catch (e) {
-      console.log(e);
+  // useEffect(() => {
+  //   const res = Api.get("likelist", user.id);
+  //   if (res.data.giveLike.find((v) => v === userState.user.id))
+  //     setIsLiked(true);
+  //   else setIsLiked(false);
+  // }, []);
+
+  useEffect(() => {
+    async function fetchLikeList() {
+      const res = await Api.get("likelist", user.id);
+      if (res.data.giveLike.find((v) => v === userState.user.id))
+        setIsLiked(true);
+      else setIsLiked(false);
+      setLikes(res.data.likes);
     }
-  };
+    fetchLikeList();
+  }, [isLiked]);
+
   const handleLikes = async () => {
     try {
-      let res = await Api.post("like/create", {
-        giveLike: userState.user.id,
-        getLike: user.id,
-      });
-      console.log(res.data.errorMessage);
-      if (res.data.errorMessage === "이미 좋아요를 눌렀습니다") {
-        // console.log(`DELETE 요청 ${serverUrl + endpoint + "/" + params}`);
-        // DELETE http://localhost:5001/like/delete/[object%20Object]
-        // Api.post("like/create", {
-        //   giveLike: userState.user.id,
-        //   getLike: user.id,
-        // });
-        console.log(`Bearer ${sessionStorage.getItem("userToken")}`);
-        // res = await axios.delete(
-        //   "http://localhost:5001/like/delete",
-        //   {
-        //     giveLike: userState.user.id,
-        //     getLike: user.id,
-        //   },
-        //   {
-        //     headers: {
-        //       Authorization: `Bearer ${sessionStorage.getItem("userToken")}`,
-        //     },
-        //   }
-        // );
-
-        // console.log(res);
-        // res = Api.get("likelist", user?.id);
-        // console.log(`delete실행, ${user.id}의likelist:${res.data}`);
+      if (isLiked) {
+        await Api.post("like/delete", {
+          giveLike: userState.user.id,
+          getLike: user.id,
+        });
+        setIsLiked(false);
+      } else {
+        await Api.post("like/create", {
+          giveLike: userState.user.id,
+          getLike: user.id,
+        });
+        setIsLiked(true);
       }
     } catch (e) {
       console.log(e);
@@ -86,7 +62,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork, isLiking }) {
         <Card.Title>{user?.name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
-        {/* <Card.Text>{likes}</Card.Text> */}
+        <Card.Text>{`likes: ${likes}`}</Card.Text>
 
         {isEditable && (
           <Col>
@@ -113,8 +89,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork, isLiking }) {
             >
               포트폴리오
             </Card.Link>
-            <button onClick={handleLikes}>LikesO</button>
-            <button onClick={deleteLikes}>LikesX</button>
+            <button onClick={handleLikes}>Likes </button>
           </>
         )}
       </Card.Body>
