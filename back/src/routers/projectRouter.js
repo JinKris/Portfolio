@@ -51,7 +51,10 @@ projectRouter.put("/projects/:id", async (req, res, next) => {
   try {
     const projectId = req.params.id;
 
-    const { title, description, fromDate, toDate } = req.body;
+    const title = req.body.title ?? undefined;
+    const description = req.body.description ?? undefined;
+    const fromDate = req.body.fromDate ?? undefined;
+    const toDate = req.body.toDate ?? undefined;
 
     const updateData = { title, description, fromDate, toDate };
 
