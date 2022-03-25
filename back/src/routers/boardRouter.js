@@ -36,20 +36,20 @@ boardRouter.post("/board/delete", async (req, res, next) => {
   }
 });
 
-boardRouter.put("/board/modify/:id", async (req, res, next) => {
+boardRouter.put("/boards/:id", async (req, res, next) => {
   const boardId = req.params.id;
   const userId = req.body.userId;
   const context = req.body.context;
   const title = req.body.title;
 
-  const modifiedBoard = await BoardService.modifiedBoard({
+  const updatedBoard = await BoardService.updateBoard({
     boardId,
     userId,
     context,
     title,
   });
 
-  res.status(200).json({ modifiedBoard: modifiedBoard });
+  res.status(200).json({ updatedBoard: updatedBoard });
 });
 
 boardRouter.get("/boardlist", async (req, res, next) => {
@@ -79,7 +79,7 @@ boardRouter.get("/boardlist/:userId", async (req, res, next) => {
 
 boardRouter.get("/board", (req, res, next) => {
   res.json({
-    status: "succ",
+    status: "success",
   });
 });
 

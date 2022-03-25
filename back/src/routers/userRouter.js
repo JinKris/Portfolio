@@ -103,7 +103,10 @@ userAuthRouter.put(
 
       const toUpdate = { name, email, newPassword, description };
 
-      const updatedUser = await UserAuthService.setUser({ userId, toUpdate });
+      const updatedUser = await UserAuthService.updateUser({
+        userId,
+        toUpdate,
+      });
 
       if (updatedUser.errorMessage) {
         throw new Error(updatedUser.errorMessage);
@@ -156,7 +159,7 @@ userAuthRouter.get(
 userAuthRouter.delete("/users/:id", loginRequired, async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const result = await UserAuthService.removeUser({ userId });
+    const result = await UserAuthService.deleteUser({ userId });
     if (result.errorMessage) {
       throw new Error(result.errorMessage);
     }

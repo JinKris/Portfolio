@@ -21,7 +21,7 @@ class BoardService {
     };
   };
 
-  static modifiedBoard = async ({ boardId, userId, context, title }) => {
+  static updateBoard = async ({ boardId, userId, context, title }) => {
     const board = await Board.findById({ boardId });
     if (!board) {
       const errorMessage = "게시물을 찾을 수 없습니다.";
@@ -34,8 +34,8 @@ class BoardService {
       return { errorMessage };
     }
 
-    const modifiedBoard = await Board.update(boardId, context, title);
-    return modifiedBoard;
+    const updatedBoard = await Board.update(boardId, context, title);
+    return updatedBoard;
   };
 
   static findAll = async () => {

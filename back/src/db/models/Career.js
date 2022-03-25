@@ -15,9 +15,9 @@ class Career {
     return Careers;
   };
 
-  static update = async ({ userId, updataField, newValue }) => {
+  static update = async (userId, updateData) => {
     const filter = { id: userId };
-    const update = { [updataField]: newValue };
+    const update = updateData;
     const option = { returnOriginal: false };
 
     const updatedCareer = await careerModel.findOneAndUpdate(

@@ -11,6 +11,8 @@ import { likeRouter } from "./routers/likeRouter";
 import { boardRouter } from "./routers/boardRouter";
 import { careerRouter } from "./routers/careerRouter";
 
+import { followRouter } from "./routers/followRouter";
+
 const app = express();
 
 app.use(cors());
@@ -32,6 +34,7 @@ app.use(likeRouter);
 app.use(boardRouter);
 app.use(careerRouter);
 
+app.use(followRouter);
 app.use(errorMiddleware);
 
 export { app };

@@ -50,13 +50,13 @@ careerRouter.put("/careers/:id", async (req, res, next) => {
     const userId = req.params.id;
     console.log(req.body);
 
-    const updateData = await CareerService.setCareer({
+    const updatedCareer = await CareerService.updateCareer({
       userId,
       company,
       fromDate,
       toDate,
     });
-    res.status(200).json(updateData);
+    res.status(200).json(updatedCareer);
   } catch (error) {
     next(error);
   }

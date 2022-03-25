@@ -26,7 +26,7 @@ class CareerService {
     return CareerList;
   };
 
-  static setCareer = async ({ userId, company, fromDate, toDate }) => {
+  static updateCareer = async ({ userId, company, fromDate, toDate }) => {
     let career = await Career.findById({ userId });
 
     if (!career) {
@@ -36,22 +36,7 @@ class CareerService {
     }
 
     const updateData = { company, fromDate, toDate };
-
-    if (updateData.company) {
-      const updataField = "company";
-      const newValue = updateData.company;
-      career = await Career.update({ userId, updataField, newValue });
-    }
-    if (updateData.fromDate) {
-      const updataField = "fromDate";
-      const newValue = updateData.fromDate;
-      career = await Career.update({ userId, updataField, newValue });
-    }
-    if (updateData.toDate) {
-      const updataField = "toDate";
-      const newValue = updateData.toDate;
-      career = await Career.update({ userId, updataField, newValue });
-    }
+    career = await Career.update(userId, updateData);
     return career;
   };
 

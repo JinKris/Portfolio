@@ -65,7 +65,7 @@ class UserAuthService {
     return users;
   }
 
-  static async setUser({ userId, toUpdate }) {
+  static async updateUser({ userId, toUpdate }) {
     let user = await User.findById({ userId });
     console.log(user);
 
@@ -124,7 +124,7 @@ class UserAuthService {
     return user;
   }
 
-  static removeUser = async ({ userId }) => {
+  static deleteUser = async ({ userId }) => {
     const user = User.findById({ userId });
 
     if (!user) {

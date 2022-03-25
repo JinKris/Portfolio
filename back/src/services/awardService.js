@@ -26,7 +26,7 @@ class AwardService {
     return awardList;
   };
 
-  static setAward = async ({ userId, title, description }) => {
+  static updateAward = async ({ userId, title, description }) => {
     let award = await Award.findById({ userId });
     console.log(award);
     if (!award) {
@@ -38,16 +38,8 @@ class AwardService {
     const updateData = { title, description };
     console.log(updateData);
 
-    if (updateData.title) {
-      const updataField = "title";
-      const newValue = updateData.title;
-      award = await Award.update({ userId, updataField, newValue });
-    }
-    if (updateData.description) {
-      const updataField = "description";
-      const newValue = updateData.description;
-      award = await Award.update({ userId, updataField, newValue });
-    }
+    award = await Award.update(userId, updateData);
+
     return award;
   };
 
