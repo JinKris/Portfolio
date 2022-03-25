@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import Tab from "./Tab.js";
+import Logout from "./Logout.js";
 
 const Container = styled.div`
   width: 100vw;
@@ -14,7 +15,7 @@ const Container = styled.div`
 `;
 
 const TopLine = styled.div`
-  width: 100wh;
+  width: 1920px;
   height: 3px;
   background-color: black;
   position: absolute;
@@ -46,6 +47,7 @@ export default function Nav({ title }) {
   return (
     <Container>
       <TopLine />
+      <Logout />
       <Title>{title}</Title>
       <Tab currTab={currTab} onClick={handleClickTab} />
     </Container>

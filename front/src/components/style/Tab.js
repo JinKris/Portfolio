@@ -10,7 +10,7 @@ const TabContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1.0344px solid rgba(0, 0, 0, 0.18);
   width: 100%;
   box-sizing: border-box;
   position: relative;
