@@ -1,7 +1,10 @@
 import React, { useContext, Component } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
 import { UserStateContext, DispatchContext } from "../App";
+
+import styled from "styled-components";
+
+import Nav from "./style/Nav";
 
 function Header() {
   const navigate = useNavigate();
@@ -25,7 +28,8 @@ function Header() {
 
   return (
     <nav activeKey={location.pathname}>
-      <h1>안녕하세요, 포트폴리오 공유 서비스입니다.</h1>
+      {/* <h1>안녕하세요, 포트폴리오 공유 서비스입니다.</h1> */}
+      <Nav />
       <ul>
         <li>
           <a href="/">나의 페이지</a>
