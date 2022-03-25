@@ -7,6 +7,7 @@ import { Award } from "./models/Award";
 import { Certificate } from "./models/Certificate.js";
 import { Like } from "./models/Like";
 import { Board } from "./models/Board";
+import { Follow } from "./models/Follow";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -25,4 +26,4 @@ db.on("error", (error) =>
   console.error("MongoDB 연결에 실패하였습니다...\n" + DB_URL + "\n" + error)
 );
 
-export { User, Project, Award, Certificate, Education, Like, Board };
+export { User, Project, Award, Certificate, Education, Like, Board, Follow };
