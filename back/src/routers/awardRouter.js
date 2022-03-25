@@ -49,7 +49,7 @@ awardRouter.put("/awards/:id", async (req, res, next) => {
     const userId = req.params.id;
     console.log(req.body);
 
-    const updateData = await AwardService.setAward({
+    const updateData = await AwardService.updateAward({
       userId,
       title,
       description,

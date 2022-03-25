@@ -124,7 +124,7 @@ class UserAuthService {
     return user;
   }
 
-  static removeUser = async ({ userId }) => {
+  static deleteUser = async ({ userId }) => {
     const user = User.findById({ userId });
 
     if (!user) {

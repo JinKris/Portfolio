@@ -27,7 +27,7 @@ class ProjectService {
     return project;
   };
 
-  static setProject = async ({ projectId, updateData }) => {
+  static updateProject = async ({ projectId, updateData }) => {
     let project = await Project.findById({ projectId });
 
     if (!project) {

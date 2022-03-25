@@ -23,7 +23,7 @@ class EducationService {
 
     return findedEducation;
   }
-  static async setEducation({ educationId, toUpdate }) {
+  static async updateEducation({ educationId, toUpdate }) {
     let updatedEducation = await Education.findById({ educationId });
 
     if (!updatedEducation) {
@@ -38,7 +38,7 @@ class EducationService {
     return educations;
   }
 
-  static async getEduUserInfo({ userId }) {
+  static async getEducationInfo({ userId }) {
     console.log("userId:", userId);
     const EducationList = await Education.findByUserID({ userId });
     console.log("EducationList", EducationList);

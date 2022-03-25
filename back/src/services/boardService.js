@@ -21,7 +21,7 @@ class BoardService {
     };
   };
 
-  static modifiedBoard = async ({ boardId, userId, context, title }) => {
+  static modifyBoard = async ({ boardId, userId, context, title }) => {
     const board = await Board.findById({ boardId });
     if (!board) {
       const errorMessage = "게시물을 찾을 수 없습니다.";

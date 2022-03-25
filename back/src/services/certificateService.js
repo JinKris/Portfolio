@@ -26,7 +26,7 @@ class CertificateService {
     return certificateList;
   };
 
-  static setCertificate = async ({ certificateId, toUpdate }) => {
+  static updateCertificate = async ({ certificateId, toUpdate }) => {
     let certificate = await Certificate.findById({ certificateId });
 
     if (!certificate) {

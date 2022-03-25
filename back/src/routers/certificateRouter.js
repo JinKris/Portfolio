@@ -55,7 +55,7 @@ certificateRouter.put("/certificates/:id", async function (req, res, next) {
     const whenDate = req.body.whenDate ?? undefined;
     const toUpdate = { title, description, whenDate };
 
-    const certificate = await CertificateService.setCertificate({
+    const certificate = await CertificateService.updateCertificate({
       certificateId,
       toUpdate,
     });

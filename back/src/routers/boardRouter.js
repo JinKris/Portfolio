@@ -42,7 +42,7 @@ boardRouter.put("/board/modify/:id", async (req, res, next) => {
   const context = req.body.context;
   const title = req.body.title;
 
-  const modifiedBoard = await BoardService.modifiedBoard({
+  const modifiedBoard = await BoardService.modifyBoard({
     boardId,
     userId,
     context,
@@ -79,7 +79,7 @@ boardRouter.get("/boardlist/:userId", async (req, res, next) => {
 
 boardRouter.get("/board", (req, res, next) => {
   res.json({
-    status: "succ",
+    status: "success",
   });
 });
 

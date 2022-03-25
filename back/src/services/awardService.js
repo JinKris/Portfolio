@@ -26,7 +26,7 @@ class AwardService {
     return awardList;
   };
 
-  static setAward = async ({ userId, title, description }) => {
+  static updateAward = async ({ userId, title, description }) => {
     let award = await Award.findById({ userId });
     console.log(award);
     if (!award) {

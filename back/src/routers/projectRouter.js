@@ -58,7 +58,7 @@ projectRouter.put("/projects/:id", async (req, res, next) => {
 
     const updateData = { title, description, fromDate, toDate };
 
-    const project = await ProjectService.setProject({ projectId, updateData });
+    const project = await ProjectService.updateProject({ projectId, updateData });
     if (project.errorMessage) {
       throw new Error(project.errorMessage);
     }

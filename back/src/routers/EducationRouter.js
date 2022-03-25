@@ -54,7 +54,7 @@ educationRouter.put("/educations/:id", async function (req, res, next) {
 
     const toUpdate = { school, major, position };
 
-    const updatedEducation = await EducationService.setEducation({
+    const updatedEducation = await EducationService.updateEducation({
       educationId,
       toUpdate,
     });
@@ -72,15 +72,15 @@ educationRouter.put("/educations/:id", async function (req, res, next) {
 educationRouter.get("/educationlist/:userId", async function (req, res, next) {
   try {
     const userId = req.params.userId;
-    const currentEduUserInfo = await EducationService.getEduUserInfo({
+    const currentEducationInfo = await EducationService.getEducationInfo({
       userId,
     });
 
-    if (currentEduUserInfo.errorMessage) {
-      throw new Error(currentEduUserInfo.errorMessage);
+    if (currentEducationInfo.errorMessage) {
+      throw new Error(currentEducationInfo.errorMessage);
     }
 
-    res.status(200).send(currentEduUserInfo);
+    res.status(200).send(currentEducationInfo);
   } catch (error) {
     next(error);
   }
