@@ -1,14 +1,9 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-// import styles from "../";
-// import "./style/styles.css";
+import styles from "../style/signPage.module.scss";
+import "../style/styles.css";
 import * as Api from "../../api";
 import { DispatchContext } from "../../App";
-
-import Button from "../style/Button";
-
-// import styles from "./style/signPage.module.scss";
-// import "./style/styles.css";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -66,35 +61,50 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button>
-        <a href="/">X</a>
+    <div className={styles.signInContainer}>
+      <button className={styles.xBtn}>
+        <a href="/" className={styles.a}>
+          X
+        </a>
       </button>
-      <label>Email</label>
-      <input
-        type="text"
-        autoComplete="on"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      {!isEmailValid && (
-        <p className="text-success">이메일 형식이 올바르지 않습니다.</p>
-      )}
-      <label>Password</label>
-      <input
-        type="password"
-        autoComplete="on"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {!isPasswordValid && (
-        <p className="text-success">비밀번호는 4글자 이상입니다.</p>
-      )}
-      <Button type="submit" disabled={!isFormValid}>
-        로그인
-      </Button>
-      <Button onClick={() => navigate("/register")}>회원가입</Button>
-    </form>
+      <div className={styles.line}></div>
+      <form onSubmit={handleSubmit}>
+        <label>Email : </label>
+        <input
+          className={styles.signInput}
+          type="text"
+          autoComplete="on"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {!isEmailValid ? (
+          <p className={styles.alarm}>Invalid email address format</p>
+        ) : (
+          <p className={styles.alarm}></p>
+        )}
+        <label>Password : </label>
+        <input
+          className={styles.signInput}
+          type="password"
+          autoComplete="on"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {!isPasswordValid ? (
+          <p className={styles.alarm}>
+            Your Password Contain at least 4 Characters
+          </p>
+        ) : (
+          <p className={styles.alarm}></p>
+        )}
+      </form>
+      <div className={styles.btnDiv}>
+        <button onClick={handleSubmit} disabled={!isFormValid}>
+          SignIn
+        </button>
+        {/* <button onClick={() => navigate("/register")}>SignUp</button> */}
+      </div>
+    </div>
   );
 }
 

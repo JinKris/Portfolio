@@ -42,7 +42,7 @@ function Header() {
           </ul>
         </li>
         <li>
-          <a href="/forum">포럼</a>
+          <a href="/board">포럼</a>
         </li>
         {isLogin && (
           <li>

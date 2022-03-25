@@ -1,12 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Row } from "react-bootstrap";
 
 import Boards from "./Boards";
 import BoardForm from "./BoardForm";
 import { UserStateContext } from "../../App";
+import styles from "../style/box.module.scss";
 
-function Forum() {
+function BoardBox() {
   const navigate = useNavigate();
   const userState = useContext(UserStateContext);
   const isEditable = true;
@@ -19,16 +19,11 @@ function Forum() {
   }, []);
 
   return (
-    <div>
-      <h1>Forum</h1>
-      <Container fluid>
-        <Row xs="auto" className="jusify-content-center">
-          <Boards />
-          <BoardForm />
-        </Row>
-      </Container>
+    <div className="Board">
+      <BoardForm />
+      <Boards />
     </div>
   );
 }
 
-export default Forum;
+export default BoardBox;

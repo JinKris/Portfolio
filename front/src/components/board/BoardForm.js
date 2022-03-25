@@ -53,31 +53,24 @@ const BoardForm = ({ currentBoard, setIsEditing }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formBasicTitle">
-        <Form.Control
-          type="text"
-          placeholder="제목"
-          value={form.title}
-          onChange={(e) => handleBoardValue("title", e.target.value)}
-        />
-      </Form.Group>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="제목"
+        value={form.title}
+        onChange={(e) => handleBoardValue("title", e.target.value)}
+      />
 
-      <Form.Group controlId="formBasicDescription" className="mt-3">
-        <Form.Control
-          type="textarea"
-          placeholder="내용"
-          value={form.context}
-          onChange={(e) => handleBoardValue("context", e.target.value)}
-        />
-      </Form.Group>
-
-      <Form.Group as={Row} className="mt-3 text-center mb-4">
-        <Col sm={{ span: 20 }}>
-          <Button type="submit" name="확인">
-            확인
-          </Button>
-          {/* <Button
+      <input
+        type="textarea"
+        placeholder="내용"
+        value={form.context}
+        onChange={(e) => handleBoardValue("context", e.target.value)}
+      />
+      <button type="submit" name="확인">
+        확인
+      </button>
+      {/* <Button
             name="취소"
             onClick={(e) => {
               setIsEditing(false);
@@ -85,9 +78,7 @@ const BoardForm = ({ currentBoard, setIsEditing }) => {
           >
             취소
           </Button> */}
-        </Col>
-      </Form.Group>
-    </Form>
+    </form>
   );
 };
 
