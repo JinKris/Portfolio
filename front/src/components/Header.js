@@ -2,9 +2,7 @@ import React, { useContext, Component } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { UserStateContext, DispatchContext } from "../App";
 
-import styled from "styled-components";
-
-import Nav from "./style/Nav";
+import header from "./Header.module.css";
 
 function Header() {
   const navigate = useNavigate();
@@ -28,24 +26,27 @@ function Header() {
 
   return (
     <nav activeKey={location.pathname}>
-      {/* <h1>안녕하세요, 포트폴리오 공유 서비스입니다.</h1> */}
-      <Nav />
-      <ul>
-        <li>
-          <a href="/">나의 페이지</a>
-        </li>
-        <li>
-          <a href="/network">네트워크</a>
-        </li>
-        <li>
-          <a href="/forum">포럼</a>
-        </li>
-        {isLogin && (
-          <li>
-            <button onClick={logout}>로그아웃</button>
-          </li>
-        )}
-      </ul>
+      <p className={header.topline} />
+      <a className={header.logout} onClick={logout}>
+        logout
+      </a>
+      <h1 className={header.title}>Portfolio</h1>
+
+      <li className={header.list1}>
+        <a className={header.My} href="/">
+          My
+        </a>
+        <a className={header.Net} href="/network">
+          Net
+        </a>
+      </li>
+      <p className={header.middleline} />
+
+      <li>
+        <a href="/forum">포럼</a>
+      </li>
+      {isLogin && <li></li>}
+      <p className={header.bottomline} />
     </nav>
   );
 }

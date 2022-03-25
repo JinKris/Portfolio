@@ -6,6 +6,8 @@ import * as Api from "../../api";
 import UserCard from "./UserCard";
 import { UserStateContext } from "../../App";
 
+import Header from "../Header";
+
 function Network() {
   const navigate = useNavigate();
   const userState = useContext(UserStateContext);
@@ -24,6 +26,7 @@ function Network() {
 
   return (
     <Container fluid>
+      <Header />
       <Row xs="auto" className="jusify-content-center">
         {users.map((user) => (
           <UserCard key={user.id} user={user} isNetwork />
