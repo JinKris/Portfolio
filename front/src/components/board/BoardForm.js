@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import { UserStateContext } from "../../App";
 import { BoardContext } from "./BoardContext";
-// import MvpButton from "../../MvpButton";
+import styles from "../style/box.module.scss";
 
-const BoardForm = ({ currentBoard, setIsEditing }) => {
+const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
   const userState = useContext(UserStateContext);
   const [form, setForm] = useState({
     title: currentBoard?.title ? currentBoard.title : "",
@@ -24,7 +23,7 @@ const BoardForm = ({ currentBoard, setIsEditing }) => {
     e.preventDefault();
     try {
       if (setIsEditing) {
-        await Api.put(`board/modify/${currentBoard.id}`, {
+        await Api.put(`boards/${currentBoard.id}`, {
           userId: currentBoard.userId,
           title: form.title,
           context: form.context,
@@ -53,31 +52,42 @@ const BoardForm = ({ currentBoard, setIsEditing }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.bForm} onSubmit={handleSubmit}>
       <input
+        className={styles.boardInput}
         type="text"
-        placeholder="제목"
+        placeholder="title"
         value={form.title}
         onChange={(e) => handleBoardValue("title", e.target.value)}
       />
 
       <input
+        className={styles.boardInput}
         type="textarea"
-        placeholder="내용"
+        placeholder="context"
         value={form.context}
         onChange={(e) => handleBoardValue("context", e.target.value)}
       />
-      <button type="submit" name="확인">
-        확인
-      </button>
-      {/* <Button
-            name="취소"
-            onClick={(e) => {
-              setIsEditing(false);
+      <div className={styles.bFormBtns}>
+        <button
+          className={styles.bFormBtn}
+          onClick={handleSubmit}
+          name="submit"
+        >
+          submit
+        </button>
+        {isEditing ? (
+          <button
+            className={styles.bFormBtn}
+            onClick={() => {
+              setIsEditing(!isEditing);
             }}
+            name="submit"
           >
-            취소
-          </Button> */}
+            back
+          </button>
+        ) : null}
+      </div>
     </form>
   );
 };

@@ -5,6 +5,7 @@ import Boards from "./Boards";
 import BoardForm from "./BoardForm";
 import { UserStateContext } from "../../App";
 import styles from "../style/box.module.scss";
+import Header from "../Header";
 
 function BoardBox() {
   const navigate = useNavigate();
@@ -19,10 +20,13 @@ function BoardBox() {
   }, []);
 
   return (
-    <div className="Board">
-      <BoardForm />
-      <Boards />
-    </div>
+    <>
+      <Header />
+      <div className={styles.boardBox}>
+        <BoardForm />
+        <Boards />
+      </div>
+    </>
   );
 }
 

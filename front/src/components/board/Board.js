@@ -11,7 +11,7 @@ function Board({ board }) {
   const userState = useContext(UserStateContext);
   const isEditable = userState.user.id === board.userId ? true : false;
   async function handleDelete(e) {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
+    if (window.confirm("sure?")) {
       e.preventDefault();
       e.stopPropagation();
       try {
@@ -31,7 +31,11 @@ function Board({ board }) {
   return (
     <>
       {isEditing ? (
-        <BoardForm setIsEditing={setIsEditing} currentBoard={board} />
+        <BoardForm
+          setIsEditing={setIsEditing}
+          isEditing={isEditing}
+          currentBoard={board}
+        />
       ) : (
         <BoardCard
           board={board}
