@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
-import Education from "./Education";
-import EducationForm from "./EducationForm";
+import Career from "./Career";
+import CareerForm from "./CareerForm";
 
-function Educations({ portfolioOwnerId, isEditable, education }) {
-  //useState로 education 상태를 생성함.
-  const [educations, setEducations] = useState([]);
+function Careers({ portfolioOwnerId, isEditable, career }) {
+  //useState로 career 상태를 생성함.
+  const [careers, setCareers] = useState([]);
   //useState로 isAdding 상태를 생성함.
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    Api.get("educationlist", portfolioOwnerId).then((res) =>
-      setEducations(res.data)
-    );
+    // "careerlist/유저id"로 GET 요청하고, response의 data로 careers를 세팅함.
+    Api.get("careerlist", portfolioOwnerId).then((res) => setCareers(res.data));
   }, [portfolioOwnerId]);
 
   return (
     <>
       <Card>
         <Card.Body>
-          <Card.Title>학력</Card.Title>
-          {educations.map((education) => (
-            <Education
-              key={education?.id}
-              education={education}
-              setEducations={setEducations}
+          <Card.Title>경력</Card.Title>
+          {careers.map((career) => (
+            <Career
+              key={career?.id}
+              career={career}
+              setCareers={setCareers}
               isEditable={isEditable}
             />
           ))}
@@ -37,9 +36,9 @@ function Educations({ portfolioOwnerId, isEditable, education }) {
             </Row>
           )}
           {isAdding && (
-            <EducationForm
+            <CareerForm
               portfolioOwnerId={portfolioOwnerId}
-              setEducations={setEducations}
+              setCareers={setCareers}
               setIsAdding={setIsAdding}
             />
           )}
@@ -49,4 +48,4 @@ function Educations({ portfolioOwnerId, isEditable, education }) {
   );
 }
 
-export default Educations;
+export default Careers;

@@ -9,6 +9,7 @@ import Projects from "./project/Projects";
 import Certificates from "./certificate/Certificates";
 import Educations from "./education/Educations";
 import Awards from "./award/Awards";
+import Careers from "./career/Careers";
 
 import Lottie from "react-lottie";
 import loading from "../lotties/loading.json";
@@ -92,6 +93,10 @@ function Portfolio() {
             isEditable={portfolioOwner.id === userState.user?.id}
           />
           <Awards
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
+          <Careers
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />

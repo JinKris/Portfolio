@@ -1,34 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import Award from "./Award";
 import AwardForm from "./AwardForm";
 
-const Awards = ({ portfolioOwnerId, isEditable, award }) => {
+function Awards({ portfolioOwnerId, isEditable }) {
+  const [awards, setAwards] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
-  const [awardLists, setAwardLists] = useState([]);
 
   useEffect(() => {
-    Api.get("awardlist", portfolioOwnerId).then((res) =>
-      setAwardLists(res.data)
-    );
+    Api.get("awardlist", portfolioOwnerId).then((res) => setAwards(res.data));
   }, [portfolioOwnerId]);
 
   return (
-    <Card style={{ width: "80rem" }}>
+    <Card>
       <Card.Body>
-        <Card.Title>수상이력</Card.Title>
-        {awardLists.map((award) => (
+        <Card.Title>프로젝트</Card.Title>
+        {awards.map((award) => (
           <Award
-            key={award?.userId}
+            key={award?.user_id}
             award={award}
-            setAwardLists={setAwardLists}
+            setAwards={setAwards}
             isEditable={isEditable}
           />
         ))}
         {isEditable && (
-          <Row className="mt-3 text-center mb-4 me-2">
-            <Col sm={{ span: 40 }}>
+          <Row className="mt-3 text-center mb-4">
+            <Col sm={{ span: 20 }}>
               <Button onClick={() => setIsAdding(true)}>+</Button>
             </Col>
           </Row>
@@ -36,13 +34,13 @@ const Awards = ({ portfolioOwnerId, isEditable, award }) => {
         {isAdding && (
           <AwardForm
             portfolioOwnerId={portfolioOwnerId}
-            setAwardLists={setAwardLists}
+            setAwards={setAwards}
             setIsAdding={setIsAdding}
           />
         )}
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default Awards;
