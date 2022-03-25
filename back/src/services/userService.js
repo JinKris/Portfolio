@@ -65,9 +65,9 @@ class UserAuthService {
     return users;
   }
 
-  static async setUser({ userId, toUpdate }) {
+  static async updateUser({ userId, toUpdate }) {
     let user = await User.findById({ userId });
-    console.log(user);
+
     if (!user) {
       const errorMessage = "가입 내역이 없습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
@@ -80,17 +80,42 @@ class UserAuthService {
       const errorMessage = "이미 가입되어 있는 email입니다.";
       return { errorMessage };
     }
-    if (toUpdate.password && toUpdate.password.length < 4) {
+
+    if (toUpdate.newPassword === undefined) {
+      const updateData = {
+        email: toUpdate.email,
+        description: toUpdate.description,
+        name: toUpdate.name,
+      };
+      user = await User.update(userId, updateData);
+      return user;
+    }
+    const verifiedPassword = await verifyPassword(
+      toUpdate.newPassword,
+      user.password
+    );
+
+    if (verifiedPassword) {
+      const errorMessage = "현재 비밀번호와 같습니다.";
+      return { errorMessage };
+    }
+
+    if (toUpdate.newPassword && toUpdate.newPassword.length < 4) {
       const errorMessage =
         "비밀번호가 너무 짧습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
-
-    if (toUpdate.password) {
-      toUpdate.password = await hashPassword(toUpdate.password, 10);
+    if (toUpdate.newPassword) {
+      toUpdate.newPassword = await hashPassword(toUpdate.newPassword, 10);
+      const updateData = {
+        email: toUpdate.email,
+        description: toUpdate.description,
+        name: toUpdate.name,
+        password: toUpdate.newPassword,
+      };
+      user = await User.update(userId, updateData);
+      return user;
     }
-    user = await User.update(userId, toUpdate);
-
     return user;
   }
 
@@ -106,7 +131,7 @@ class UserAuthService {
     return user;
   }
 
-  static removeUser = async ({ userId }) => {
+  static deleteUser = async ({ userId }) => {
     const user = User.findById({ userId });
 
     if (!user) {
@@ -118,6 +143,26 @@ class UserAuthService {
     return {
       status: "success",
     };
+  };
+
+  static passwordTest = async ({ userId, currentPassword }) => {
+    let user = await User.findById({ userId });
+
+    if (!user) {
+      const errorMessage = "가입 내역이 없습니다. 다시 한 번 확인해 주세요.";
+      return { errorMessage };
+    }
+
+    const verifiedPassword = await verifyPassword(
+      currentPassword,
+      user.password
+    );
+
+    if (verifiedPassword) {
+      return true;
+    } else {
+      return false;
+    }
   };
 }
 

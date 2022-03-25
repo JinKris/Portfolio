@@ -97,13 +97,16 @@ userAuthRouter.put(
       const userId = req.params.id;
 
       const email = req.body.email ?? undefined;
-      const password = req.body.password ?? undefined;
+      const newPassword = req.body.newPassword ?? undefined;
       const description = req.body.description ?? undefined;
       const name = req.body.name ?? undefined;
 
-      const toUpdate = { name, email, password, description };
+      const toUpdate = { name, email, newPassword, description };
 
-      const updatedUser = await UserAuthService.setUser({ userId, toUpdate });
+      const updatedUser = await UserAuthService.updateUser({
+        userId,
+        toUpdate,
+      });
 
       if (updatedUser.errorMessage) {
         throw new Error(updatedUser.errorMessage);
@@ -113,6 +116,24 @@ userAuthRouter.put(
     } catch (error) {
       next(error);
     }
+  }
+);
+
+userAuthRouter.post(
+  "/users/currentPassword/:id",
+  loginRequired,
+  async (req, res, next) => {
+    const userId = req.params.id;
+    const currentPassword = req.body.currentPassword ?? undefined;
+
+    const result = await UserAuthService.passwordTest({
+      userId,
+      currentPassword,
+    });
+
+    res.status(200).json({
+      result,
+    });
   }
 );
 
@@ -138,7 +159,7 @@ userAuthRouter.get(
 userAuthRouter.delete("/users/:id", loginRequired, async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const result = await UserAuthService.removeUser({ userId });
+    const result = await UserAuthService.deleteUser({ userId });
     if (result.errorMessage) {
       throw new Error(result.errorMessage);
     }

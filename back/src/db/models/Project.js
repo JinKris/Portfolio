@@ -12,9 +12,9 @@ class Project {
     return project;
   };
 
-  static update = async ({ projectId, updateDataField, newValue }) => {
+  static update = async ({ projectId, updateData }) => {
     const filter = { id: projectId };
-    const update = { [updateDataField]: newValue };
+    const update = updateData;
     const option = { returnOriginal: false };
 
     const updatedProject = await projectModel.findOneAndUpdate(

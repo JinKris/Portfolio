@@ -8,6 +8,10 @@ import { projectRouter } from "./routers/projectRouter";
 import { educationRouter } from "./routers/educationRouter";
 import { awardRouter } from "./routers/awardRouter";
 import { likeRouter } from "./routers/likeRouter";
+import { boardRouter } from "./routers/boardRouter";
+import { careerRouter } from "./routers/careerRouter";
+
+import { followRouter } from "./routers/followRouter";
 
 const app = express();
 
@@ -27,7 +31,10 @@ app.use(projectRouter);
 app.use(awardRouter);
 app.use(educationRouter);
 app.use(likeRouter);
+app.use(boardRouter);
+app.use(careerRouter);
 
+app.use(followRouter);
 app.use(errorMiddleware);
 
 export { app };

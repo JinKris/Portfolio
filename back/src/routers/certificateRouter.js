@@ -14,11 +14,7 @@ certificateRouter.post("/certificate/create", async function (req, res, next) {
       );
     }
 
-    const userId = req.body.userId;
-    const title = req.body.title;
-    const description = req.body.description;
-    const whenDate = req.body.whenDate;
-
+    const { userId, title, description, whenDate } = req.body;
     const newCertificate = await CertificateService.addCertificate({
       userId,
       title,
@@ -54,12 +50,12 @@ certificateRouter.put("/certificates/:id", async function (req, res, next) {
   try {
     const certificateId = req.params.id;
 
-    const title = req.body.title ?? null;
-    const description = req.body.description ?? null;
-    const whenDate = req.body.whenDate ?? null;
+    const title = req.body.title ?? undefined;
+    const description = req.body.description ?? undefined;
+    const whenDate = req.body.whenDate ?? undefined;
     const toUpdate = { title, description, whenDate };
 
-    const certificate = await CertificateService.setCertificate({
+    const certificate = await CertificateService.updateCertificate({
       certificateId,
       toUpdate,
     });
