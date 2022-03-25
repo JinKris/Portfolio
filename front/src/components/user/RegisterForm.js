@@ -60,6 +60,9 @@ function RegisterForm() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <button>
+          <a href="/">X</a>
+        </button>
         <label>이메일 주소</label>
         <input
           type="email"
@@ -98,9 +101,6 @@ function RegisterForm() {
         )}
         <button variant="primary" type="submit" disabled={!isFormValid}>
           회원가입
-        </button>
-        <button variant="light" onClick={() => navigate("/login")}>
-          로그인하기
         </button>
       </form>
     </div>

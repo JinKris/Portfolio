@@ -1,16 +1,14 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
+// import styles from "../";
+// import "./style/styles.css";
 import * as Api from "../../api";
 import { DispatchContext } from "../../App";
 
-import styled from "styled-components";
 import Button from "../style/Button";
 
-const FormContainer = styled.div`
-  display: flex;
-  border: black solid;
-`;
+// import styles from "./style/signPage.module.scss";
+// import "./style/styles.css";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -68,35 +66,35 @@ function LoginForm() {
   };
 
   return (
-    <FormContainer className="container">
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          type="text"
-          autoComplete="on"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {!isEmailValid && (
-          <p className="text-success">이메일 형식이 올바르지 않습니다.</p>
-        )}
-        <label>Password</label>
-        <input
-          type="password"
-          autoComplete="on"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {!isPasswordValid && (
-          <p className="text-success">비밀번호는 4글자 이상입니다.</p>
-        )}
-        <button onClick={() => navigate("/", { replace: true })}>goback</button>
-        <Button type="submit" disabled={!isFormValid}>
-          로그인
-        </Button>
-        <Button onClick={() => navigate("/register")}>회원가입</Button>
-      </form>
-    </FormContainer>
+    <form onSubmit={handleSubmit}>
+      <button>
+        <a href="/">X</a>
+      </button>
+      <label>Email</label>
+      <input
+        type="text"
+        autoComplete="on"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      {!isEmailValid && (
+        <p className="text-success">이메일 형식이 올바르지 않습니다.</p>
+      )}
+      <label>Password</label>
+      <input
+        type="password"
+        autoComplete="on"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      {!isPasswordValid && (
+        <p className="text-success">비밀번호는 4글자 이상입니다.</p>
+      )}
+      <Button type="submit" disabled={!isFormValid}>
+        로그인
+      </Button>
+      <Button onClick={() => navigate("/register")}>회원가입</Button>
+    </form>
   );
 }
 
