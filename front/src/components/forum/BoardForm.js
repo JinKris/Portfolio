@@ -11,7 +11,6 @@ const BoardForm = ({ currentBoard, setIsEditing }) => {
     title: currentBoard?.title ? currentBoard.title : "",
     context: currentBoard?.context ? currentBoard.context : "",
   });
-
   const { boards, setBoards } = useContext(BoardContext);
 
   const handleBoardValue = (name, value) => {
@@ -37,9 +36,17 @@ const BoardForm = ({ currentBoard, setIsEditing }) => {
           userId: userId,
           title: form.title,
           context: form.context,
-        });
+        }).then(
+          setBoards([
+            ...boards,
+            {
+              userId: userId,
+              title: form.title,
+              context: form.context,
+            },
+          ])
+        );
       }
-      //   await Api.get("boardlist").then((res) => setBoards(res.data.boards));
     } catch (e) {
       console.log(e);
     }
@@ -70,14 +77,14 @@ const BoardForm = ({ currentBoard, setIsEditing }) => {
           <Button type="submit" name="확인">
             확인
           </Button>
-          <Button
+          {/* <Button
             name="취소"
             onClick={(e) => {
               setIsEditing(false);
             }}
           >
             취소
-          </Button>
+          </Button> */}
         </Col>
       </Form.Group>
     </Form>

@@ -35,7 +35,6 @@ function Board({ board }) {
       ) : (
         <BoardCard
           board={board}
-          portfolioOwnerId={board.userId}
           isEditable={isEditable}
           setIsEditing={setIsEditing}
           handleDelete={handleDelete}

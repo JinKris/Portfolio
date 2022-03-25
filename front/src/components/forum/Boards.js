@@ -5,7 +5,7 @@ import * as Api from "../../api";
 import Board from "./Board";
 // import BoardForm from "./BoardForm";
 
-function Boards({ isEditable }) {
+function Boards() {
   const [boards, setBoards] = useState([]);
 
   useEffect(() => {

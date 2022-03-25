@@ -10,11 +10,11 @@ function BoardCard({ board, isEditable, setIsEditing, handleDelete }) {
         <Col>
           <span className="primary">title: {title}</span>
           <br />
-          <span>context: {context}</span>
+          <span>{context}</span>
           <br />
         </Col>
         {isEditable && (
-          <Col xs lg="1">
+          <Col xs lg="2">
             <Button onClick={() => setIsEditing((prev) => !prev)} name="편집">
               편집
             </Button>
