@@ -7,20 +7,19 @@ import { UserStateContext } from "../../App";
 
 function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   const navigate = useNavigate();
-  //변수에 넣는것들은 명확하게.. 0...false...
+  //변수에 넣는것들은 명확하게.. 0...false...  --likes
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const userState = useContext(UserStateContext);
+  //follow
+  // const [following, setFollowing] = useState(0);
+  const [follower, setFollower] = useState(0);
+  const [isFollowed, setIsFollowed] = useState(false);
+  const [f4f, setF4f] = useState(false);
 
-  // useEffect(() => {
-  //   const res = Api.get("likelist", user.id);
-  //   if (res.data.giveLike.find((v) => v === userState.user.id))
-  //     setIsLiked(true);
-  //   else setIsLiked(false);
-  // }, []);
-
-  //수정
+  //수정 필요 ㅠㅠ fetchLike
   useEffect(() => {
+    //likes
     async function fetchLikeList() {
       if (!user) return;
       try {
@@ -35,10 +34,36 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
         console.log(e);
       }
     }
+
     fetchLikeList();
   }, [isLiked, user]);
 
+  //수정 필요 ㅠㅠ fetchFollow
+  useEffect(() => {
+    //follow
+    async function fetchFollowList() {
+      if (!user) return;
+      try {
+        const res = await Api.get("followlist", user.id);
+        if (res.data.follower.find((v) => v === userState.user.id)) {
+          if (res.data.following.find((v) => v === userState.user.id)) {
+            setF4f(true);
+          } else setF4f(false);
+          setIsFollowed(true);
+        } else {
+          setIsFollowed(false);
+          setF4f(false);
+        }
+        setFollower(res.data.followerNumber);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchFollowList();
+  }, [user, isFollowed, f4f]);
+
   const handleLikes = async () => {
+    if (user.id === userState.user.id) return;
     //수정
     try {
       if (isLiked) {
@@ -53,6 +78,27 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
         });
       }
       setIsLiked(!isLiked);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const handleFollow = async () => {
+    if (user.id === userState.user.id) return;
+    //수정
+    try {
+      if (isFollowed) {
+        await Api.post("follow/delete", {
+          follower: user.id,
+          following: userState.user.id,
+        });
+        setIsFollowed(false);
+      } else if (!isFollowed) {
+        await Api.post("follow/create", {
+          follower: user.id,
+          following: userState.user.id,
+        });
+        setIsFollowed(true);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -72,6 +118,8 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
         <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
         <Card.Text>{`likes: ${likes}`}</Card.Text>
+        <Card.Text>{`follower: ${follower}`}</Card.Text>
+        <Card.Text>{`f4f:${f4f}`}</Card.Text>
 
         {isEditable && (
           <Col>
@@ -99,6 +147,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
               포트폴리오
             </Card.Link>
             <button onClick={handleLikes}>Likes </button>
+            <button onClick={handleFollow}>follow </button>
           </>
         )}
       </Card.Body>

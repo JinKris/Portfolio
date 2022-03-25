@@ -10,6 +10,7 @@ import Certificates from "./certificate/Certificates";
 import Educations from "./education/Educations";
 import Awards from "./award/Awards";
 import Header from "./Header";
+import Careers from "./career/Careers";
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -70,15 +71,19 @@ function Portfolio() {
             />
           </Col>
           <Col>
+            <Educations
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={isEditable}
+            />
+            <Careers
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={portfolioOwner.id === userState.user?.id}
+            />
             <Projects
               portfolioOwnerId={portfolioOwner.id}
               isEditable={isEditable}
             />
             <Certificates
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={isEditable}
-            />
-            <Educations
               portfolioOwnerId={portfolioOwner.id}
               isEditable={isEditable}
             />
