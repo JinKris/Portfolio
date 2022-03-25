@@ -61,7 +61,7 @@ function LoginForm() {
       });
 
       // 기본 페이지로 이동
-      navigate("/", { replace: true });
+      navigate("/portfolio", { replace: true });
     } catch (err) {
       console.log("로그인에 실패하였습니다.\n", err);
     }
@@ -90,9 +90,7 @@ function LoginForm() {
         {!isPasswordValid && (
           <p className="text-success">비밀번호는 4글자 이상입니다.</p>
         )}
-        <button onClick={() => navigate("/main", { replace: true })}>
-          goback
-        </button>
+        <button onClick={() => navigate("/", { replace: true })}>goback</button>
         <Button type="submit" disabled={!isFormValid}>
           로그인
         </Button>

@@ -20,7 +20,7 @@ function Header() {
     // dispatch 함수를 이용해 로그아웃함.
     dispatch({ type: "LOGOUT" });
     // 기본 페이지로 돌아감.
-    navigate("/main");
+    navigate("/");
   };
 
   return (
@@ -28,10 +28,18 @@ function Header() {
       <h1>안녕하세요, 포트폴리오 공유 서비스입니다.</h1>
       <ul>
         <li>
-          <a href="/">나의 페이지</a>
+          <a href="/portfolio">나의 페이지My</a>
+          <ul>
+            <li>portfolio</li>
+            <li>setting</li>
+          </ul>
         </li>
         <li>
-          <a href="/network">네트워크</a>
+          <a href="/network">네트워크Net</a>'
+          <ul>
+            <li>portfolio</li>
+            <li>board</li>
+          </ul>
         </li>
         <li>
           <a href="/forum">포럼</a>

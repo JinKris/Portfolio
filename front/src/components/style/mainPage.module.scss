@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "bourbon";
+  src: url(BourbonGrotesque-Regular.otf);
+}
+
+body {
+  margin: 0;
+  font-family: "bourbon";
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: auto;
+  padding: 0px;
+  flex-direction: column;
+
+  h1 {
+    margin-bottom: 50px;
+    font-family: "bourbon";
+  }
+  div {
+    display: flex;
+    .signIn {
+    }
+    .signUp {
+    }
+  }
+}

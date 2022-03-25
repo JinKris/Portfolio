@@ -60,8 +60,8 @@ function App() {
         <Router>
           {/* <Header /> */}
           <Routes>
-            <Route path="/main" element={<MainPage />} />
-            <Route path="/" exact element={<Portfolio />} />
+            <Route path="/" element={<MainPage />} />
+            <Route path="/portfolio" exact element={<Portfolio />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/users/:userId" element={<Portfolio />} />
