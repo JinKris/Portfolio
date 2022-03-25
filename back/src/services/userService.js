@@ -67,7 +67,6 @@ class UserAuthService {
 
   static async updateUser({ userId, toUpdate }) {
     let user = await User.findById({ userId });
-    console.log(user);
 
     if (!user) {
       const errorMessage = "가입 내역이 없습니다. 다시 한 번 확인해 주세요.";
@@ -82,6 +81,15 @@ class UserAuthService {
       return { errorMessage };
     }
 
+    if (toUpdate.newPassword === undefined) {
+      const updateData = {
+        email: toUpdate.email,
+        description: toUpdate.description,
+        name: toUpdate.name,
+      };
+      user = await User.update(userId, updateData);
+      return user;
+    }
     const verifiedPassword = await verifyPassword(
       toUpdate.newPassword,
       user.password
@@ -97,7 +105,6 @@ class UserAuthService {
         "비밀번호가 너무 짧습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
-
     if (toUpdate.newPassword) {
       toUpdate.newPassword = await hashPassword(toUpdate.newPassword, 10);
       const updateData = {

@@ -34,7 +34,6 @@ class CertificateService {
         "해당 id를 가진 자격증 데이터는 없습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
-    s;
     const certificates = await Certificate.update({
       certificateId,
       toUpdate,
