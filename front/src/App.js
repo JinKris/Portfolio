@@ -9,8 +9,6 @@ import LoginForm from "./components/user/LoginForm";
 import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
-import MainPage from "./components/MainPage";
-import BoardBox from "./components/board/BoardBox";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -54,20 +52,17 @@ function App() {
     return "loading...";
   }
 
-  //dialog provider ...
   return (
     <DispatchContext.Provider value={dispatch}>
       <UserStateContext.Provider value={userState}>
         <Router>
-          {/* <Header /> */}
+          <Header />
           <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/portfolio" exact element={<Portfolio />} />
+            <Route path="/" exact element={<Portfolio />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/users/:userId" element={<Portfolio />} />
             <Route path="/network" element={<Network />} />
-            <Route path="/board" element={<BoardBox />} />
             <Route path="*" element={<Portfolio />} />
           </Routes>
         </Router>

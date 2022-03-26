@@ -25,7 +25,7 @@
 
 2. 백엔드
 
-- Express (nodemon, babel-node로 실행됩니다.).
+- Express (nodemon, babel-node로 실행됩니다.)
 - Mongodb, Mongoose
 
 ## 설치 방법

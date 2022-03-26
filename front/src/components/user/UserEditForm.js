@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
@@ -27,16 +26,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
 
     // isEditing을 false로 세팅함.
     setIsEditing(false);
-  };
-
-  //회원탈퇴 기능
-  const navigate = useNavigate();
-
-  const userDelete = async (e) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      await Api.delete("users", user.id);
-      await navigate("/main");
-    } else return;
   };
 
   return (
@@ -75,15 +64,8 @@ function UserEditForm({ user, setIsEditing, setUser }) {
               <Button variant="primary" type="submit" className="me-3">
                 확인
               </Button>
-              <Button
-                className="me-3"
-                variant="secondary"
-                onClick={() => setIsEditing(false)}
-              >
+              <Button variant="secondary" onClick={() => setIsEditing(false)}>
                 취소
-              </Button>
-              <Button className="me-3" variant="danger" onClick={userDelete}>
-                회원탈퇴
               </Button>
             </Col>
           </Form.Group>
