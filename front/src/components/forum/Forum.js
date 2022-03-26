@@ -4,6 +4,7 @@ import { Container, Row } from "react-bootstrap";
 
 import Boards from "./Boards";
 import BoardForm from "./BoardForm";
+import Header from "../Header";
 import { UserStateContext } from "../../App";
 
 function Forum() {
@@ -20,6 +21,7 @@ function Forum() {
 
   return (
     <div>
+      <Header />
       <h1>Forum</h1>
       <Container fluid>
         <Row xs="auto" className="jusify-content-center">

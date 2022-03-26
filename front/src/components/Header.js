@@ -1,5 +1,5 @@
 import React, { useContext, Component } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { UserStateContext, DispatchContext } from "../App";
 
 import header from "./Header.module.css";
@@ -33,20 +33,19 @@ function Header() {
       <h1 className={header.title}>Portfolio</h1>
 
       <li className={header.list1}>
-        <a className={header.My} href="/">
+        <Link to="/" className={header.My}>
           My
-        </a>
-        <a className={header.Net} href="/network">
+        </Link>
+        <Link to="/network" className={header.Net}>
           Net
-        </a>
+        </Link>
+        <Link to="/forum" className={header.Board}>
+          Board
+        </Link>
       </li>
       <p className={header.middleline} />
 
-      <li>
-        <a href="/forum">포럼</a>
-      </li>
-      {isLogin && <li></li>}
-      <p className={header.bottomline} />
+      {/* {isLogin && <li></li>} */}
     </nav>
   );
 }
