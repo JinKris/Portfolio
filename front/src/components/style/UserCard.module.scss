@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "voyage";
+  src: url(MADEBonVoyageRegularPERSONALUSE.otf);
+
+  font-family: "baskerville";
+  src: url(LibreBaskerville-Bold.ttf);
+
+  font-family: "Caslon";
+  src: url(CaslonOldFaceHeavyRegular.otf);
+}
+* {
+  list-style-type: none;
+  text-decoration: none;
+}
+.ucContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+.ucBox {
+  position: relative;
+  width: 300px !important;
+  height: 300px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: white;
+  border-width: 0.2px;
+  background-color: black;
+  padding: 3px;
+
+  p {
+    color: white;
+  }
+  transition: transform 0.4s linear;
+}
+
+.ucBtnBox {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  button {
+    border: none;
+    background-color: transparent;
+    color: white;
+  }
+}

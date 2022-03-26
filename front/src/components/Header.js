@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useContext, Component } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import { UserStateContext, DispatchContext } from "../App";
+import header from "../components/style/Header.module.scss";
+import classNames from "classnames";
 
 function Header() {
   const navigate = useNavigate();
@@ -24,22 +26,46 @@ function Header() {
   };
 
   return (
-    <Nav activeKey={location.pathname}>
-      <Nav.Item className="me-auto mb-5">
-        <Nav.Link disabled>안녕하세요, 포트폴리오 공유 서비스입니다.</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link onClick={() => navigate("/")}>나의 페이지</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link onClick={() => navigate("/network")}>네트워크</Nav.Link>
-      </Nav.Item>
+    <nav activeKey={location.pathname}>
+      <p className={header.topline} />
       {isLogin && (
-        <Nav.Item>
-          <Nav.Link onClick={logout}>로그아웃</Nav.Link>
-        </Nav.Item>
+        <li className={header.logoutContainer}>
+          <Link to="/" onClick={logout} className={header.logout}>
+            loggout
+          </Link>
+        </li>
       )}
-    </Nav>
+      <h1 className={header.title}>Portfolio</h1>
+
+      <li className={header.list1}>
+        <Link
+          to="/portfolio"
+          className={classNames(header.My, {
+            [header.active]: location.pathname === "/portfolio",
+          })}
+        >
+          My
+        </Link>
+        <Link
+          to="/network"
+          className={classNames(header.Net, {
+            [header.active]: location.pathname === "/network",
+          })}
+        >
+          Net
+        </Link>
+        <Link
+          to="/board"
+          className={classNames(header.Board, {
+            [header.active]: location.pathname === "/board",
+          })}
+        >
+          Board
+        </Link>
+      </li>
+      {isLogin && <li className={header.list2}></li>}
+      <p className={header.middleline} />
+    </nav>
   );
 }
 

@@ -1,5 +1,5 @@
 # dependencies
 node_modules
-/front/build
 .env
 
+back

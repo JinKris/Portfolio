@@ -1,26 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import ProjectCard from "./ProjectCard";
-import ProjectEditForm from "./ProjectEditForm";
-// import * as Api from "../../api";
+import ProjectForm from "./ProjectForm";
+import * as Api from "../../api";
+import { ProjectContext } from "./ProjectContext";
 
-function Project({ project, setProjects, isEditable }) {
-  //useState로 isEditing 상태를 생성함.
+function Project({ project, isEditable }) {
   const [isEditing, setIsEditing] = useState(false);
-
+  const { projects, setProjects } = useContext(ProjectContext);
+  async function handleDelete(e) {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      e.preventDefault();
+      e.stopPropagation();
+      try {
+        await Api.delete("projects", project.id);
+        const idx = projects.findIndex((item) => item.id === project.id);
+        projects.splice(idx, 1);
+        setProjects([...projects]);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
   return (
     <>
       {isEditing ? (
-        <ProjectEditForm
-          setIsEditing={setIsEditing}
-          setProjects={setProjects}
-          currentProject={project}
-        />
+        <ProjectForm setIsEditing={setIsEditing} currentProject={project} />
       ) : (
         <ProjectCard
           project={project}
+          portfolioOwnerId={project.userId}
           isEditable={isEditable}
           setIsEditing={setIsEditing}
-          setProjects={setProjects}
+          handleDelete={handleDelete}
         />
       )}
     </>

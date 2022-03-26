@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import styles from "../style/signUpPage.module.scss";
+import "../style/styles.css";
 
 import * as Api from "../../api";
 
@@ -52,94 +54,79 @@ function RegisterForm() {
       // 로그인 페이지로 이동함.
       navigate("/login");
     } catch (err) {
+      alert("이미 사용 중인 E-mail 입니다."); //이메일 중복 방지
       console.log("회원가입에 실패하였습니다.", err);
     }
   };
 
   return (
-    <Container>
-      <Row className="justify-content-md-center mt-5">
-        <Col lg={8}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="registerEmail">
-              <Form.Label>이메일 주소</Form.Label>
-              <Form.Control
-                type="email"
-                autoComplete="off"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {!isEmailValid && (
-                <Form.Text className="text-success">
-                  이메일 형식이 올바르지 않습니다.
-                </Form.Text>
-              )}
-            </Form.Group>
-
-            <Form.Group controlId="registerPassword" className="mt-3">
-              <Form.Label>비밀번호</Form.Label>
-              <Form.Control
-                type="password"
-                autoComplete="off"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {!isPasswordValid && (
-                <Form.Text className="text-success">
-                  비밀번호는 4글자 이상으로 설정해 주세요.
-                </Form.Text>
-              )}
-            </Form.Group>
-
-            <Form.Group controlId="registerConfirmPassword" className="mt-3">
-              <Form.Label>비밀번호 재확인</Form.Label>
-              <Form.Control
-                type="password"
-                autoComplete="off"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              {!isPasswordSame && (
-                <Form.Text className="text-success">
-                  비밀번호가 일치하지 않습니다.
-                </Form.Text>
-              )}
-            </Form.Group>
-
-            <Form.Group controlId="registerName" className="mt-3">
-              <Form.Label>이름</Form.Label>
-              <Form.Control
-                type="text"
-                autoComplete="off"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              {!isNameValid && (
-                <Form.Text className="text-success">
-                  이름은 2글자 이상으로 설정해 주세요.
-                </Form.Text>
-              )}
-            </Form.Group>
-
-            <Form.Group as={Row} className="mt-3 text-center">
-              <Col sm={{ span: 20 }}>
-                <Button variant="primary" type="submit" disabled={!isFormValid}>
-                  회원가입
-                </Button>
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mt-3 text-center">
-              <Col sm={{ span: 20 }}>
-                <Button variant="light" onClick={() => navigate("/login")}>
-                  로그인하기
-                </Button>
-              </Col>
-            </Form.Group>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <div className={styles.signInContainer}>
+      <button className={styles.xBtn}>
+        <a href="/" className={styles.a}>
+          X
+        </a>
+      </button>
+      <div className={styles.line}></div>
+      <form onSubmit={handleSubmit}>
+        <label>Email : </label>
+        <input
+          className={styles.signInput}
+          type="email"
+          autoComplete="off"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {!isEmailValid ? (
+          <p className={styles.alarm}>Invalid email address format</p>
+        ) : (
+          <p className={styles.alarm}></p>
+        )}
+        <label>Password : </label>
+        <input
+          className={styles.signInput}
+          type="password"
+          autoComplete="off"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {!isPasswordValid ? (
+          <p className={styles.alarm}>Password Contain at least 4 Characters</p>
+        ) : (
+          <p className={styles.alarm}></p>
+        )}
+        <label>ch Password : </label>
+        <input
+          className={styles.signInput}
+          type="password"
+          autoComplete="off"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        {!isPasswordSame ? (
+          <p className={styles.alarm}>비밀번호가 not일치</p>
+        ) : (
+          <p className={styles.alarm}></p>
+        )}
+        <label>Name : </label>
+        <input
+          className={styles.signInput}
+          type="text"
+          autoComplete="off"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        {!isNameValid ? (
+          <p className={styles.alarm}>Name Contain at least 4 Characters</p>
+        ) : (
+          <p className={styles.alarm}></p>
+        )}
+      </form>
+      <div className={styles.btnDiv}>
+        <button onClick={handleSubmit} disabled={!isFormValid}>
+          Continue
+        </button>
+      </div>
+    </div>
   );
 }
 
