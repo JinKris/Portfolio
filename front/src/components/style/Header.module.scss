@@ -12,12 +12,20 @@
   top: 0;
 }
 
-.logout {
+.text {
+  text-decoration: none;
+  color: black;
+  font-size: 55px;
+}
+.logoutContainer {
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   padding: 20px;
+}
+.logout {
+  color: #000000;
   text-decoration: none;
-  color: black;
 }
 
 .title {

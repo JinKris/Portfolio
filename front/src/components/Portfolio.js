@@ -12,6 +12,8 @@ import Awards from "./award/Awards";
 import Header from "./Header";
 import Careers from "./career/Careers";
 
+import footer from "./style/Footer.module.css";
+
 import portfolio from "../components/style/Portfolio.module.css";
 
 function Portfolio() {
@@ -85,6 +87,7 @@ function Portfolio() {
           isEditable={isEditable}
         />
         <Awards portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
+        <div className={footer.text}>Portfolio</div>
       </li>
     </>
   );

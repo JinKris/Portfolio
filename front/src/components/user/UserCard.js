@@ -1,12 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useContext, useState } from "react";
-import { Card, Row, Button, Col } from "react-bootstrap";
+import { Card, Row, Button, Col, Container } from "react-bootstrap";
 import * as Api from "../../api";
 import { UserStateContext } from "../../App";
 
 // import axios, { Axios } from "axios";
 
-function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
+function UserCard({
+  user,
+  setIsEditing,
+  isEditable,
+  isNetwork,
+  setChangingPW,
+}) {
   const navigate = useNavigate();
   //변수에 넣는것들은 명확하게.. 0...false...  --likes
   const [likes, setLikes] = useState(0);
@@ -104,55 +110,63 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
       console.log(e);
     }
   };
+  const stateReset = () => {
+    setIsEditing(true);
+    setChangingPW(false);
+  };
+
   return (
-    <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
-      <Card.Body>
-        <Row className="justify-content-md-center">
-          <Card.Img
-            style={{ width: "10rem", height: "8rem" }}
-            className="mb-3"
-            src="http://placekitten.com/250/250"
-            alt="랜덤 고양이 사진 (http://placekitten.com API 사용)"
-          />
-        </Row>
-        <Card.Title>{user?.name}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
+    <Card.Body style={{ width: "20rem" }}>
+      <Card.Title
+        style={{ display: "flex", justifyContent: "center", fontSize: "40px" }}
+      >
+        {user?.name}
+      </Card.Title>
+      <Card.Subtitle
+        style={{ display: "flex", justifyContent: "center" }}
+        className="mb-2 text-muted"
+      >
+        {user?.email}
+      </Card.Subtitle>
+      <Card.Body style={{ display: "flex", justifyContent: "center" }}>
         <Card.Text>{user?.description}</Card.Text>
         <Card.Text>{`likes: ${likes}`}</Card.Text>
         <Card.Text>{`follower: ${follower}`}</Card.Text>
         <Card.Text>{`f4f:${f4f}`}</Card.Text>
-
-        {isEditable && (
-          <Col>
-            <Row className="mt-3 text-center text-info">
-              <Col sm={{ span: 20 }}>
-                <Button
-                  variant="outline-info"
-                  size="sm"
-                  onClick={() => setIsEditing(true)}
-                >
-                  편집
-                </Button>
-              </Col>
-            </Row>
-          </Col>
-        )}
-
-        {isNetwork && (
-          <>
-            <Card.Link
-              className="mt-3"
-              href="#"
-              onClick={() => navigate(`/users/${user.id}`)}
-            >
-              포트폴리오
-            </Card.Link>
-            <button onClick={handleLikes}>Likes </button>
-            <button onClick={handleFollow}>follow </button>
-          </>
-        )}
       </Card.Body>
-    </Card>
+      {isEditable && (
+        <Card.Body style={{ display: "flex", justifyContent: "center" }}>
+          <Row className="mt-3 text-center text-info">
+            <Col sm={{ span: 20 }}>
+              <Button variant="outline-info" size="sm" onClick={stateReset}>
+                편집
+              </Button>
+              <Button
+                className="ms-2"
+                variant="outline-info"
+                size="sm"
+                onClick={() => setChangingPW(true)}
+              >
+                비밀번호 변경
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
+      )}
+      {isNetwork && (
+        <>
+          <Card.Link
+            className="mt-3"
+            href="#"
+            onClick={() => navigate(`/users/${user.id}`)}
+          >
+            포트폴리오
+          </Card.Link>
+          <button onClick={handleLikes}>Likes </button>
+          <button onClick={handleFollow}>follow </button>
+        </>
+      )}
+    </Card.Body>
   );
 }
 
