@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
 
 import * as Api from "../../api";
-import UserCard from "./UserCard";
+import NetUserCard from "./NetUserCard";
 import { UserStateContext } from "../../App";
+
+import Header from "../Header";
+
+import network from "../style/Network.module.css";
 
 function Network() {
   const navigate = useNavigate();
@@ -23,13 +27,16 @@ function Network() {
   }, [userState, navigate]);
 
   return (
-    <Container fluid>
-      <Row xs="auto" className="jusify-content-center">
-        {users.map((user) => (
-          <UserCard key={user.id} user={user} isNetwork />
-        ))}
-      </Row>
-    </Container>
+    <>
+      <Header />
+      <div className={network.container}>
+        <div className={network.body}>
+          {users.map((user) => (
+            <NetUserCard key={user.id} user={user} isNetwork />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 

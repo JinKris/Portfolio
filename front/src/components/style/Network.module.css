@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  padding: 250px;
+  margin-top: -200px;
+}
+
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 150px;
+  color: black;
+  justify-content: space-between;
+  margin-left: 65px;
+}
