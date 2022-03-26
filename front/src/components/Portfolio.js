@@ -12,6 +12,8 @@ import Awards from "./award/Awards";
 import Header from "./Header";
 import Careers from "./career/Careers";
 
+import portfolio from "../components/style/Portfolio.module.css";
+
 function Portfolio() {
   const navigate = useNavigate();
   const params = useParams();
@@ -62,38 +64,28 @@ function Portfolio() {
   return (
     <>
       <Header />
-      <Container fluid>
-        <Row>
-          <Col md="3" lg="3">
-            <User
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={isEditable}
-            />
-          </Col>
-          <Col>
-            <Educations
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={isEditable}
-            />
-            <Careers
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={portfolioOwner.id === userState.user?.id}
-            />
-            <Projects
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={isEditable}
-            />
-            <Certificates
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={isEditable}
-            />
-            <Awards
-              portfolioOwnerId={portfolioOwner.id}
-              isEditable={isEditable}
-            />
-          </Col>
-        </Row>
-      </Container>
+      <div className={portfolio.user} fluid>
+        <User portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
+      </div>
+      <li>
+        <Educations
+          portfolioOwnerId={portfolioOwner.id}
+          isEditable={isEditable}
+        />
+        <Careers
+          portfolioOwnerId={portfolioOwner.id}
+          isEditable={portfolioOwner.id === userState.user?.id}
+        />
+        <Projects
+          portfolioOwnerId={portfolioOwner.id}
+          isEditable={isEditable}
+        />
+        <Certificates
+          portfolioOwnerId={portfolioOwner.id}
+          isEditable={isEditable}
+        />
+        <Awards portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
+      </li>
     </>
   );
 }

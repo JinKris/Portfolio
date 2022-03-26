@@ -1,7 +1,8 @@
 import React, { useContext, Component } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import { UserStateContext, DispatchContext } from "../App";
+import header from "../components/style/Header.module.scss";
 
 function Header() {
   const navigate = useNavigate();
@@ -25,31 +26,26 @@ function Header() {
 
   return (
     <nav activeKey={location.pathname}>
-      <h1>안녕하세요, 포트폴리오 공유 서비스입니다.</h1>
-      <ul>
+      <p className={header.topline} />
+      {isLogin && (
         <li>
-          <a href="/portfolio">나의 페이지My</a>
-          <ul>
-            <li>portfolio</li>
-            <li>setting</li>
-          </ul>
+          <button onClick={logout}>loggout</button>
         </li>
-        <li>
-          <a href="/network">네트워크Net</a>'
-          <ul>
-            <li>portfolio</li>
-            <li>board</li>
-          </ul>
-        </li>
-        <li>
-          <a href="/board">포럼</a>
-        </li>
-        {isLogin && (
-          <li>
-            <button onClick={logout}>로그아웃</button>
-          </li>
-        )}
-      </ul>
+      )}
+      <h1 className={header.title}>Portfolio</h1>
+
+      <li className={header.list1}>
+        <Link to="/portfolio" className={header.My}>
+          My
+        </Link>
+        <Link to="/network" className={header.Net}>
+          Net
+        </Link>
+        <Link to="/board" className={header.Board}>
+          Board
+        </Link>
+      </li>
+      <p className={header.middleline} />
     </nav>
   );
 }
