@@ -461,6 +461,11 @@ find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
+font-face@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/font-face/-/font-face-2.3.4.tgz#b59b478e2bc8ed266be0762cde36bfc56529b2be"
+  integrity sha512-7Ko9gU36xbTmyeh7mfyJrYB4Gwz6cI+Q/DRMJeAdq3qN8lzlLN5uMTLheCMUpHGStRKLM/mKCv+Pp7zjfMtBxQ==
+
 forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"

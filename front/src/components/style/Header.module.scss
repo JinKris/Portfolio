@@ -1,3 +1,14 @@
+@font-face {
+  font-family: "voyage";
+  src: url(MADEBonVoyageRegularPERSONALUSE.otf);
+
+  font-family: "baskerville";
+  src: url(LibreBaskerville-Bold.ttf);
+
+  font-family: "Caslon";
+  src: url(CaslonOldFaceHeavyRegular.otf);
+}
+
 * {
   list-style-type: none;
   text-decoration: none;
@@ -26,6 +37,8 @@
 .logout {
   color: #000000;
   text-decoration: none;
+  font-family: "voyage";
+  font-weight: bold;
 }
 
 .title {
@@ -34,6 +47,8 @@
   justify-content: center;
   color: black;
   font-size: 80px;
+  font-family: "Caslon";
+  font-weight: bold;
 }
 
 .list1 {
@@ -43,6 +58,8 @@
   color: black;
   text-decoration: none;
   margin-top: 30px;
+  font-family: "voyage";
+  font-weight: bold;
 }
 
 .list1 a + a {

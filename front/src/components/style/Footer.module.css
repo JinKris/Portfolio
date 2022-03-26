@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "voyage";
+  src: url(MADEBonVoyageRegularPERSONALUSE.otf);
+}
+
 .text {
   position: absolute;
   width: 100%;
@@ -9,4 +14,7 @@
   background-color: black;
   font-size: 70px;
   color: white;
+
+  font-family: "voyage";
+  font-weight: bold;
 }
