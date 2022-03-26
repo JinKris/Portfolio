@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import pwForm from "../style/UserCard.module.scss";
 
 import * as Api from "../../api";
 
@@ -29,11 +30,11 @@ function ChangePasswordForm({ user, setChangingPW, setUser }) {
         await Api.put(`users/${user.id}`, {
           newPassword,
         });
-        alert("비밀번호 변경 완료!");
+        alert("Password change complete!");
         setChangingPW(false);
         navigate("/");
       } else {
-        alert("현재 비밀번호가 일치하지 않습니다.");
+        alert("Passwords do not match");
       }
     } catch (err) {
       console.log(err);
@@ -41,63 +42,57 @@ function ChangePasswordForm({ user, setChangingPW, setUser }) {
   };
 
   return (
-    <Card className="mb-2 ms-3" style={{ width: "18rem" }}>
-      <Card.Body>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Control
-              type="password"
-              autoComplete="on"
-              placeholder="현재 비밀번호"
-              onChange={(e) => setCurrentPassword(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Control
-              type="password"
-              placeholder="새 비밀번호"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            {!isPasswordValid && (
-              <Form.Text className="text-success">
-                비밀번호는 4글자 이상입니다.
-              </Form.Text>
-            )}
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Control
-              type="password"
-              placeholder="새 비밀번호 확인"
-              onChange={(e) => setCheckNewpassword(e.target.value)}
-            />
-            {!isPasswordSame && (
-              <Form.Text className="text-success">
-                비밀번호가 일치하지 않습니다.
-              </Form.Text>
-            )}
-          </Form.Group>
-
-          <Form.Group as={Row} className="mt-3 text-center">
-            <Col sm={{ span: 20 }}>
-              <Button
-                variant="primary"
-                type="submit"
-                className="me-3"
-                disabled={!CheckAll} //// 비밀번호 일치 확인 안되어있을 시 재입력?
-              >
-                확인
-              </Button>
-              <Button variant="secondary" onClick={() => setChangingPW(false)}>
-                취소
-              </Button>
-            </Col>
-          </Form.Group>
-        </Form>
-      </Card.Body>
-    </Card>
+    <div className={pwForm.ucContainer}>
+      <div className={pwForm.ucEdBox}>
+        <form onSubmit={handleSubmit}>
+          <input
+            className={pwForm.usInput}
+            type="password"
+            autoComplete="on"
+            placeholder="current password"
+            onChange={(e) => setCurrentPassword(e.target.value)}
+          />
+          <input
+            className={pwForm.usInput}
+            type="password"
+            placeholder="new password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+          {!isPasswordValid ? (
+            <p className={pwForm.pwAlert}>
+              Your Password Contain at least 4 Characters
+            </p>
+          ) : (
+            <p></p>
+          )}
+          <input
+            className={pwForm.usInput}
+            type="password"
+            placeholder="check new password"
+            onChange={(e) => setCheckNewpassword(e.target.value)}
+          />
+          {!isPasswordSame ? <p>Passwords do not match</p> : <p></p>}
+          <div className={pwForm.ucBtnBox}>
+            <button
+              className={pwForm.ucEdit}
+              variant="primary"
+              type="submit"
+              disabled={!CheckAll} //// 비밀번호 일치 확인 안되어있을 시 재입력?
+            >
+              Submit
+            </button>
+            <button
+              className={pwForm.ucEdit}
+              variant="secondary"
+              onClick={() => setChangingPW(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 

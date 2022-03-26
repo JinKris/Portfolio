@@ -1,17 +1,15 @@
 @font-face {
-  font-family: "voyage";
-  src: url(MADEBonVoyageRegularPERSONALUSE.otf);
-
-  font-family: "baskerville";
-  src: url(LibreBaskerville-Bold.ttf);
-
+  font-family: "sandol";
+  src: url(AppleSDGothicNeoL.ttf);
   font-family: "Caslon";
   src: url(CaslonOldFaceHeavyRegular.otf);
 }
 * {
   list-style-type: none;
   text-decoration: none;
+  font-family: "Caslon", "sandol";
 }
+
 .ucContainer {
   display: flex;
   justify-content: center;
@@ -38,6 +36,25 @@
   transition: transform 0.4s linear;
 }
 
+.ucEdBox {
+  position: relative;
+  width: 250px !important;
+  height: 300px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-width: 0.2px;
+  background-color: black;
+  padding: 3px;
+
+  p {
+    color: white;
+  }
+  transition: transform 0.4s linear;
+}
+
 .ucBtnBox {
   position: absolute;
   right: 10px;
@@ -47,4 +64,45 @@
     background-color: transparent;
     color: white;
   }
+}
+
+.ucName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+}
+
+.ucIcon {
+  font-size: 0.8em;
+}
+
+.ucEdit {
+  text-decoration: none;
+  color: white;
+  &:hover {
+    text-shadow: 0 0 5px #fff;
+  }
+}
+
+.ucPw {
+  text-decoration: none;
+  color: white;
+  &:hover {
+    text-shadow: 0 0 5px #fff;
+  }
+}
+.usInput {
+  border: solid;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 0.2px;
+  border-color: gray;
+
+  background-color: black;
+  color: gray;
+}
+.pwAlert {
+  font-size: 0.7em;
 }

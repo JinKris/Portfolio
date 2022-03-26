@@ -123,18 +123,18 @@ function UserCard({
     <div className={usercard.ucContainer}>
       <div className={usercard.ucBox}>
         <div>
-          <p>{user?.name}</p>
+          <p className={usercard.ucName}>{user?.name}</p>
           <p>{user?.email}</p>
           <p>{user?.description}</p>
-          <p>
+          <p className={usercard.ucIcon}>
             <FontAwesomeIcon icon={faHeart} size="1x" />_{likes}
           </p>
-          <p>
+          <p className={usercard.ucIcon}>
             <FontAwesomeIcon icon={faF} size="1x" />
             ollow_{follower}
           </p>
           {!isEditable && (
-            <p>
+            <p className={usercard.ucIcon}>
               <FontAwesomeIcon icon={faF} size="1x" />4
               <FontAwesomeIcon icon={faF} size="1x" />_{`${f4f}`}
             </p>
@@ -142,8 +142,15 @@ function UserCard({
         </div>
         {isEditable && (
           <div className={usercard.ucBtnBox}>
-            <button onClick={stateReset}>edit</button>
-            <button onClick={() => setChangingPW(true)}>password</button>
+            <button className={usercard.ucEdit} onClick={stateReset}>
+              Edit
+            </button>
+            <button
+              className={usercard.ucPw}
+              onClick={() => setChangingPW(true)}
+            >
+              Password
+            </button>
           </div>
         )}
       </div>

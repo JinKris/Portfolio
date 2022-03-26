@@ -1,3 +1,14 @@
+@font-face {
+  font-family: "sandol";
+  src: url(AppleSDGothicNeoL.ttf);
+  font-family: "Caslon";
+  src: url(CaslonOldFaceHeavyRegular.otf);
+}
+* {
+  list-style-type: none;
+  text-decoration: none;
+  font-family: "Caslon", "sandol";
+}
 .boardsBox {
   background-color: black;
   width: 100%;
@@ -39,6 +50,16 @@
   margin: 10px;
   color: white;
 
+  font-family: "Caslon", "sandol";
+  .bCardTitle {
+    font-size: 1em;
+    border-style: solid;
+    border-color: white;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0.2px;
+  }
   .bCardBtns {
     position: absolute;
     right: 20px;
@@ -47,6 +68,9 @@
       border: none;
       background-color: transparent;
       color: white;
+      &:hover {
+        text-shadow: 0 0 5px white;
+      }
     }
   }
 }
@@ -89,6 +113,9 @@
       border: none;
       background-color: transparent;
       color: gray;
+      &:hover {
+        text-shadow: 0 0 5px gray;
+      }
     }
   }
 }

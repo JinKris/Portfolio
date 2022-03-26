@@ -1,5 +1,4 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
-import MvpButton from "../../MvpButton";
 import pro from "../style/mvpCardBody.module.scss";
 
 function ProjectCard({ project, isEditable, setIsEditing, handleDelete }) {
@@ -7,13 +6,13 @@ function ProjectCard({ project, isEditable, setIsEditing, handleDelete }) {
 
   return (
     <div className={pro.mvpBox}>
-      <span>{title}</span>
+      <span className={pro.mvpTitle}>{title}</span>
       <br />
       <span>{description}</span>
       <br />
-      <span>{fromDate}</span>
+      <span className={pro.mvpDate}>{fromDate}</span>
       <br />
-      <span>{toDate}</span>
+      <span className={pro.mvpDate}>{toDate}</span>
       <br />
       <div className={pro.mvpBtnBox}>
         {isEditable && (
@@ -22,10 +21,10 @@ function ProjectCard({ project, isEditable, setIsEditing, handleDelete }) {
               className={pro.mvpBtn}
               onClick={() => setIsEditing((prev) => !prev)}
             >
-              edit
+              Edit
             </button>
             <button className={pro.mvpBtn} onClick={handleDelete}>
-              delete
+              Delete
             </button>
           </>
         )}

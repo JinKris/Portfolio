@@ -4,7 +4,6 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import Award from "./Award";
 import AwardForm from "./AwardForm";
-import MvpButton from "../../MvpButton";
 import aw from "../style/mvpCardBody.module.scss";
 
 const Awards = ({ portfolioOwnerId, isEditable }) => {

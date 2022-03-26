@@ -54,7 +54,7 @@ const CareerForm = ({
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control
           type="text"
-          placeholder="회사 이름"
+          placeholder="company name"
           value={form.company}
           onChange={(e) => handleCareerValue("company", e.target.value)}
         />
@@ -63,7 +63,7 @@ const CareerForm = ({
       <Form.Group controlId="formBasicFromDate" className="mt-3">
         <Form.Control
           type="date"
-          placeholder="입사날짜"
+          placeholder="start work"
           value={form.fromDate}
           onChange={(e) => handleCareerValue("fromDate", e.target.value)}
         />
@@ -73,7 +73,7 @@ const CareerForm = ({
         <Form.Control
           type="date"
           min={form?.fromDate}
-          placeholder="퇴사날짜"
+          placeholder="resign"
           value={form.toDate}
           onChange={(e) => handleCareerValue("toDate", e.target.value)}
         />
@@ -81,10 +81,10 @@ const CareerForm = ({
       <Form.Group className="mt-3 text-center">
         <Col>
           <button className={car.mvpBtn} type="submit">
-            submit
+            Submit
           </button>
           <button className={car.mvpBtn} onClick={() => setIsEditing(false)}>
-            cheso
+            Cancel
           </button>
         </Col>
       </Form.Group>

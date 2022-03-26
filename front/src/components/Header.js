@@ -31,7 +31,7 @@ function Header() {
       {isLogin && (
         <li className={header.logoutContainer}>
           <Link to="/" onClick={logout} className={header.logout}>
-            loggout
+            logOut
           </Link>
         </li>
       )}

@@ -1,18 +1,13 @@
 @font-face {
-  font-family: "voyage";
-  src: url(MADEBonVoyageRegularPERSONALUSE.otf);
-
-  font-family: "baskerville";
-  src: url(LibreBaskerville-Bold.ttf);
-
+  font-family: "sandol";
+  src: url(AppleSDGothicNeoL.ttf);
   font-family: "Caslon";
   src: url(CaslonOldFaceHeavyRegular.otf);
-
-  font-family: "sd";
-  src: url(AppleSDGothicNeoL.ttf);
 }
 * {
-  font-family: "Caslon", "sd";
+  list-style-type: none;
+  text-decoration: none;
+  font-family: "Caslon", "sandol";
 }
 .mvpContainer {
   position: relative;
@@ -38,7 +33,17 @@
     font-size: 1.5em;
   }
 }
-
+.mvpTitle {
+  font-size: 1.2em;
+  border: solid;
+  border-left-width: 0px;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 0.2px;
+}
+.mvpDate {
+  font-size: 0.75em;
+}
 .mvpBox {
   border-style: solid;
   border: 2px;
@@ -51,6 +56,9 @@
   background-color: transparent;
   color: black;
   margin-top: 20px;
+  &:hover {
+    text-shadow: 0 0 5px black;
+  }
 }
 
 .mvpBtnBox {
@@ -60,6 +68,7 @@
 
 .mvpPlusBtn {
   position: absolute;
-  bottom: 15px;
-  left: 15px;
+  bottom: 30px;
+  left: 30px;
+  font-size: 2em;
 }

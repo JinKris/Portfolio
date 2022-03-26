@@ -1,5 +1,4 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
-import MvpButton from "../../MvpButton";
 import certi from "../style/mvpCardBody.module.scss";
 
 function CertificateCard({
@@ -12,11 +11,11 @@ function CertificateCard({
 
   return (
     <div className={certi.mvpBox}>
-      <span>{title}</span>
+      <span className={certi.mvpTitle}>{title}</span>
       <br />
       <span>{description}</span>
       <br />
-      <span>{whenDate}</span>
+      <span className={certi.mvpDate}>{whenDate}</span>
       <div className={certi.mvpBtnBox}>
         {isEditable && (
           <>
@@ -24,10 +23,10 @@ function CertificateCard({
               className={certi.mvpBtn}
               onClick={() => setIsEditing((prev) => !prev)}
             >
-              edit
+              Edit
             </button>
             <button className={certi.mvpBtn} onClick={handleDelete}>
-              delete
+              Delete
             </button>
           </>
         )}

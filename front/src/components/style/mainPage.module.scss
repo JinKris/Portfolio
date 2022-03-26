@@ -1,20 +1,14 @@
 @font-face {
-  font-family: "voyage";
-  src: url(MADEBonVoyageRegularPERSONALUSE.otf);
-
-  font-family: "baskerville";
-  src: url(LibreBaskerville-Bold.ttf);
-
+  font-family: "sandol";
+  src: url(AppleSDGothicNeoL.ttf);
   font-family: "Caslon";
   src: url(CaslonOldFaceHeavyRegular.otf);
 }
 * {
   list-style-type: none;
   text-decoration: none;
+  font-family: "Caslon", "sandol";
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@200&display=swap");
-//font-family: 'Noto Serif Display', serif;
 
 body {
   margin: 0;
@@ -30,11 +24,22 @@ body {
   flex-direction: column;
 
   h1 {
-    margin-bottom: 50px;
-    font-family: "Architects Daughter";
+    font-family: "Caslon";
+    font-size: xx-large;
+    margin-bottom: 40px;
   }
   button {
     border: none;
     background-color: white;
   }
+}
+
+.signIn {
+  font-family: "Caslon";
+  font-size: small;
+}
+
+.signUp {
+  font-family: "Caslon";
+  font-size: small;
 }

@@ -1,25 +1,18 @@
 @font-face {
-  font-family: "voyage";
-  src: url(MADEBonVoyageRegularPERSONALUSE.otf);
-
-  font-family: "baskerville";
-  src: url(LibreBaskerville-Bold.ttf);
-
+  font-family: "sandol";
+  src: url(AppleSDGothicNeoL.ttf);
   font-family: "Caslon";
   src: url(CaslonOldFaceHeavyRegular.otf);
 }
 * {
   list-style-type: none;
   text-decoration: none;
-}
-@font-face {
-  font-family: "bourbon";
-  src: url(BourbonGrotesque-Regular.otf);
+  font-family: "Caslon", "sandol";
 }
 
 body {
   margin: 0;
-  font-family: "bourbon";
+  font-family: "Caslon";
 }
 
 textarea:focus,
@@ -45,6 +38,7 @@ label {
   // align-items: center;
   flex-direction: column;
   .xBtn {
+    text-decoration: none;
     position: relative;
     right: 0px;
     display: flex;
@@ -59,7 +53,9 @@ label {
     background-color: white;
   }
 }
-
+a:hover {
+  color: black;
+}
 form {
   padding-left: 20px;
   width: 80%;
@@ -69,11 +65,11 @@ form {
   padding: left 100%;
   text-decoration: none;
   color: black;
-  border: solid;
-  border-left-width: 0.2px;
-  border-right-width: 0.2px;
-  border-top-width: 0.2px;
-  border-bottom-width: 0.2px;
+  // border: solid;
+  // border-left-width: 0.2px;
+  // border-right-width: 0.2px;
+  // border-top-width: 0.2px;
+  // border-bottom-width: 0.2px;
   padding: 0px;
   margin: 0px;
 }
@@ -93,6 +89,7 @@ form {
 }
 
 .btnDiv {
+  text-decoration: none;
   display: flex;
   justify-content: center;
   flex-direction: row;

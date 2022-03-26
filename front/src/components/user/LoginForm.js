@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "../style/signPage.module.scss";
-import "../style/styles.css";
 import * as Api from "../../api";
 import { DispatchContext } from "../../App";
 
@@ -56,14 +55,14 @@ function LoginForm() {
       // 기본 페이지로 이동
       navigate("/portfolio", { replace: true });
     } catch (err) {
-      console.log("로그인에 실패하였습니다.\n", err);
+      console.log("Fail\n", err);
     }
   };
 
   return (
     <div className={styles.signInContainer}>
       <button className={styles.xBtn}>
-        <a href="/" className={styles.a}>
+        <a className={styles.a} href="/">
           X
         </a>
       </button>

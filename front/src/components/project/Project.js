@@ -8,7 +8,7 @@ function Project({ project, isEditable }) {
   const [isEditing, setIsEditing] = useState(false);
   const { projects, setProjects } = useContext(ProjectContext);
   async function handleDelete(e) {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
+    if (window.confirm("Are you sure?")) {
       e.preventDefault();
       e.stopPropagation();
       try {

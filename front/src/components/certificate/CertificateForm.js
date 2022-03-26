@@ -73,7 +73,7 @@ const CertificateForm = ({
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control
           type="text"
-          placeholder="자격증"
+          placeholder="certificate"
           value={form.title}
           onChange={(e) => handleCertificateValue("title", e.target.value)}
         />
@@ -82,7 +82,7 @@ const CertificateForm = ({
       <Form.Group controlId="formBasicDescription" className="mt-3">
         <Form.Control
           type="text"
-          placeholder="상세내역"
+          placeholder="contents"
           value={form.description}
           onChange={(e) =>
             handleCertificateValue("description", e.target.value)
@@ -93,7 +93,8 @@ const CertificateForm = ({
       <Form.Group controlId="formBasicWhenDate" className="mt-3">
         <Form.Control
           type="date"
-          placeholder="취득날짜"
+          placeholder="
+          acquisition date"
           value={form.whenDate}
           onChange={(e) => handleCertificateValue("whenDate", e.target.value)}
         />
@@ -102,7 +103,7 @@ const CertificateForm = ({
       <Form.Group as={Row} className="mt-3 text-center mb-4">
         <Col sm={{ span: 20 }}>
           <button className={certi.mvpBtn} type="submit">
-            submit
+            Submit
           </button>
           <button
             className={certi.mvpBtn}
@@ -110,7 +111,7 @@ const CertificateForm = ({
               setIsAdding ? setIsAdding(false) : setIsEditing(false);
             }}
           >
-            cheso
+            Cancel
           </button>
         </Col>
       </Form.Group>

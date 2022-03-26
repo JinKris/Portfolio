@@ -62,7 +62,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
       <input
         className={styles.boardInput}
         type="text"
-        placeholder="title"
+        placeholder="Title"
         value={form.title}
         onChange={(e) => handleBoardValue("title", e.target.value)}
       />
@@ -76,7 +76,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
       />
       <div className={styles.bFormBtns}>
         <button className={styles.bFormBtn} type="submit">
-          submit
+          Submit
         </button>
         {isEditing && (
           <button
@@ -86,7 +86,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
             }}
             type="button"
           >
-            back
+            Cancel
           </button>
         )}
       </div>

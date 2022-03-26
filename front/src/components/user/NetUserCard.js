@@ -3,6 +3,10 @@ import React, { useEffect, useContext, useState } from "react";
 import { Card, Row, Button, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import { UserStateContext } from "../../App";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faF } from "@fortawesome/free-solid-svg-icons";
+import nUserCard from "../style/NetUserCard.module.scss";
 
 // import axios, { Axios } from "axios";
 
@@ -104,33 +108,41 @@ function NetUserCard({ user, setIsEditing }) {
     }
   };
   return (
-    <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
-      <Card.Body>
-        <Row className="justify-content-md-center"></Row>
-        <Card.Title>{user?.name}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
-        <Card.Text>{user?.description}</Card.Text>
-        <Card.Text>{`likes: ${likes}`}</Card.Text>
-        <Card.Text>{`follower: ${follower}`}</Card.Text>
-        <Card.Text>{`f4f:${f4f}`}</Card.Text>
-
-        <>
-          <Card.Link
-            className="mt-3"
-            href="#"
+    <div className={nUserCard.nUserCardContainer}>
+      <div>
+        <div className={nUserCard.nUserCardBox}>
+          <p className={nUserCard.nUserCardName}>{user?.name}</p>
+          <p>{user?.email}</p>
+          <p className={nUserCard.nUserIcon}>
+            <FontAwesomeIcon icon={faHeart} size="1x" />_{likes}
+          </p>
+          <p className={nUserCard.nUserIcon}>
+            <FontAwesomeIcon icon={faF} size="1x" />
+            ollow_{follower}
+          </p>
+          <p className={nUserCard.nUserIcon}>
+            <FontAwesomeIcon icon={faF} size="1x" />4
+            <FontAwesomeIcon icon={faF} size="1x" />_{`${f4f}`}
+          </p>
+          <button
+            className={nUserCard.nUserCardBtn}
             onClick={() => navigate(`/users/${user.id}`)}
           >
-            포트폴리오
-          </Card.Link>
-        </>
-        {isEditable ? null : (
-          <>
-            <button onClick={handleLikes}>Likes </button>
-            <button onClick={handleFollow}>follow </button>
-          </>
-        )}
-      </Card.Body>
-    </Card>
+            Portfolio
+          </button>
+          {isEditable ? null : (
+            <>
+              <button className={nUserCard.nUserCardBtn} onClick={handleLikes}>
+                Likes
+              </button>
+              <button className={nUserCard.nUserCardBtn} onClick={handleFollow}>
+                Follow
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

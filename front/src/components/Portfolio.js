@@ -69,7 +69,7 @@ function Portfolio() {
         <User portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
       </div>
       <div className={portfolio.pfContainer}>
-        <div style={{ width: "90%" }}>
+        <div style={{ width: "55%" }}>
           <Educations
             classNmae={portfolio.pfMvp}
             portfolioOwnerId={portfolioOwner.id}

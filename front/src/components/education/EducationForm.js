@@ -71,7 +71,7 @@ const EducationForm = ({
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control
           type="text"
-          placeholder="학교이름"
+          placeholder="school name"
           autoComplete="off"
           value={form.school}
           onChange={(e) => handleEducationValue("school", e.target.value)}
@@ -80,7 +80,7 @@ const EducationForm = ({
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Control
           type="text"
-          placeholder="전공"
+          placeholder="major"
           value={form.major}
           onChange={(e) => handleEducationValue("major", e.target.value)}
         />
@@ -88,42 +88,48 @@ const EducationForm = ({
       <div className="mb-3 mt-3">
         <Form.Check
           inline
-          label="재학중"
+          label="attending"
           id="radio1"
           type="radio"
           name="position"
-          value="재학중"
-          checked={form.position === "재학중"}
+          value="attending"
+          checked={form.position === "attending"}
           onChange={(e) => handleEducationValue("position", e.target.value)}
         />
         <Form.Check
           inline
-          label="학사졸업"
+          label="
+          bachelor's degree"
           id="radio2"
           type="radio"
           name="position"
-          value="학사졸업"
-          checked={form.position === "학사졸업"}
+          value="
+          bachelor's degree"
+          checked={
+            form.position ===
+            `
+          bachelor's degree`
+          }
           onChange={(e) => handleEducationValue("position", e.target.value)}
         />
         <Form.Check
           inline
-          label="석사졸업"
+          label="master's Graduation"
           id="radio3"
           type="radio"
           name="position"
-          value="석사졸업"
-          checked={form.position === "석사졸업"}
+          value="master's Graduation"
+          checked={form.position === "master's Graduation"}
           onChange={(e) => handleEducationValue("position", e.target.value)}
         />
         <Form.Check
           inline
-          label="박사졸업"
+          label="Ph.D. Graduation"
           id="radio4"
           type="radio"
           name="position"
-          value="박사졸업"
-          checked={form.position === "박사졸업"}
+          value="Ph.D. Graduation"
+          checked={form.position === "Ph.D. Graduation"}
           onChange={(e) => handleEducationValue("position", e.target.value)}
         />
       </div>
@@ -131,7 +137,7 @@ const EducationForm = ({
       <Form.Group as={Row} className="mt-3 text-center mb-4">
         <Col sm={{ span: 20 }}>
           <button className={edu.mvpBtn} type="submit">
-            submit
+            Submit
           </button>
           <button
             className={edu.mvpBtn}
@@ -139,7 +145,7 @@ const EducationForm = ({
               setIsAdding ? setIsAdding(false) : setIsEditing(false);
             }}
           >
-            cheso
+            Cancel
           </button>
         </Col>
       </Form.Group>

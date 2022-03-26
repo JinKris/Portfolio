@@ -1,5 +1,4 @@
 import * as Api from "../../api";
-import MvpButton from "../../MvpButton";
 
 import aw from "../style/mvpCardBody.module.scss";
 
@@ -8,7 +7,7 @@ const AwardCard = ({ award, isEditable, setIsEditing, handleDelete }) => {
 
   return (
     <div className={aw.mvpBox}>
-      <span>{title}</span>
+      <span className={aw.mvpTitle}>{title}</span>
       <br />
       <span>{description}</span>
       <div className={aw.mvpBtnBox}>
@@ -18,10 +17,10 @@ const AwardCard = ({ award, isEditable, setIsEditing, handleDelete }) => {
               className={aw.mvpBtn}
               onClick={() => setIsEditing((prev) => !prev)}
             >
-              edit
+              Edit
             </button>
             <button className={aw.mvpBtn} onClick={handleDelete}>
-              delete
+              Delete
             </button>
           </>
         )}

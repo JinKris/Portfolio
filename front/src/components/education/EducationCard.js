@@ -14,7 +14,7 @@ const EducationCard = ({
 
   return (
     <div className={edu.mvpBox}>
-      <span>{school}</span>
+      <span className={edu.mvpTitle}>{school}</span>
       <br />
       <span>{`${major} (${position})`}</span>
       <div className={edu.mvpBtnBox}>
@@ -24,10 +24,10 @@ const EducationCard = ({
               className={edu.mvpBtn}
               onClick={() => setIsEditing((prev) => !prev)}
             >
-              edit
+              Edit
             </button>
             <button className={edu.mvpBtn} onClick={handleDelete}>
-              delete
+              Delete
             </button>
           </>
         )}

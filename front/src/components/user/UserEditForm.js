@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import userEdcard from "../style/UserCard.module.scss";
 import * as Api from "../../api";
 
 function UserEditForm({ user, setIsEditing, setUser }) {
@@ -10,6 +11,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   const [email, setEmail] = useState(user.email);
   //useState로 description 상태를 생성함.
   const [description, setDescription] = useState(user.description);
+  const isValid = user.email === email ? false : true;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,63 +35,64 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   const navigate = useNavigate();
 
   const userDelete = async (e) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
+    if (window.confirm("Are you sure?")) {
       await Api.delete("users", user.id);
       await navigate("/main");
     } else return;
   };
 
   return (
-    <Card className="mb-2">
-      <Card.Body>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="useEditName" className="mb-3">
-            <Form.Control
-              type="text"
-              placeholder="이름"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="userEditEmail" className="mb-3">
-            <Form.Control
-              type="email"
-              placeholder="이메일"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="userEditDescription">
-            <Form.Control
-              type="text"
-              placeholder="정보, 인사말"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group as={Row} className="mt-3 text-center">
-            <Col sm={{ span: 20 }}>
-              <Button variant="primary" type="submit" className="me-3">
-                submit
-              </Button>
-              <Button
-                className="me-3"
-                variant="secondary"
-                onClick={() => setIsEditing(false)}
-              >
-                취소
-              </Button>
-              <Button className="me-3" variant="danger" onClick={userDelete}>
-                회원탈퇴
-              </Button>
-            </Col>
-          </Form.Group>
-        </Form>
-      </Card.Body>
-    </Card>
+    <div className={userEdcard.ucContainer}>
+      <div className={userEdcard.ucBox}>
+        <form onSubmit={handleSubmit}>
+          <input
+            className={userEdcard.usInput}
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            className={userEdcard.usInput}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className={userEdcard.usInput}
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <div className={userEdcard.ucBtnBox}>
+            <button
+              lassName={userEdcard.ucEdit}
+              variant="primary"
+              type="submit"
+              disabled={!isValid}
+            >
+              Submit
+            </button>
+            <button
+              className={userEdcard.ucEdit}
+              variant="secondary"
+              onClick={() => setIsEditing(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className={userEdcard.ucEdit}
+              variant="danger"
+              onClick={userDelete}
+            >
+              회탈
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 

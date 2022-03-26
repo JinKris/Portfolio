@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "sandol";
+  src: url(AppleSDGothicNeoL.ttf);
+  font-family: "Caslon";
+  src: url(CaslonOldFaceHeavyRegular.otf);
+}
+* {
+  list-style-type: none;
+  text-decoration: none;
+  font-family: "Caslon", "sandol";
+}
+.nUserCardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .nUserCardName {
+    font-size: 1.3em;
+  }
+
+  .nUserIcon {
+    font-size: 0.8em;
+  }
+}
+
+.nUserCardBtn {
+  border: none;
+  background-color: transparent;
+  color: black;
+
+  &:hover {
+    text-shadow: 0 0 5px black;
+  }
+}
+
+.nUserCardName {
+  border-style: solid;
+  border-color: black;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 0.2px;
+}

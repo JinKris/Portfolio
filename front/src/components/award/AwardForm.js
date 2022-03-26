@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import { AwardContext } from "./AwardContext";
-import MvpButton from "../../MvpButton";
 import aw from "../style/mvpCardBody.module.scss";
 
 const AwardForm = ({
@@ -65,7 +64,7 @@ const AwardForm = ({
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control
           type="text"
-          placeholder="수상내역"
+          placeholder="award"
           autoComplete="off"
           value={form.title}
           onChange={(e) => handleAwardValue("title", e.target.value)}
@@ -74,7 +73,7 @@ const AwardForm = ({
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Control
           type="text"
-          placeholder="상세내역"
+          placeholder="description"
           value={form.description}
           onChange={(e) => handleAwardValue("description", e.target.value)}
         />
@@ -83,7 +82,7 @@ const AwardForm = ({
       <Form.Group as={Row} className="mt-3 text-center mb-4">
         <Col sm={{ span: 20 }}>
           <button className={aw.mvpBtn} type="submit">
-            submit
+            Submit
           </button>
           <button
             className={aw.mvpBtn}
@@ -91,7 +90,7 @@ const AwardForm = ({
               setIsAdding ? setIsAdding(false) : setIsEditing(false);
             }}
           >
-            cheso
+            Cancel
           </button>
         </Col>
       </Form.Group>

@@ -8,7 +8,7 @@ const Award = ({ award, isEditable }) => {
   const [isEditing, setIsEditing] = useState(false);
   const { awards, setAwards } = useContext(AwardContext);
   async function handleDelete(e) {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
+    if (window.confirm("Are you sure?")) {
       e.preventDefault();
       e.stopPropagation();
       try {

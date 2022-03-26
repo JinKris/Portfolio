@@ -19,11 +19,11 @@ function CareerCard({ career, isEditable, setIsEditing, setCareers }) {
 
   return (
     <div className={car.mvpBox}>
-      <span>{career.company}</span>
+      <span className={car.mvpTitle}>{career.company}</span>
       <br />
-      <span>{career.fromDate}</span>
+      <span className={car.mvpDate}>{career.fromDate}</span>
       <br />
-      <span>{career.toDate}</span>
+      <span className={car.mvpDate}>{career.toDate}</span>
       <div className={car.mvpBtnBox}>
         {isEditable && (
           <>
@@ -31,10 +31,10 @@ function CareerCard({ career, isEditable, setIsEditing, setCareers }) {
               className={car.mvpBtn}
               onClick={() => setIsEditing((prev) => !prev)}
             >
-              edit
+              Edit
             </button>
             <button className={car.mvpBtn} onClick={handleDelete}>
-              delete
+              Delete
             </button>
           </>
         )}

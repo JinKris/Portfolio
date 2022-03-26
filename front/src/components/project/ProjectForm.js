@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import { ProjectContext } from "./ProjectContext";
-import MvpButton from "../../MvpButton";
 import pro from "../style/mvpCardBody.module.scss";
 
 const ProjectForm = ({
@@ -105,7 +104,7 @@ const ProjectForm = ({
       <Form.Group controlId="formBasicFromDate" className="mt-3">
         <Form.Control
           type="date"
-          placeholder="시작날짜"
+          placeholder="fromDate"
           value={form.fromDate}
           onChange={(e) => handleProjectValue("fromDate", e.target.value)}
         />
@@ -114,7 +113,7 @@ const ProjectForm = ({
       <Form.Group controlId="formBasicToDate" className="mt-3">
         <Form.Control
           type="date"
-          placeholder="종료날짜"
+          placeholder="endDate"
           min={form?.fromDate}
           value={form.toDate}
           onChange={(e) => handleProjectValue("toDate", e.target.value)}
@@ -124,7 +123,7 @@ const ProjectForm = ({
       <Form.Group as={Row} className="mt-3 text-center mb-4">
         <Col sm={{ span: 20 }}>
           <button className={pro.mvpBtn} type="submit">
-            submit
+            Submit
           </button>
           <button
             className={pro.mvpBtn}
@@ -132,7 +131,7 @@ const ProjectForm = ({
               setIsAdding ? setIsAdding(false) : setIsEditing(false);
             }}
           >
-            cheso
+            Cancel
           </button>
         </Col>
       </Form.Group>
