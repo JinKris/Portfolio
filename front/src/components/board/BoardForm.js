@@ -10,7 +10,8 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
     title: currentBoard?.title ? currentBoard.title : "",
     context: currentBoard?.context ? currentBoard.context : "",
   });
-  const { boards = [], setBoards } = useContext(BoardContext) || {};
+  // const { boards = [], setBoards } = useContext(BoardContext) || {};
+  const { boards, setBoards } = useContext(BoardContext);
 
   const handleBoardValue = (name, value) => {
     setForm({
@@ -30,25 +31,26 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
           context: form.context,
         });
         setIsEditing(false);
-        const res = await Api.get("boardlist");
-        setBoards(res.data.boards);
+        // const res = await Api.get("boardlist");
+        // setBoards(res.data.boards);
+        await Api.get("boardlist").then((res) => setBoards(res.data.boards));
       } else {
         await Api.post("board/create", {
           userId: userState.user.id,
           title: form.title,
           context: form.context,
         });
-        setBoards((prev) => {
-          return [
-            ...prev,
-            {
-              userId: userState.user.id,
-              title: form.title,
-              context: form.context,
-            },
-          ];
-        });
-        // await Api.get("boardlist").then((res) => setBoards(res.data.boards));
+        // setBoards((prev) => {
+        //   return [
+        //     ...prev,
+        //     {
+        //       userId: userState.user.id,
+        //       title: form.title,
+        //       context: form.context,
+        //     },
+        //   ];
+        // });
+        await Api.get("boardlist").then((res) => setBoards(res.data.boards));
       }
     } catch (e) {
       console.log(e);

@@ -4,6 +4,9 @@ import { Card, Row, Button, Col, useAccordionButton } from "react-bootstrap";
 import * as Api from "../../api";
 import { UserStateContext } from "../../App";
 import usercard from "../style/UserCard.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faF } from "@fortawesome/free-solid-svg-icons";
 
 // import axios, { Axios } from "axios";
 
@@ -117,33 +120,43 @@ function UserCard({
     setChangingPW(false);
   };
   return (
-    <div className={usercard.ucBox} style={{ width: "18rem" }}>
-      <div>
-        <p>{user?.name}</p>
-        <p>{user?.email}</p>
-        <p>{user?.description}</p>
-        <p>{`likes: ${likes}`}</p>
-        <p>{`follower: ${follower}`}</p>
-
-        {isEditable && (
-          <Card.Body style={{ display: "flex", justifyContent: "center" }}>
-            <Row className="mt-3 text-center text-info">
-              <Col sm={{ span: 20 }}>
-                <Button variant="outline-info" size="sm" onClick={stateReset}>
-                  편집
-                </Button>
-                <Button
-                  className="ms-2"
-                  variant="outline-info"
-                  size="sm"
-                  onClick={() => setChangingPW(true)}
-                >
-                  비밀번호 변경
-                </Button>
-              </Col>
-            </Row>
-          </Card.Body>
-        )}
+    <div className={usercard.ucContainer}>
+      <div className={usercard.ucFrontBox}>
+        <div>
+          <p>{user?.name}</p>
+          <p>{user?.email}</p>
+          <p>
+            <FontAwesomeIcon icon={faHeart} size="1x" />
+            {likes}
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faF} size="1x" />
+            ollow{follower}
+          </p>
+          {!isEditable && <p>{`f4f:${f4f}`}</p>}
+        </div>
+        <div className={usercard.ucBackBox}>
+          <p>{user?.description}</p>
+          {isEditable && (
+            <Card.Body style={{ display: "flex", justifyContent: "center" }}>
+              <Row className="mt-3 text-center text-info">
+                <Col sm={{ span: 20 }}>
+                  <Button variant="outline-info" size="sm" onClick={stateReset}>
+                    편집
+                  </Button>
+                  <Button
+                    className="ms-2"
+                    variant="outline-info"
+                    size="sm"
+                    onClick={() => setChangingPW(true)}
+                  >
+                    비밀번호 변경
+                  </Button>
+                </Col>
+              </Row>
+            </Card.Body>
+          )}
+        </div>
       </div>
     </div>
   );

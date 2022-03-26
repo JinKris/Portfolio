@@ -12,7 +12,7 @@ import Awards from "./award/Awards";
 import Header from "./Header";
 import Careers from "./career/Careers";
 
-import portfolio from "../components/style/Portfolio.module.css";
+import portfolio from "../components/style/Portfolio.module.scss";
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -64,28 +64,34 @@ function Portfolio() {
   return (
     <>
       <Header />
-      <div className={portfolio.user} fluid>
+      <div className={portfolio.user}>
         <User portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
       </div>
-      <li>
-        <Educations
-          portfolioOwnerId={portfolioOwner.id}
-          isEditable={isEditable}
-        />
-        <Careers
-          portfolioOwnerId={portfolioOwner.id}
-          isEditable={portfolioOwner.id === userState.user?.id}
-        />
-        <Projects
-          portfolioOwnerId={portfolioOwner.id}
-          isEditable={isEditable}
-        />
-        <Certificates
-          portfolioOwnerId={portfolioOwner.id}
-          isEditable={isEditable}
-        />
-        <Awards portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
-      </li>
+      <div className={portfolio.pfContainer}>
+        <li>
+          <Educations
+            classNmae={portfolio.pfMvp}
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={isEditable}
+          />
+          <Careers
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
+          <Projects
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={isEditable}
+          />
+          <Certificates
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={isEditable}
+          />
+          <Awards
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={isEditable}
+          />
+        </li>
+      </div>
     </>
   );
 }

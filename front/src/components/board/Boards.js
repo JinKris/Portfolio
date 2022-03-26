@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import * as Api from "../../api";
 import Board from "./Board";
 import styles from "../style/box.module.scss";
+import { BoardContext } from "./BoardContext";
 
 function Boards() {
-  const [boards, setBoards] = useState([]);
+  const { boards, setBoards } = useContext(BoardContext);
   useEffect(() => {
     Api.get("boardlist").then((res) => setBoards(res.data.boards));
   }, []);
