@@ -1,18 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useContext, useState } from "react";
-import { Card, Row, Button, Col, useAccordionButton } from "react-bootstrap";
+import { Card, Row, Button, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import { UserStateContext } from "../../App";
-import usercard from "../style/UserCard.module.scss";
 
 // import axios, { Axios } from "axios";
 
-function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
+function NetUserCard({ user, setIsEditing }) {
   const navigate = useNavigate();
   //변수에 넣는것들은 명확하게.. 0...false...  --likes
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const userState = useContext(UserStateContext);
+  const isEditable = false;
   //follow
   // const [following, setFollowing] = useState(0);
   const [follower, setFollower] = useState(0);
@@ -106,26 +106,34 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
     }
   };
   return (
-    <div className={usercard.ucBox} style={{ width: "18rem" }}>
-      <div>
-        <p>{user?.name}</p>
-        <p>{user?.email}</p>
-        <p>{user?.description}</p>
-        <p>{`likes: ${likes}`}</p>
-        <p>{`follower: ${follower}`}</p>
+    <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
+      <Card.Body>
+        <Row className="justify-content-md-center"></Row>
+        <Card.Title>{user?.name}</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
+        <Card.Text>{user?.description}</Card.Text>
+        <Card.Text>{`likes: ${likes}`}</Card.Text>
+        <Card.Text>{`follower: ${follower}`}</Card.Text>
+        <Card.Text>{`f4f:${f4f}`}</Card.Text>
 
-        {isEditable && (
-          <Button
-            variant="outline-info"
-            size="sm"
-            onClick={() => setIsEditing(true)}
+        <>
+          <Card.Link
+            className="mt-3"
+            href="#"
+            onClick={() => navigate(`/users/${user.id}`)}
           >
-            편집
-          </Button>
+            포트폴리오
+          </Card.Link>
+        </>
+        {isEditable ? null : (
+          <>
+            <button onClick={handleLikes}>Likes </button>
+            <button onClick={handleFollow}>follow </button>
+          </>
         )}
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   );
 }
 
-export default UserCard;
+export default NetUserCard;

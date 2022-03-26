@@ -45,6 +45,7 @@ function Header() {
           Board
         </Link>
       </li>
+      {isLogin && <li className={header.list2}></li>}
       <p className={header.middleline} />
     </nav>
   );

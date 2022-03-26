@@ -26,6 +26,7 @@ const ProjectForm = ({
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       if (setIsAdding) {
         const userId = portfolioOwnerId;

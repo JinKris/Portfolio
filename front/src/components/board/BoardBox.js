@@ -10,7 +10,7 @@ import Header from "../Header";
 function BoardBox() {
   const navigate = useNavigate();
   const userState = useContext(UserStateContext);
-  const isEditable = true;
+  // const isEditable = true;
   useEffect(() => {
     // 만약 전역 상태의 user가 null이라면, 로그인 페이지로 이동함.
     if (!userState.user) {

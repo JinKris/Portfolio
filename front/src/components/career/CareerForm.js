@@ -10,9 +10,9 @@ const CareerForm = ({
   setIsAdding,
 }) => {
   const [form, setForm] = useState({
-    company: "",
-    fromDate: "",
-    toDate: "",
+    company: currentCareer?.company ? currentCareer.company : "",
+    fromDate: currentCareer?.fromDate ? currentCareer.fromDate : "",
+    toDate: currentCareer?.toDate ? currentCareer.toDate : "",
   });
 
   const handleCareerValue = (name, value) => {
@@ -72,6 +72,7 @@ const CareerForm = ({
       <Form.Group controlId="formBasicToDate" className="mt-3">
         <Form.Control
           type="date"
+          min={form?.fromDate}
           placeholder="퇴사날짜"
           value={form.toDate}
           onChange={(e) => handleCareerValue("toDate", e.target.value)}

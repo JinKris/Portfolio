@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
 
 import * as Api from "../../api";
-import UserCard from "./UserCard";
+import NetUserCard from "./NetUserCard";
 import { UserStateContext } from "../../App";
 
 import Header from "../Header";
@@ -32,18 +32,11 @@ function Network() {
       <div className={network.container}>
         <div className={network.body}>
           {users.map((user) => (
-            <UserCard key={user.id} user={user} isNetwork />
+            <NetUserCard key={user.id} user={user} isNetwork />
           ))}
         </div>
       </div>
     </>
-    // <div>
-    //   <div style={{ display: "flex" }}>
-    //     {users.map((user) => (
-    //       <UserCard key={user.id} user={user} isNetwork />
-    //     ))}
-    //   </div>
-    // </div>
   );
 }
 

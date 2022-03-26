@@ -10,7 +10,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
     title: currentBoard?.title ? currentBoard.title : "",
     context: currentBoard?.context ? currentBoard.context : "",
   });
-  const { boards, setBoards } = useContext(BoardContext);
+  const { boards = [], setBoards } = useContext(BoardContext) || {};
 
   const handleBoardValue = (name, value) => {
     setForm({
@@ -29,22 +29,22 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
           context: form.context,
         });
         setIsEditing(false);
+        await Api.get("boardlist").then((res) => setBoards(res.data.boards));
       } else {
-        const userId = userState.user.id;
         await Api.post("board/create", {
-          userId: userId,
+          userId: userState.user.id,
           title: form.title,
           context: form.context,
-        }).then(
-          setBoards([
-            ...boards,
-            {
-              userId: userId,
-              title: form.title,
-              context: form.context,
-            },
-          ])
-        );
+        }).then;
+        setBoards([
+          ...boards,
+          {
+            userId: userState.user.id,
+            title: form.title,
+            context: form.context,
+          },
+        ])();
+        // await Api.get("boardlist").then((res) => setBoards(res.data.boards));
       }
     } catch (e) {
       console.log(e);
@@ -61,7 +61,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
         onChange={(e) => handleBoardValue("title", e.target.value)}
       />
 
-      <input
+      <textarea
         className={styles.boardInput}
         type="textarea"
         placeholder="context"
@@ -76,7 +76,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
         >
           submit
         </button>
-        {isEditing ? (
+        {isEditing && (
           <button
             className={styles.bFormBtn}
             onClick={() => {
@@ -86,7 +86,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
           >
             back
           </button>
-        ) : null}
+        )}
       </div>
     </form>
   );
