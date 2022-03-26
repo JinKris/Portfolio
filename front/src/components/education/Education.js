@@ -12,10 +12,10 @@ const Education = ({ education, isEditable }) => {
       e.preventDefault();
       e.stopPropagation();
       try {
-        await Api.delete("awards", education.id);
+        await Api.delete("educations", education.id);
         const idx = educations.findIndex((item) => item.id === education.id);
         educations.splice(idx, 1);
-        setEducations([...education]);
+        setEducations([...educations]);
       } catch (e) {
         console.log(e);
       }

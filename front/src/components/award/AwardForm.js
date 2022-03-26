@@ -31,18 +31,20 @@ const AwardForm = ({
           userId,
           title: form.title,
           description: form.description,
-        })
-          .then(setIsAdding(false))
-          .then(
-            setAwards([
-              ...awards,
-              {
-                userId,
-                title: form.title,
-                description: form.description,
-              },
-            ])
-          );
+        });
+        setIsAdding(false);
+        await Api.get("awardlist", userId).then((res) => setAwards(res.data));
+        // .then(setIsAdding(false))
+        // .then(
+        //   setAwards([
+        //     ...awards,
+        //     {
+        //       userId,
+        //       title: form.title,
+        //       description: form.description,
+        //     },
+        //   ])
+        // );
       } else if (setIsEditing) {
         await Api.put(`awards/${currentAward.id}`, {
           userId: currentAward.userId,

@@ -35,19 +35,23 @@ const CertificateForm = ({
           title: form.title,
           description: form.description,
           whenDate: form.whenDate,
-        })
-          .then(setIsAdding(false))
-          .then(
-            setCertificates([
-              ...certificates,
-              {
-                userId,
-                title: form.title,
-                description: form.description,
-                whenDate: form.whenDate,
-              },
-            ])
-          );
+        });
+        setIsAdding(false);
+        await Api.get("certificates", userId).then((res) =>
+          setCertificates(res.data)
+        );
+        // .then(setIsAdding(false))
+        // .then(
+        //   setCertificates([
+        //     ...certificates,
+        //     {
+        //       userId,
+        //       title: form.title,
+        //       description: form.description,
+        //       whenDate: form.whenDate,
+        //     },
+        //   ])
+        // );
       } else if (setIsEditing) {
         await Api.put(`certificates/${currentCertificate.id}`, {
           userId: currentCertificate.userId,

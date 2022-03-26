@@ -73,7 +73,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
           <Form.Group as={Row} className="mt-3 text-center">
             <Col sm={{ span: 20 }}>
               <Button variant="primary" type="submit" className="me-3">
-                확인
+                submit
               </Button>
               <Button
                 className="me-3"

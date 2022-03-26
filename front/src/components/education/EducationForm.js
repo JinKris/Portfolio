@@ -33,19 +33,23 @@ const EducationForm = ({
           school: form.school,
           major: form.major,
           position: form.position,
-        })
-          .then(setIsAdding(false))
-          .then(
-            setEducations([
-              ...educations,
-              {
-                userId,
-                school: form.school,
-                major: form.major,
-                position: form.position,
-              },
-            ])
-          );
+        });
+        setIsAdding(false);
+        await Api.get("educationlist", userId).then((res) =>
+          setEducations(res.data)
+        );
+        // .then(setIsAdding(false))
+        // .then(
+        //   setEducations([
+        //     ...educations,
+        //     {
+        //       userId:userId,
+        //       school: form.school,
+        //       major: form.major,
+        //       position: form.position,
+        //     },
+        //   ])
+        // );
       } else if (setIsEditing) {
         await Api.put(`educations/${currentEducation.id}`, {
           userId: currentEducation.userId,

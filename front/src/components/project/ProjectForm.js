@@ -37,20 +37,22 @@ const ProjectForm = ({
           description: form.description,
           fromDate: form.fromDate,
           toDate: form.toDate,
-        })
-          .then(setIsAdding(false))
-          .then(
-            setProjects([
-              ...projects,
-              {
-                userId,
-                title: form.title,
-                description: form.description,
-                fromDate: form.fromDate,
-                toDate: form.toDate,
-              },
-            ])
-          );
+        });
+        setIsAdding(false);
+        await Api.get("projectst", userId).then((res) => setProjects(res.data));
+        // .then(setIsAdding(false))
+        // .then(
+        //   setProjects([
+        //     ...projects,
+        //     {
+        //       userId,
+        //       title: form.title,
+        //       description: form.description,
+        //       fromDate: form.fromDate,
+        //       toDate: form.toDate,
+        //     },
+        //   ])
+        // );
       } else if (setIsEditing) {
         await Api.put(`projects/${currentProject.id}`, {
           userId: currentProject.userId,
