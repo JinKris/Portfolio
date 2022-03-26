@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import { UserStateContext, DispatchContext } from "../App";
 import header from "../components/style/Header.module.scss";
+import classNames from "classnames";
 
 function Header() {
   const navigate = useNavigate();
@@ -35,7 +36,12 @@ function Header() {
       <h1 className={header.title}>Portfolio</h1>
 
       <li className={header.list1}>
-        <Link to="/portfolio" className={header.My}>
+        <Link
+          to="/portfolio"
+          className={classNames(header.My, {
+            [header.active]: location.pathname === "/portfolio",
+          })}
+        >
           My
         </Link>
         <Link to="/network" className={header.Net}>

@@ -7,8 +7,8 @@ import { UserStateContext } from "../../App";
 
 function Board({ board }) {
   const [isEditing, setIsEditing] = useState(false);
-  const { boards, setBoards } = useContext(BoardContext);
   const userState = useContext(UserStateContext);
+  const { boards = [], setBoards } = useContext(BoardContext) || {};
   const isEditable = userState.user.id === board.userId ? true : false;
   async function handleDelete(e) {
     if (window.confirm("sure?")) {
@@ -35,6 +35,7 @@ function Board({ board }) {
           setIsEditing={setIsEditing}
           isEditing={isEditing}
           currentBoard={board}
+          setBoards={setBoards}
         />
       ) : (
         <BoardCard

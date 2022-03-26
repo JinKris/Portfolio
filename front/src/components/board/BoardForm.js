@@ -21,6 +21,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //await + then (x)
     try {
       if (setIsEditing) {
         await Api.put(`boards/${currentBoard.id}`, {
@@ -29,21 +30,24 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
           context: form.context,
         });
         setIsEditing(false);
-        await Api.get("boardlist").then((res) => setBoards(res.data.boards));
+        const res = await Api.get("boardlist");
+        setBoards(res.data.boards);
       } else {
         await Api.post("board/create", {
           userId: userState.user.id,
           title: form.title,
           context: form.context,
-        }).then;
-        setBoards([
-          ...boards,
-          {
-            userId: userState.user.id,
-            title: form.title,
-            context: form.context,
-          },
-        ])();
+        });
+        setBoards((prev) => {
+          return [
+            ...prev,
+            {
+              userId: userState.user.id,
+              title: form.title,
+              context: form.context,
+            },
+          ];
+        });
         // await Api.get("boardlist").then((res) => setBoards(res.data.boards));
       }
     } catch (e) {
@@ -69,11 +73,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
         onChange={(e) => handleBoardValue("context", e.target.value)}
       />
       <div className={styles.bFormBtns}>
-        <button
-          className={styles.bFormBtn}
-          onClick={handleSubmit}
-          name="submit"
-        >
+        <button className={styles.bFormBtn} type="submit">
           submit
         </button>
         {isEditing && (
@@ -82,7 +82,7 @@ const BoardForm = ({ currentBoard, isEditing, setIsEditing }) => {
             onClick={() => {
               setIsEditing(!isEditing);
             }}
-            name="submit"
+            type="button"
           >
             back
           </button>

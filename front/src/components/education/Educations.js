@@ -18,7 +18,7 @@ const Educations = ({ portfolioOwnerId, isEditable }) => {
 
   return (
     <EducationContext.Provider value={{ educations, setEducations }}>
-      <Card style={{ width: "80rem" }}>
+      <Card>
         <Card.Body>
           <Card.Title>학력</Card.Title>
           {educations.map((education) => (

@@ -16,7 +16,7 @@ const Awards = ({ portfolioOwnerId, isEditable }) => {
 
   return (
     <AwardContext.Provider value={{ awards, setAwards }}>
-      <Card style={{ width: "80rem" }}>
+      <Card>
         <Card.Body>
           <Card.Title>수상이력</Card.Title>
           {awards.map((award) => (
