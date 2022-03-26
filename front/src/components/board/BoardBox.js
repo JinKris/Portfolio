@@ -6,6 +6,7 @@ import BoardForm from "./BoardForm";
 import { UserStateContext } from "../../App";
 import styles from "../style/box.module.scss";
 import Header from "../Header";
+import footer from "../style/Footer.module.css";
 
 function BoardBox() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function BoardBox() {
         <BoardForm />
         <Boards />
       </div>
+      <div className={footer.text}>Portfolio</div>
     </BoardContext.Provider>
   );
 }
