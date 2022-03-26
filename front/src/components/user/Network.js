@@ -9,6 +9,7 @@ import { UserStateContext } from "../../App";
 import Header from "../Header";
 
 import network from "../style/Network.module.css";
+import footer from "../style/Footer.module.css";
 
 function Network() {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ function Network() {
           ))}
         </div>
       </div>
+      <span className={footer.text}>Portfolio</span>
     </>
   );
 }

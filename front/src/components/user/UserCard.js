@@ -4,9 +4,9 @@ import { Card, Row, Button, Col, useAccordionButton } from "react-bootstrap";
 import * as Api from "../../api";
 import { UserStateContext } from "../../App";
 import usercard from "../style/UserCard.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { faF } from "@fortawesome/free-solid-svg-icons";
+/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; */
+/* import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faF } from "@fortawesome/free-solid-svg-icons"; */
 
 // import axios, { Axios } from "axios";
 
@@ -126,17 +126,15 @@ function UserCard({
           <p>{user?.name}</p>
           <p>{user?.email}</p>
           <p>{user?.description}</p>
+          <p>{/* <FontAwesomeIcon icon={faHeart} size="1x" />_{likes} */}</p>
           <p>
-            <FontAwesomeIcon icon={faHeart} size="1x" />_{likes}
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faF} size="1x" />
+            {/* <FontAwesomeIcon icon={faF} size="1x" /> */}
             ollow_{follower}
           </p>
           {!isEditable && (
             <p>
-              <FontAwesomeIcon icon={faF} size="1x" />4
-              <FontAwesomeIcon icon={faF} size="1x" />_{`${f4f}`}
+              {/* <FontAwesomeIcon icon={faF} size="1x" /> */}4
+              {/* <FontAwesomeIcon icon={faF} size="1x" /> */}_{`${f4f}`}
             </p>
           )}
         </div>
