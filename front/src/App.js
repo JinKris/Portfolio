@@ -11,7 +11,7 @@ import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
 import MainPage from "./components/MainPage";
 import BoardBox from "./components/board/BoardBox";
-
+import Carousel from "./components/Carousel";
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
 
@@ -58,6 +58,7 @@ function App() {
     <DispatchContext.Provider value={dispatch}>
       <UserStateContext.Provider value={userState}>
         <Router>
+          <Carousel />
           {/* <Header /> */}
           <Routes>
             <Route path="/" element={<MainPage />} />
