@@ -11,6 +11,7 @@ import Educations from "./education/Educations";
 import Awards from "./award/Awards";
 import Header from "./Header";
 import Careers from "./career/Careers";
+import footer from "./style/Footer.module.css";
 
 import portfolio from "../components/style/Portfolio.module.scss";
 
@@ -68,7 +69,7 @@ function Portfolio() {
         <User portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
       </div>
       <div className={portfolio.pfContainer}>
-        <li>
+        <div style={{ width: "90%" }}>
           <Educations
             classNmae={portfolio.pfMvp}
             portfolioOwnerId={portfolioOwner.id}
@@ -90,8 +91,9 @@ function Portfolio() {
             portfolioOwnerId={portfolioOwner.id}
             isEditable={isEditable}
           />
-        </li>
+        </div>
       </div>
+      <div className={footer.text}>Portfolio</div>
     </>
   );
 }

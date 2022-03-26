@@ -29,8 +29,10 @@ function Header() {
     <nav activeKey={location.pathname}>
       <p className={header.topline} />
       {isLogin && (
-        <li>
-          <button onClick={logout}>loggout</button>
+        <li className={header.logoutContainer}>
+          <Link to="/" onClick={logout} className={header.logout}>
+            loggout
+          </Link>
         </li>
       )}
       <h1 className={header.title}>Portfolio</h1>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { EducationContext } from "./EducationContext";
-import { Button, Card, Col, Row } from "react-bootstrap";
+
 import * as Api from "../../api";
 import Education from "./Education";
 import EducationForm from "./EducationForm";
-import MvpButton from "../../MvpButton";
+import education from "../style/mvpCardBody.module.scss";
 
 const Educations = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -18,8 +18,8 @@ const Educations = ({ portfolioOwnerId, isEditable }) => {
 
   return (
     <EducationContext.Provider value={{ educations, setEducations }}>
-      <div>
-        <p>학력</p>
+      <div className={education.mvpContainer}>
+        <div className={education.mvpContaineritle}>Education</div>
         {educations.map((education) => (
           <Education
             key={education.id}
@@ -29,7 +29,12 @@ const Educations = ({ portfolioOwnerId, isEditable }) => {
         ))}
         {isEditable && (
           <div>
-            <MvpButton onClick={() => setIsAdding(true)} name="+" />
+            <button
+              className={education.mvpBtn}
+              onClick={() => setIsAdding(true)}
+            >
+              +
+            </button>
           </div>
         )}
         {isAdding && (

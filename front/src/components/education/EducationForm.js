@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import { EducationContext } from "./EducationContext";
-import MvpButton from "../../MvpButton";
+import edu from "../style/mvpCardBody.module.scss";
 
 const EducationForm = ({
   portfolioOwnerId,
@@ -126,14 +126,17 @@ const EducationForm = ({
 
       <Form.Group as={Row} className="mt-3 text-center mb-4">
         <Col sm={{ span: 20 }}>
-          <MvpButton type="submit" name="확인" />
-          <MvpButton
-            type="submit"
-            name="취소"
+          <button className={edu.mvpBtn} type="submit">
+            submit
+          </button>
+          <button
+            className={edu.mvpBtn}
             onClick={(e) => {
               setIsAdding ? setIsAdding(false) : setIsEditing(false);
             }}
-          />
+          >
+            cheso
+          </button>
         </Col>
       </Form.Group>
     </Form>

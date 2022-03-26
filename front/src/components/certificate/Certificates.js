@@ -4,7 +4,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import Certificate from "./Certificate";
 import CertificateForm from "./CertificateForm";
-import MvpButton from "../../MvpButton";
+import certi from "../style/mvpCardBody.module.scss";
 
 function Certificates({ portfolioOwnerId, isEditable }) {
   const [certificates, setCertificates] = useState([]);
@@ -18,31 +18,29 @@ function Certificates({ portfolioOwnerId, isEditable }) {
 
   return (
     <CertificateContext.Provider value={{ certificates, setCertificates }}>
-      <Card>
-        <Card.Body>
-          <Card.Title>자격증</Card.Title>
-          {certificates.map((certificate) => (
-            <Certificate
-              key={certificate?.id}
-              certificate={certificate}
-              isEditable={isEditable}
-            />
-          ))}
-          {isEditable && (
-            <Row className="mt-3 text-center mb-4">
-              <Col sm={{ span: 20 }}>
-                <MvpButton onClick={() => setIsAdding(true)} name="+" />
-              </Col>
-            </Row>
-          )}
-          {isAdding && (
-            <CertificateForm
-              portfolioOwnerId={portfolioOwnerId}
-              setIsAdding={setIsAdding}
-            />
-          )}
-        </Card.Body>
-      </Card>
+      <div className={certi.mvpContainer}>
+        <div className={certi.mvpContaineritle}>Certification</div>
+        {certificates.map((certificate) => (
+          <Certificate
+            key={certificate?.id}
+            certificate={certificate}
+            isEditable={isEditable}
+          />
+        ))}
+        {isEditable && (
+          <div>
+            <button className={certi.mvpBtn} onClick={() => setIsAdding(true)}>
+              +
+            </button>
+          </div>
+        )}
+        {isAdding && (
+          <CertificateForm
+            portfolioOwnerId={portfolioOwnerId}
+            setIsAdding={setIsAdding}
+          />
+        )}
+      </div>
     </CertificateContext.Provider>
   );
 }

@@ -1,7 +1,16 @@
 @font-face {
-  font-family: "bourbon";
-  src: url(BourbonGrotesque-Regular.otf);
-  font-family: "Architects Daughter", cursive;
+  font-family: "voyage";
+  src: url(MADEBonVoyageRegularPERSONALUSE.otf);
+
+  font-family: "baskerville";
+  src: url(LibreBaskerville-Bold.ttf);
+
+  font-family: "Caslon";
+  src: url(CaslonOldFaceHeavyRegular.otf);
+}
+* {
+  list-style-type: none;
+  text-decoration: none;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@200&display=swap");

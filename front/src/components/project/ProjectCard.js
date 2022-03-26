@@ -1,27 +1,32 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 import MvpButton from "../../MvpButton";
+import pro from "../style/mvpCardBody.module.scss";
 
 function ProjectCard({ project, isEditable, setIsEditing, handleDelete }) {
   const { title = "", description = "", fromDate = "", toDate = "" } = project;
 
   return (
-    <div>
-      <div>
-        <span className="primary">{title}</span>
-        <br />
-        <span>{description}</span>
-        <br />
-        <span className="text-muted">{fromDate}</span>
-        <br />
-        <span className="text-muted">{toDate}</span>
-        <br />
+    <div className={pro.mvpBox}>
+      <span>{title}</span>
+      <br />
+      <span>{description}</span>
+      <br />
+      <span>{fromDate}</span>
+      <br />
+      <span>{toDate}</span>
+      <br />
+      <div className={pro.mvpBtnBox}>
         {isEditable && (
           <>
-            <MvpButton
+            <button
+              className={pro.mvpBtn}
               onClick={() => setIsEditing((prev) => !prev)}
-              name="편집"
-            />
-            <MvpButton onClick={handleDelete} name="삭제" />
+            >
+              edit
+            </button>
+            <button className={pro.mvpBtn} onClick={handleDelete}>
+              delete
+            </button>
           </>
         )}
       </div>

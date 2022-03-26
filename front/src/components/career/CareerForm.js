@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
-
+import car from "../style/mvpCardBody.module.scss";
 const CareerForm = ({
   portfolioOwnerId,
   currentCareer,
@@ -80,16 +80,12 @@ const CareerForm = ({
       </Form.Group>
       <Form.Group className="mt-3 text-center">
         <Col>
-          <Button variant="primary" type="submit" className="me-3">
-            확인
-          </Button>
-          <Button
-            variant="secondary"
-            className="me-3"
-            onClick={() => setIsEditing(false)}
-          >
-            취소
-          </Button>
+          <button className={car.mvpBtn} type="submit">
+            submit
+          </button>
+          <button className={car.mvpBtn} onClick={() => setIsEditing(false)}>
+            cheso
+          </button>
         </Col>
       </Form.Group>
     </Form>

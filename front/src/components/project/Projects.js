@@ -4,7 +4,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import Project from "./Project";
 import ProjectForm from "./ProjectForm";
-import MvpButton from "../../MvpButton";
+import pro from "../style/mvpCardBody.module.scss";
 
 function Projects({ portfolioOwnerId, isEditable }) {
   const [projects, setProjects] = useState([]);
@@ -18,31 +18,29 @@ function Projects({ portfolioOwnerId, isEditable }) {
 
   return (
     <ProjectContext.Provider value={{ projects, setProjects }}>
-      <Card>
-        <Card.Body>
-          <Card.Title>프로젝트</Card.Title>
-          {projects.map((project) => (
-            <Project
-              key={project?.id}
-              project={project}
-              isEditable={isEditable}
-            />
-          ))}
-          {isEditable && (
-            <Row className="mt-3 text-center mb-4">
-              <Col sm={{ span: 20 }}>
-                <MvpButton onClick={() => setIsAdding(true)} name="+" />
-              </Col>
-            </Row>
-          )}
-          {isAdding && (
-            <ProjectForm
-              portfolioOwnerId={portfolioOwnerId}
-              setIsAdding={setIsAdding}
-            />
-          )}
-        </Card.Body>
-      </Card>
+      <div className={pro.mvpContainer}>
+        <div className={pro.mvpContaineritle}>Project</div>
+        {projects.map((project) => (
+          <Project
+            key={project?.id}
+            project={project}
+            isEditable={isEditable}
+          />
+        ))}
+        {isEditable && (
+          <div>
+            <button className={pro.mvpBtn} onClick={() => setIsAdding(true)}>
+              +
+            </button>
+          </div>
+        )}
+        {isAdding && (
+          <ProjectForm
+            portfolioOwnerId={portfolioOwnerId}
+            setIsAdding={setIsAdding}
+          />
+        )}
+      </div>
     </ProjectContext.Provider>
   );
 }

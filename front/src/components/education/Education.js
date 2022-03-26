@@ -34,6 +34,7 @@ const Education = ({ education, isEditable }) => {
           portfolioOwnerId={education.userId}
           isEditable={isEditable}
           setIsEditing={setIsEditing}
+          handleDelete={handleDelete}
         />
       )}
     </>

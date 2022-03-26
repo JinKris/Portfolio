@@ -1,4 +1,18 @@
 @font-face {
+  font-family: "voyage";
+  src: url(MADEBonVoyageRegularPERSONALUSE.otf);
+
+  font-family: "baskerville";
+  src: url(LibreBaskerville-Bold.ttf);
+
+  font-family: "Caslon";
+  src: url(CaslonOldFaceHeavyRegular.otf);
+}
+* {
+  list-style-type: none;
+  text-decoration: none;
+}
+@font-face {
   font-family: "bourbon";
   src: url(BourbonGrotesque-Regular.otf);
 }

@@ -1,5 +1,6 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
+import car from "../style/mvpCardBody.module.scss";
 
 function CareerCard({ career, isEditable, setIsEditing, setCareers }) {
   const handleDelete = async (e) => {
@@ -17,31 +18,24 @@ function CareerCard({ career, isEditable, setIsEditing, setCareers }) {
   const { company = "", fromDate = "", toDate = " " } = career;
 
   return (
-    <div>
-      <div>
-        {career.company}
-        <br />
-        <span className="text-muted">입사날짜: {career.fromDate}</span>
-        <br />
-        <span className="text-muted">퇴사날짜: {career.toDate}</span>
+    <div className={car.mvpBox}>
+      <span>{career.company}</span>
+      <br />
+      <span>{career.fromDate}</span>
+      <br />
+      <span>{career.toDate}</span>
+      <div className={car.mvpBtnBox}>
         {isEditable && (
           <>
-            <Button
-              variant="outline-info"
-              size="sm"
+            <button
+              className={car.mvpBtn}
               onClick={() => setIsEditing((prev) => !prev)}
-              className="mr-3"
             >
-              편집
-            </Button>
-            <Button
-              variant="outline-info"
-              size="sm"
-              onClick={handleDelete}
-              className="mr-3"
-            >
-              삭제
-            </Button>
+              edit
+            </button>
+            <button className={car.mvpBtn} onClick={handleDelete}>
+              delete
+            </button>
           </>
         )}
       </div>

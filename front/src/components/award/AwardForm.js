@@ -3,6 +3,7 @@ import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import { AwardContext } from "./AwardContext";
 import MvpButton from "../../MvpButton";
+import aw from "../style/mvpCardBody.module.scss";
 
 const AwardForm = ({
   portfolioOwnerId,
@@ -79,14 +80,17 @@ const AwardForm = ({
 
       <Form.Group as={Row} className="mt-3 text-center mb-4">
         <Col sm={{ span: 20 }}>
-          <MvpButton type="submit" name="확인" />
-          <MvpButton
-            type="submit"
-            name="취소"
+          <button className={aw.mvpBtn} type="submit">
+            submit
+          </button>
+          <button
+            className={aw.mvpBtn}
             onClick={(e) => {
               setIsAdding ? setIsAdding(false) : setIsEditing(false);
             }}
-          />
+          >
+            cheso
+          </button>
         </Col>
       </Form.Group>
     </Form>

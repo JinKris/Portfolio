@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
-import MvpButton from "../../MvpButton";
 
-import education from "../style/mvpCardBody.module.scss";
+import edu from "../style/mvpCardBody.module.scss";
+
 const EducationCard = ({
   education,
   isEditable,
@@ -12,15 +12,22 @@ const EducationCard = ({
   const { school = "", major = "", position = "" } = education;
 
   return (
-    <div className={education.mvpContainer}>
-      <div>
-        <span>1:{school}</span>
-        <br />
-        <span className="text-muted">{`${major} (${position})`}</span>
+    <div className={edu.mvpBox}>
+      <span>{school}</span>
+      <br />
+      <span>{`${major} (${position})`}</span>
+      <div className={edu.mvpBtnBox}>
         {isEditable && (
           <>
-            <button onClick={() => setIsEditing((prev) => !prev)}>편집</button>
-            <button onClick={handleDelete}>삭제</button>
+            <button
+              className={edu.mvpBtn}
+              onClick={() => setIsEditing((prev) => !prev)}
+            >
+              edit
+            </button>
+            <button className={edu.mvpBtn} onClick={handleDelete}>
+              delete
+            </button>
           </>
         )}
       </div>

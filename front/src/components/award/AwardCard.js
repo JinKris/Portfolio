@@ -1,23 +1,28 @@
-import { Card, Button, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import MvpButton from "../../MvpButton";
+
+import aw from "../style/mvpCardBody.module.scss";
 
 const AwardCard = ({ award, isEditable, setIsEditing, handleDelete }) => {
   const { title = "", description = "" } = award;
 
   return (
-    <div>
-      <div>
-        <span className="primary">{title}</span>
-        <br />
-        <span className="text-muted">{description}</span>
+    <div className={aw.mvpBox}>
+      <span>{title}</span>
+      <br />
+      <span>{description}</span>
+      <div className={aw.mvpBtnBox}>
         {isEditable && (
           <>
-            <MvpButton
+            <button
+              className={aw.mvpBtn}
               onClick={() => setIsEditing((prev) => !prev)}
-              name="편집"
-            />
-            <MvpButton onClick={handleDelete} name="삭제" />
+            >
+              edit
+            </button>
+            <button className={aw.mvpBtn} onClick={handleDelete}>
+              delete
+            </button>
           </>
         )}
       </div>

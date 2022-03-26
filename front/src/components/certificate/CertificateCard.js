@@ -1,5 +1,6 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 import MvpButton from "../../MvpButton";
+import certi from "../style/mvpCardBody.module.scss";
 
 function CertificateCard({
   certificate,
@@ -10,26 +11,28 @@ function CertificateCard({
   const { title = "", description = "", whenDate = " " } = certificate;
 
   return (
-    <Card.Text>
-      <Row className="align-items-center">
-        <Col>
-          <span className="primary">{title}</span>
-          <br />
-          <span>{description}</span>
-          <br />
-          <span className="text-muted">{whenDate}</span>
-        </Col>
+    <div className={certi.mvpBox}>
+      <span>{title}</span>
+      <br />
+      <span>{description}</span>
+      <br />
+      <span>{whenDate}</span>
+      <div className={certi.mvpBtnBox}>
         {isEditable && (
-          <Col xs lg="1">
-            <MvpButton
+          <>
+            <button
+              className={certi.mvpBtn}
               onClick={() => setIsEditing((prev) => !prev)}
-              name="편집"
-            />
-            <MvpButton onClick={handleDelete} name="삭제" />
-          </Col>
+            >
+              edit
+            </button>
+            <button className={certi.mvpBtn} onClick={handleDelete}>
+              delete
+            </button>
+          </>
         )}
-      </Row>
-    </Card.Text>
+      </div>
+    </div>
   );
 }
 

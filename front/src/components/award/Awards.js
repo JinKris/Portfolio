@@ -5,6 +5,7 @@ import * as Api from "../../api";
 import Award from "./Award";
 import AwardForm from "./AwardForm";
 import MvpButton from "../../MvpButton";
+import aw from "../style/mvpCardBody.module.scss";
 
 const Awards = ({ portfolioOwnerId, isEditable }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -16,27 +17,25 @@ const Awards = ({ portfolioOwnerId, isEditable }) => {
 
   return (
     <AwardContext.Provider value={{ awards, setAwards }}>
-      <Card>
-        <Card.Body>
-          <Card.Title>수상이력</Card.Title>
-          {awards.map((award) => (
-            <Award key={award?.userId} award={award} isEditable={isEditable} />
-          ))}
-          {isEditable && (
-            <Row className="mt-3 text-center mb-4">
-              <Col sm={{ span: 20 }}>
-                <MvpButton onClick={() => setIsAdding(true)} name="+" />
-              </Col>
-            </Row>
-          )}
-          {isAdding && (
-            <AwardForm
-              portfolioOwnerId={portfolioOwnerId}
-              setIsAdding={setIsAdding}
-            />
-          )}
-        </Card.Body>
-      </Card>
+      <div className={aw.mvpContainer}>
+        <div className={aw.mvpContaineritle}>Award</div>
+        {awards.map((award) => (
+          <Award key={award?.userId} award={award} isEditable={isEditable} />
+        ))}
+        {isEditable && (
+          <div>
+            <button className={aw.mvpBtn} onClick={() => setIsAdding(true)}>
+              +
+            </button>
+          </div>
+        )}
+        {isAdding && (
+          <AwardForm
+            portfolioOwnerId={portfolioOwnerId}
+            setIsAdding={setIsAdding}
+          />
+        )}
+      </div>
     </AwardContext.Provider>
   );
 };

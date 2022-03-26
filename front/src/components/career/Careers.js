@@ -3,11 +3,10 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import Career from "./Career";
 import CareerForm from "./CareerForm";
+import car from "../style/mvpCardBody.module.scss";
 
 function Careers({ portfolioOwnerId, isEditable, career }) {
-  //useState로 career 상태를 생성함.
   const [careers, setCareers] = useState([]);
-  //useState로 isAdding 상태를 생성함.
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
@@ -17,33 +16,30 @@ function Careers({ portfolioOwnerId, isEditable, career }) {
 
   return (
     <>
-      <Card>
-        <Card.Body>
-          <Card.Title>경력</Card.Title>
-          {careers.map((career) => (
-            <Career
-              key={career?.id}
-              career={career}
-              setCareers={setCareers}
-              isEditable={isEditable}
-            />
-          ))}
-          {isEditable && (
-            <Row className="mt-3 text-center mb-4">
-              <Col sm={{ span: 20 }}>
-                <Button onClick={() => setIsAdding(true)}>+</Button>
-              </Col>
-            </Row>
-          )}
-          {isAdding && (
-            <CareerForm
-              portfolioOwnerId={portfolioOwnerId}
-              setCareers={setCareers}
-              setIsAdding={setIsAdding}
-            />
-          )}
-        </Card.Body>
-      </Card>
+      <div className={car.mvpContainer}>
+        <div className={car.mvpContaineritle}>Career</div>
+        {careers.map((career) => (
+          <Career
+            key={career?.id}
+            career={career}
+            setCareers={setCareers}
+            isEditable={isEditable}
+          />
+        ))}
+        {isEditable && (
+          <div>
+            <button className={car.mvpBtn} onClick={() => setIsAdding(true)}>
+              +
+            </button>
+          </div>
+        )}
+        {isAdding && (
+          <CareerForm
+            portfolioOwnerId={portfolioOwnerId}
+            setIsAdding={setIsAdding}
+          />
+        )}
+      </div>
     </>
   );
 }
