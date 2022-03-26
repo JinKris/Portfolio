@@ -44,10 +44,20 @@ function Header() {
         >
           My
         </Link>
-        <Link to="/network" className={header.Net}>
+        <Link
+          to="/network"
+          className={classNames(header.Net, {
+            [header.active]: location.pathname === "/network",
+          })}
+        >
           Net
         </Link>
-        <Link to="/board" className={header.Board}>
+        <Link
+          to="/board"
+          className={classNames(header.Board, {
+            [header.active]: location.pathname === "/board",
+          })}
+        >
           Board
         </Link>
       </li>

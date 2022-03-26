@@ -19,9 +19,7 @@ function NetUserCard({ user, setIsEditing }) {
   const [isFollowed, setIsFollowed] = useState(false);
   const [f4f, setF4f] = useState(false);
 
-  //수정 필요 ㅠㅠ fetchLike
   useEffect(() => {
-    //likes
     async function fetchLikeList() {
       if (!user) return;
       try {

@@ -7,7 +7,13 @@ import usercard from "../style/UserCard.module.scss";
 
 // import axios, { Axios } from "axios";
 
-function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
+function UserCard({
+  user,
+  setIsEditing,
+  isEditable,
+  isNetwork,
+  setChangingPW,
+}) {
   const navigate = useNavigate();
   //변수에 넣는것들은 명확하게.. 0...false...  --likes
   const [likes, setLikes] = useState(0);
@@ -105,6 +111,11 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
       console.log(e);
     }
   };
+
+  const stateReset = () => {
+    setIsEditing(true);
+    setChangingPW(false);
+  };
   return (
     <div className={usercard.ucBox} style={{ width: "18rem" }}>
       <div>
@@ -115,13 +126,23 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
         <p>{`follower: ${follower}`}</p>
 
         {isEditable && (
-          <Button
-            variant="outline-info"
-            size="sm"
-            onClick={() => setIsEditing(true)}
-          >
-            편집
-          </Button>
+          <Card.Body style={{ display: "flex", justifyContent: "center" }}>
+            <Row className="mt-3 text-center text-info">
+              <Col sm={{ span: 20 }}>
+                <Button variant="outline-info" size="sm" onClick={stateReset}>
+                  편집
+                </Button>
+                <Button
+                  className="ms-2"
+                  variant="outline-info"
+                  size="sm"
+                  onClick={() => setChangingPW(true)}
+                >
+                  비밀번호 변경
+                </Button>
+              </Col>
+            </Row>
+          </Card.Body>
         )}
       </div>
     </div>
