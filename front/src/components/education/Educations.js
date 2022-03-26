@@ -18,31 +18,27 @@ const Educations = ({ portfolioOwnerId, isEditable }) => {
 
   return (
     <EducationContext.Provider value={{ educations, setEducations }}>
-      <Card>
-        <Card.Body>
-          <Card.Title>학력</Card.Title>
-          {educations.map((education) => (
-            <Education
-              key={education.id}
-              education={education}
-              isEditable={isEditable}
-            />
-          ))}
-          {isEditable && (
-            <Row className="mt-3 text-center mb-4 me-2">
-              <Col sm={{ span: 40 }}>
-                <MvpButton onClick={() => setIsAdding(true)} name="+" />
-              </Col>
-            </Row>
-          )}
-          {isAdding && (
-            <EducationForm
-              portfolioOwnerId={portfolioOwnerId}
-              setIsAdding={setIsAdding}
-            />
-          )}
-        </Card.Body>
-      </Card>
+      <div>
+        <p>학력</p>
+        {educations.map((education) => (
+          <Education
+            key={education.id}
+            education={education}
+            isEditable={isEditable}
+          />
+        ))}
+        {isEditable && (
+          <div>
+            <MvpButton onClick={() => setIsAdding(true)} name="+" />
+          </div>
+        )}
+        {isAdding && (
+          <EducationForm
+            portfolioOwnerId={portfolioOwnerId}
+            setIsAdding={setIsAdding}
+          />
+        )}
+      </div>
     </EducationContext.Provider>
   );
 };

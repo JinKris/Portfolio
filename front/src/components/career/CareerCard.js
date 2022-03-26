@@ -17,17 +17,15 @@ function CareerCard({ career, isEditable, setIsEditing, setCareers }) {
   const { company = "", fromDate = "", toDate = " " } = career;
 
   return (
-    <Card.Text>
-      <Row className="align-items-center">
-        <Col>
-          {career.company}
-          <br />
-          <span className="text-muted">입사날짜: {career.fromDate}</span>
-          <br />
-          <span className="text-muted">퇴사날짜: {career.toDate}</span>
-        </Col>
+    <div>
+      <div>
+        {career.company}
+        <br />
+        <span className="text-muted">입사날짜: {career.fromDate}</span>
+        <br />
+        <span className="text-muted">퇴사날짜: {career.toDate}</span>
         {isEditable && (
-          <Col xs lg="1">
+          <>
             <Button
               variant="outline-info"
               size="sm"
@@ -44,10 +42,10 @@ function CareerCard({ career, isEditable, setIsEditing, setCareers }) {
             >
               삭제
             </Button>
-          </Col>
+          </>
         )}
-      </Row>
-    </Card.Text>
+      </div>
+    </div>
   );
 }
 

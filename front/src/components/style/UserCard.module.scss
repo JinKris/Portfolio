@@ -1,21 +1,13 @@
 .ucContainer {
-  position: absolute;
-  top: 40%;
-  left: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: black;
 }
-.ucFrontBox {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
+.ucBox {
   width: 300px !important;
   height: 300px;
-
+  flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,53 +22,3 @@
   }
   transition: transform 0.4s linear;
 }
-
-.ucBackBox {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 300px !important;
-  height: 300px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-style: solid;
-  border-color: white;
-  border-width: 0.2px;
-  background-color: black;
-  padding: 3px;
-
-  p {
-    color: white;
-  }
-  transition: transform 0.4s linear;
-}
-
-.ucBackBox {
-  transform: perspective(400px) rotateY(-180deg);
-}
-.ucFrontBox {
-  transform: perspective(400px) rotateY(0deg);
-}
-.ucContainer:hover > .ucBackBox {
-  transform: perspective(400px) rotateY(0deg);
-}
-.ucContainer:hover > .ucFrontBox {
-  transform: perspective(400px) rotateY(180deg);
-}
-
-// .ucBackBox {
-//   transform: rotateY(-180deg);
-// }
-// .ucFrontBox {
-//   transform: rotateY(0deg);
-// }
-// .ucContainer:hover > .ucBackBox {
-//   transform: rotateY(0deg);
-// }
-// .ucContainer:hover > .ucFrontBox {
-//   transform: rotateY(180deg);
-// }

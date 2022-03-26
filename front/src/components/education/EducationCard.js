@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
 import MvpButton from "../../MvpButton";
 
+import education from "../style/mvpCardBody.module.scss";
 const EducationCard = ({
   education,
   isEditable,
@@ -11,24 +12,19 @@ const EducationCard = ({
   const { school = "", major = "", position = "" } = education;
 
   return (
-    <Card.Text>
-      <Row className="align-items-center">
-        <Col>
-          <span>{school}</span>
-          <br />
-          <span className="text-muted">{`${major} (${position})`}</span>
-        </Col>
+    <div className={education.mvpContainer}>
+      <div>
+        <span>1:{school}</span>
+        <br />
+        <span className="text-muted">{`${major} (${position})`}</span>
         {isEditable && (
-          <Col xs lg="1">
-            <MvpButton
-              onClick={() => setIsEditing((prev) => !prev)}
-              name="편집"
-            />
-            <MvpButton onClick={handleDelete} name="삭제" />
-          </Col>
+          <>
+            <button onClick={() => setIsEditing((prev) => !prev)}>편집</button>
+            <button onClick={handleDelete}>삭제</button>
+          </>
         )}
-      </Row>
-    </Card.Text>
+      </div>
+    </div>
   );
 };
 

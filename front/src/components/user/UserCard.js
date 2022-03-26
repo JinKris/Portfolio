@@ -121,10 +121,11 @@ function UserCard({
   };
   return (
     <div className={usercard.ucContainer}>
-      <div className={usercard.ucFrontBox}>
+      <div className={usercard.ucBox}>
         <div>
           <p>{user?.name}</p>
           <p>{user?.email}</p>
+          <p>{user?.description}</p>
           <p>
             <FontAwesomeIcon icon={faHeart} size="1x" />
             {likes}
@@ -135,8 +136,7 @@ function UserCard({
           </p>
           {!isEditable && <p>{`f4f:${f4f}`}</p>}
         </div>
-        <div className={usercard.ucBackBox}>
-          <p>{user?.description}</p>
+        <div>
           {isEditable && (
             <Card.Body style={{ display: "flex", justifyContent: "center" }}>
               <Row className="mt-3 text-center text-info">
