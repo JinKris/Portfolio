@@ -52,7 +52,7 @@ function RegisterForm() {
       });
 
       // 로그인 페이지로 이동함.
-      navigate("/main");
+      navigate("/");
     } catch (err) {
       alert("Email already in use"); //이메일 중복 방지
       console.log("Fail", err);

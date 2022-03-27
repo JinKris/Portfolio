@@ -93,7 +93,7 @@ function Portfolio() {
           />
         </div>
       </div>
-      <div className={footer.text}>Portfolio</div>
+      {/* <div className={footer.text}>Portfolio</div> */}
     </>
   );
 }
