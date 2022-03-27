@@ -85,6 +85,14 @@
   }
 }
 
+.ucEditDanger {
+  text-decoration: none;
+  color: rgb(80, 76, 76) !important;
+  &:hover {
+    text-shadow: 0 0 5px gray;
+  }
+}
+
 .ucPw {
   text-decoration: none;
   color: white;

@@ -112,17 +112,17 @@ function NetUserCard({ user, setIsEditing }) {
       <div>
         <div className={nUserCard.nUserCardBox}>
           <p className={nUserCard.nUserCardName}>{user?.name}</p>
-          <p>{user?.email}</p>
+          <p className={nUserCard.nUserCardEmail}>{user?.email}</p>
           <p className={nUserCard.nUserIcon}>
             <FontAwesomeIcon icon={faHeart} size="1x" />_{likes}
           </p>
-          <p className={nUserCard.nUserIcon}>
+          <p className={nUserCard.nUserIcon1}>
             <FontAwesomeIcon icon={faF} size="1x" />
-            ollow_{follower}
+            ollow _ {follower}
           </p>
-          <p className={nUserCard.nUserIcon}>
+          <p className={nUserCard.nUserIcon3}>
             <FontAwesomeIcon icon={faF} size="1x" />4
-            <FontAwesomeIcon icon={faF} size="1x" />_{`${f4f}`}
+            <FontAwesomeIcon icon={faF} size="1x" />_ {f4f ? "O" : "X"}
           </p>
           <button
             className={nUserCard.nUserCardBtn}

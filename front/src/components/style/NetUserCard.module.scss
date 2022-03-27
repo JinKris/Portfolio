@@ -11,17 +11,36 @@
 }
 .nUserCardContainer {
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
-  width: 100%;
-
+  width: 25%;
+  text-align: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
   .nUserCardName {
-    font-size: 1.3em;
+    font-size: 1.5em;
   }
 
   .nUserIcon {
     font-size: 0.8em;
+    margin-top: 2px;
+    margin-bottom: 4px;
   }
+  .nUserIcon1 {
+    font-size: 0.8em;
+    margin-top: 0px;
+    margin-bottom: 4px;
+  }
+  .nUserIcon3 {
+    font-size: 0.8em;
+    margin-top: 0px;
+    margin-bottom: 4px;
+  }
+}
+.nUserCardEmail {
+  margin-bottom: 0px !important;
 }
 
 .nUserCardBtn {
@@ -41,4 +60,5 @@
   border-right-width: 0;
   border-top-width: 0;
   border-bottom-width: 0.2px;
+  margin-bottom: 3px;
 }

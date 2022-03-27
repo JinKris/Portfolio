@@ -59,6 +59,11 @@ function UserEditForm({ user, setIsEditing, setUser }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {!isValid ? (
+            <p className={userEdcard.pwAlert}>Duplicated email</p>
+          ) : (
+            <p></p>
+          )}
           <input
             className={userEdcard.usInput}
             type="text"
@@ -82,12 +87,8 @@ function UserEditForm({ user, setIsEditing, setUser }) {
             >
               Cancel
             </button>
-            <button
-              className={userEdcard.ucEdit}
-              variant="danger"
-              onClick={userDelete}
-            >
-              회탈
+            <button className={userEdcard.ucEditDanger} onClick={userDelete}>
+              WithDraw
             </button>
           </div>
         </form>
