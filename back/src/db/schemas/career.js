@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const certificateSchema = new Schema(
+const careerSchema = new Schema(
   {
     id: {
       type: String,
@@ -10,15 +10,15 @@ const certificateSchema = new Schema(
       type: String,
       required: true,
     },
-    title: {
+    company: {
       type: String,
       required: true,
     },
-    description: {
+    fromDate: {
       type: String,
       required: true,
     },
-    whenDate: {
+    toDate: {
       type: String,
       required: true,
     },
@@ -28,6 +28,6 @@ const certificateSchema = new Schema(
   }
 );
 
-const certificateModel = model("Certificate", certificateSchema);
+const careerModel = model("Career", careerSchema);
 
-export { certificateModel };
+export { careerModel };
