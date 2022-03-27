@@ -32,7 +32,8 @@ const AwardForm = ({
           description: form.description,
         });
         setIsAdding(false);
-        await Api.get("awardlist", userId).then((res) => setAwards(res.data));
+        let res = await Api.get("awardlist", userId);
+        setAwards(res.data);
         // .then(setIsAdding(false))
         // .then(
         //   setAwards([
@@ -51,9 +52,8 @@ const AwardForm = ({
           description: form.description,
         });
         setIsEditing(false);
-        await Api.get("awardlist", currentAward.userId).then((res) =>
-          setAwards(res.data)
-        );
+        let res = await Api.get("awardlist", currentAward.userId);
+        setAwards(res.data);
       }
     } catch (e) {
       console.log(e);
