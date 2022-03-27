@@ -21,18 +21,21 @@ class User {
     return users;
   }
 
-  static async update({ userId, fieldToUpdate, newValue }) {
+  static async update(userId, updateData) {
     const filter = { id: userId };
-    const update = { [fieldToUpdate]: newValue };
+    const updateContent = updateData;
     const option = { returnOriginal: false };
-
     const updatedUser = await userModel.findOneAndUpdate(
       filter,
-      update,
+      updateContent,
       option
     );
     return updatedUser;
   }
+
+  static removeUser = async ({ userId }) => {
+    await userModel.deleteOne({ id: userId });
+  };
 }
 
 export { User };

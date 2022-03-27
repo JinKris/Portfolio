@@ -1,12 +1,8 @@
 import { Schema, model } from "mongoose";
 
-const certificateSchema = new Schema(
+const boardSchema = new Schema(
   {
     id: {
-      type: String,
-      required: true,
-    },
-    userId: {
       type: String,
       required: true,
     },
@@ -14,13 +10,12 @@ const certificateSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
+    userId: {
       type: String,
       required: true,
     },
-    whenDate: {
+    context: {
       type: String,
-      required: true,
     },
   },
   {
@@ -28,6 +23,6 @@ const certificateSchema = new Schema(
   }
 );
 
-const certificateModel = model("Certificate", certificateSchema);
+const boardModel = model("Board", boardSchema);
 
-export { certificateModel };
+export { boardModel };

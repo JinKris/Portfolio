@@ -27,7 +27,7 @@ class ProjectService {
     return project;
   };
 
-  static setProject = async ({ projectId, updateData }) => {
+  static updateProject = async ({ projectId, updateData }) => {
     let project = await Project.findById({ projectId });
 
     if (!project) {
@@ -36,27 +36,11 @@ class ProjectService {
       return { errorMessage };
     }
 
-    if (updateData.title) {
-      const updateDataField = "title";
-      const newValue = updateData.title;
-      project = await Project.update({ projectId, updateDataField, newValue });
-    }
-    if (updateData.description) {
-      const updateDataField = "description";
-      const newValue = updateData.description;
-      project = await Project.update({ projectId, updateDataField, newValue });
-    }
-    if (updateData.fromDate) {
-      const updateDataField = "fromDate";
-      const newValue = updateData.fromDate;
-      project = await Project.update({ projectId, updateDataField, newValue });
-    }
-    if (updateData.toDate) {
-      const updateDataField = "toDate";
-      const newValue = updateData.toDate;
-      project = await Project.update({ projectId, updateDataField, newValue });
-    }
-    return project;
+    const projects = await Project.update({
+      projectId,
+      updateData,
+    });
+    return projects;
   };
 
   static getProjectList = async ({ userId }) => {
