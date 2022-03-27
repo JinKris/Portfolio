@@ -27,7 +27,7 @@ const AwardForm = ({
       if (setIsAdding) {
         const userId = portfolioOwnerId;
         await Api.post("award/create", {
-          userId,
+          userId: userId,
           title: form.title,
           description: form.description,
         });
@@ -49,7 +49,8 @@ const AwardForm = ({
           userId: currentAward.userId,
           title: form.title,
           description: form.description,
-        }).then(setIsEditing(false));
+        });
+        setIsEditing(false);
         await Api.get("awardlist", currentAward.userId).then((res) =>
           setAwards(res.data)
         );

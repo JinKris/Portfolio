@@ -1,4 +1,3 @@
-import { Card, Button, Row, Col } from "react-bootstrap";
 import pro from "../style/mvpCardBody.module.scss";
 
 function ProjectCard({ project, isEditable, setIsEditing, handleDelete }) {

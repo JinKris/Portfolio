@@ -4,8 +4,9 @@ import * as Api from "../../api";
 import Career from "./Career";
 import CareerForm from "./CareerForm";
 import car from "../style/mvpCardBody.module.scss";
+import { CareerContext } from "./CareerContext";
 
-function Careers({ portfolioOwnerId, isEditable, career }) {
+function Careers({ portfolioOwnerId, isEditable }) {
   const [careers, setCareers] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
 
@@ -15,7 +16,7 @@ function Careers({ portfolioOwnerId, isEditable, career }) {
   }, [portfolioOwnerId]);
 
   return (
-    <>
+    <CareerContext.Provider value={{ careers, setCareers }}>
       <div className={car.mvpContainer}>
         <div className={car.mvpContaineritle}>Career</div>
         {careers.map((career) => (
@@ -40,7 +41,7 @@ function Careers({ portfolioOwnerId, isEditable, career }) {
           />
         )}
       </div>
-    </>
+    </CareerContext.Provider>
   );
 }
 

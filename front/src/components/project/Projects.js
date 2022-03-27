@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ProjectContext } from "./ProjectContext";
-import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import Project from "./Project";
 import ProjectForm from "./ProjectForm";

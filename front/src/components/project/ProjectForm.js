@@ -31,14 +31,15 @@ const ProjectForm = ({
       if (setIsAdding) {
         const userId = portfolioOwnerId;
         await Api.post("project/create", {
-          userId,
+          userId: userId,
           title: form.title,
           description: form.description,
           fromDate: form.fromDate,
           toDate: form.toDate,
         });
         setIsAdding(false);
-        await Api.get("projectst", userId).then((res) => setProjects(res.data));
+        let res = await Api.get("projectlist", userId);
+        setProjects(res.data);
         // .then(setIsAdding(false))
         // .then(
         //   setProjects([
@@ -59,10 +60,10 @@ const ProjectForm = ({
           description: form.description,
           fromDate: form.fromDate,
           toDate: form.toDate,
-        }).then(setIsEditing(false));
-        await Api.get("projectlist", currentProject.userId).then((res) =>
-          setProjects(res.data)
-        );
+        });
+        setIsEditing(false);
+        let res = await Api.get("projectlist", currentProject.userId);
+        setProjects(res.data);
         /////////////////////////////////////////////////////////////////////////////
         // const idx = projects.findIndex((card) => card.id !== projects.id);
         // projects[idx] = {
@@ -86,7 +87,7 @@ const ProjectForm = ({
       <Form.Group controlId="formBasicTitle">
         <Form.Control
           type="text"
-          placeholder="수상내역"
+          placeholder="proejct"
           value={form.title}
           onChange={(e) => handleProjectValue("title", e.target.value)}
         />
@@ -95,7 +96,7 @@ const ProjectForm = ({
       <Form.Group controlId="formBasicDescription" className="mt-3">
         <Form.Control
           type="text"
-          placeholder="상세내역"
+          placeholder="description"
           value={form.description}
           onChange={(e) => handleProjectValue("description", e.target.value)}
         />

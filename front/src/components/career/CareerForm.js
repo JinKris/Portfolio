@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Form, Card, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import car from "../style/mvpCardBody.module.scss";
+import { CareerContext } from "./CareerContext";
 const CareerForm = ({
   portfolioOwnerId,
   currentCareer,
-  setCareers,
   setIsEditing,
   setIsAdding,
 }) => {
@@ -14,7 +14,7 @@ const CareerForm = ({
     fromDate: currentCareer?.fromDate ? currentCareer.fromDate : "",
     toDate: currentCareer?.toDate ? currentCareer.toDate : "",
   });
-
+  const { careers, setCareers } = useContext(CareerContext);
   const handleCareerValue = (name, value) => {
     setForm({
       ...form,
@@ -27,11 +27,12 @@ const CareerForm = ({
       if (setIsAdding) {
         const userId = portfolioOwnerId;
         await Api.post("career/create", {
-          userId,
+          userId: userId,
           company: form.company,
           fromDate: form.fromDate,
           toDate: form.toDate,
-        }).then(setIsAdding(false));
+        });
+        setIsAdding(false);
         await Api.get("careerlist", userId).then((res) => setCareers(res.data));
       } else if (setIsEditing) {
         await Api.put(`careers/${currentCareer.id}`, {
@@ -39,10 +40,11 @@ const CareerForm = ({
           company: form.company,
           fromDate: form.fromDate,
           toDate: form.toDate,
-        }).then(setIsEditing(false));
-        await Api.get("careerlist", currentCareer.userId).then((res) =>
-          setCareers(res.data)
-        );
+        });
+        setIsEditing(false);
+        /* */
+        const res = await Api.get("careerlist", currentCareer.userId);
+        setCareers(res.data);
       }
     } catch (e) {
       console.log(e);

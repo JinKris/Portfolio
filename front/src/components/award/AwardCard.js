@@ -1,5 +1,3 @@
-import * as Api from "../../api";
-
 import aw from "../style/mvpCardBody.module.scss";
 
 const AwardCard = ({ award, isEditable, setIsEditing, handleDelete }) => {

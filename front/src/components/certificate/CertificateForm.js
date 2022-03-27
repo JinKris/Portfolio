@@ -31,15 +31,14 @@ const CertificateForm = ({
       if (setIsAdding) {
         const userId = portfolioOwnerId;
         await Api.post("certificate/create", {
-          userId,
+          userId: userId,
           title: form.title,
           description: form.description,
           whenDate: form.whenDate,
         });
         setIsAdding(false);
-        await Api.get("certificates", userId).then((res) =>
-          setCertificates(res.data)
-        );
+        let res = await Api.get("certificatelist", userId);
+        setCertificates(res.data);
         // .then(setIsAdding(false))
         // .then(
         //   setCertificates([
@@ -58,10 +57,10 @@ const CertificateForm = ({
           title: form.title,
           description: form.description,
           whenDate: form.whenDate,
-        }).then(setIsEditing(false));
-        await Api.get("certificatelist", currentCertificate.userId).then(
-          (res) => setCertificates(res.data)
-        );
+        });
+        setIsEditing(false);
+        let res = await Api.get("certificatelist", currentCertificate.userId);
+        setCertificates(res.data);
       }
     } catch (e) {
       console.log(e);
