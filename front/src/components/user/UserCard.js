@@ -121,10 +121,10 @@ function UserCard({
   };
   return (
     <div className={usercard.ucContainer}>
-      <div className={usercard.ucBox}>
-        <div>
+      <div>
+        <div className={usercard.ucBox}>
           <p className={usercard.ucName}>{user?.name}</p>
-          <p>{user?.email}</p>
+          <p className={usercard.nUserCardEmail}>{user?.email}</p>
           <p>{user?.description}</p>
           <p className={usercard.ucIcon}>
             <FontAwesomeIcon icon={faHeart} size="1x" />_{likes}
@@ -136,7 +136,7 @@ function UserCard({
           {!isEditable && (
             <p className={usercard.ucIcon}>
               <FontAwesomeIcon icon={faF} size="1x" />4
-              <FontAwesomeIcon icon={faF} size="1x" />_{`${f4f}`}
+              <FontAwesomeIcon icon={faF} size="1x" />_{f4f ? "O" : "X"}
             </p>
           )}
         </div>

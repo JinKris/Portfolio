@@ -19,7 +19,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
     // "users/유저id" 엔드포인트로 PUT 요청함.
     const res = await Api.put(`users/${user.id}`, {
       name,
-      email,
       description,
     });
     // 유저 정보는 response의 data임.
@@ -59,11 +58,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          {!isValid ? (
-            <p className={userEdcard.pwAlert}>Duplicated email</p>
-          ) : (
-            <p></p>
-          )}
           <input
             className={userEdcard.usInput}
             type="text"
@@ -76,7 +70,6 @@ function UserEditForm({ user, setIsEditing, setUser }) {
               lassName={userEdcard.ucEdit}
               variant="primary"
               type="submit"
-              disabled={!isValid}
             >
               Submit
             </button>

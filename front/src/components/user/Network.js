@@ -37,7 +37,7 @@ function Network() {
           ))}
         </div>
       </div>
-      <span className={footer.text}>Portfolio</span>
+      <div className={footer.text}>Portfolio</div>
     </>
   );
 }
