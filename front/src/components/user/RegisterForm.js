@@ -50,7 +50,7 @@ function RegisterForm() {
         password,
         name,
       });
-
+      window.location.href = "/";
       // 로그인 페이지로 이동함.
       navigate("/");
     } catch (err) {
